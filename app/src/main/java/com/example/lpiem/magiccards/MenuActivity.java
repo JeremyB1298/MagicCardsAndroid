@@ -9,13 +9,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
+=======
+>>>>>>> UserClass
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+
+import Models.User;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -24,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
     private ImageView ivUserPicture;
     private JSONObject response, profile_pic_data, profile_pic_url;
     private Button bLogOut;
+    static private User user;
 
 
 
@@ -53,6 +58,8 @@ public class MenuActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        initUser();
+
     }
 
     public void logOut(View view){
@@ -64,4 +71,11 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    private void initUser(){
+
+
+
+    }
+
 }
