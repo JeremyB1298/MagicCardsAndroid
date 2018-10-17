@@ -9,11 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-<<<<<<< HEAD
+
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
-=======
->>>>>>> UserClass
+
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
