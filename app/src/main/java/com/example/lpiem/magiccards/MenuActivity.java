@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
@@ -59,6 +63,8 @@ public class MenuActivity extends AppCompatActivity {
 
     public void logOut(View view){
 
+
+        AccessToken.setCurrentAccessToken(null);
         LoginManager.getInstance().logOut();
         Intent intent = new Intent(MenuActivity.this,MainActivity.class);
         startActivity(intent);
