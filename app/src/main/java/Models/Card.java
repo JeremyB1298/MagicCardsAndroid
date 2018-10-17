@@ -1,4 +1,4 @@
-package com.example.lpiem.magiccards;
+package Models;
 
 public class Card {
 

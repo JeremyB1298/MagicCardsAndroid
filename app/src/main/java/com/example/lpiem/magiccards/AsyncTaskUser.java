@@ -15,7 +15,7 @@ public class AsyncTaskUser extends AsyncTask<Void, Void, String> {
 
         try {
 
-            URL url=new URL("");
+            URL url=new URL("10.0.0.2:8080/web/index.php/");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             try {

@@ -9,12 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+
+import Models.User;
 
 public class MenuActivity extends AppCompatActivity {
 
