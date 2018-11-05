@@ -18,7 +18,17 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 import Models.User;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -27,7 +37,6 @@ public class MenuActivity extends AppCompatActivity {
     private ImageView ivUserPicture;
     private JSONObject response, profile_pic_data, profile_pic_url;
     private Button bLogOut;
-    static private User user;
 
 
 
@@ -59,6 +68,9 @@ public class MenuActivity extends AppCompatActivity {
 
         initUser();
 
+        Controller controller = new Controller();
+        controller.start();
+
     }
 
     public void logOut(View view){
@@ -76,5 +88,6 @@ public class MenuActivity extends AppCompatActivity {
 
 
     }
+
 
 }
