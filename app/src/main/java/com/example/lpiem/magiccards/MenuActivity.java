@@ -14,6 +14,7 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -38,13 +39,14 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Intent intent = getIntent();
-        String jsondata = intent.getStringExtra("userProfile");
-        Log.w("Jsondata", jsondata);
+
+
         bLogOut=(Button) findViewById(R.id.bLogOut);
         tvUserName = (TextView) findViewById(R.id.tvUserName);
         ivUserPicture = (ImageView) findViewById(R.id.ivUserPicture);
         tvUserEmail = (TextView) findViewById(R.id.tvUserEmail);
         try {
+            String jsondata = intent.getStringExtra("userProfile");
             response = new JSONObject(jsondata);
             tvUserEmail.setText(response.get("email").toString());
             tvUserName.setText(response.get("name").toString());
@@ -54,6 +56,16 @@ public class MenuActivity extends AppCompatActivity {
                    .into(ivUserPicture);
 
         } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            GoogleSignInAccount acct = intent.getParcelableExtra("ACCOUNT");
+            tvUserEmail.setText(acct.getDisplayName().toString());
+            tvUserName.setText(acct.getEmail().toString());
+        }
+
+        catch (Exception e){
             e.printStackTrace();
         }
 

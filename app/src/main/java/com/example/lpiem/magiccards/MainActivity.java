@@ -194,12 +194,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // Signed in successfully, show authenticated UI.
             Toast.makeText(this,"Connecte",Toast.LENGTH_SHORT).show();
+            this.goToMenuActivity();
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("Connect", "signInResult:failed code=" + e.getStatusCode());
             Toast.makeText(this,"Error",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void goToMenuActivity (){
+        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            intent.putExtra("ACCOUNT", acct);
+            startActivity(intent);
+        }
+
     }
 
 
@@ -238,8 +249,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             handleSignInResult(task);
         }
     }
-
-
-
 
 }
