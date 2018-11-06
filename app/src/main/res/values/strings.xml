@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">MagicCards</string>
 
+    <string name="logout">Logout</string>
+
     <string name="facebook_app_id">246160442735223</string>
     <string name="fb_login_protocol_scheme">fb246160442735223</string>
+    <string name="imp" >Import</string>
+    <string name="gallery" >Gallery</string>
+    <string name="slideshow" >SlideShow</string>
+    <string name="tools" >Tools</string>
 
 
 </resources>
