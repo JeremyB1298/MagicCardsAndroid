@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String personGivenName = acct.getGivenName();
             String personFamilyName = acct.getFamilyName();
             String personEmail = acct.getEmail();
+
             Log.d("PersonalInfo", "person email: "+personEmail);
             String personId = acct.getId();
             Log.d("PersonalInfo", "person Name: "+personName);
