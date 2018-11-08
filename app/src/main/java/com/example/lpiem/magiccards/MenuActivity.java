@@ -84,6 +84,10 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.logOutNavDraw:
                                 logOut(findViewById(android.R.id.content));
                                 break;
+
+                            case R.id.listCardPage:
+                                goToCardList(findViewById(android.R.id.content));
+                                break;
                             default:
                                 //Action;
                         }
