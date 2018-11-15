@@ -112,6 +112,9 @@ public class MenuActivity extends AppCompatActivity {
            Picasso.with(this).load(profile_pic_url.getString("url"))
                    .into(ivUserPicture);
 
+           connexionToTheAppWithGoogle("47892378546");
+
+
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -132,7 +135,6 @@ public class MenuActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        initUser();
 
         Controller controller = new Controller();
         controller.start();
@@ -179,11 +181,11 @@ public class MenuActivity extends AppCompatActivity {
 
     
 
-    private void initUser(){
-
-
+    private void connexionToTheAppWithGoogle(String googleId){
 
     }
+
+
 
 
 }
