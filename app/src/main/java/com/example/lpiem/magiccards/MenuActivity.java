@@ -106,7 +106,7 @@ public class MenuActivity extends AppCompatActivity {
             String jsondata = intent.getStringExtra("userProfile");
             response = new JSONObject(jsondata);
             tvUserEmail.setText(response.get("email").toString());
-            tvUserName.setText(response.get("name").toString());
+            tvUserName.setText(response.get("na me").toString());
             profile_pic_data = new JSONObject(response.get("picture").toString());
             profile_pic_url = new JSONObject(profile_pic_data.getString("data"));
            Picasso.with(this).load(profile_pic_url.getString("url"))
