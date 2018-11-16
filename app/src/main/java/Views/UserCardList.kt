@@ -23,10 +23,10 @@ class UserCardList : AppCompatActivity(), InterfaceCallBackController {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_card_list)
 
-        val controller = MagicCardRetrofitController(this as InterfaceCallBackController, listCard)
+        val controller = MagicCardRetrofitController(this as InterfaceCallBackController)
 
         rv_animal_list.layoutManager = LinearLayoutManager(this);
-        controller.callWS()
+        controller.callWS(listCard)
     }
 
 

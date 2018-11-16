@@ -1,7 +1,7 @@
 package com.example.lpiem.magiccards
 
-import Views.UserCardList
 import Models.User
+import Views.UserCardList
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -21,15 +22,13 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
-import android.support.v4.view.GravityCompat
-import android.util.Log
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
 import com.squareup.picasso.Picasso
-import org.json.JSONObject
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.activity_menu.*
+import org.json.JSONObject
 
 
 class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
@@ -67,13 +66,13 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
         setContentView(R.layout.activity_menu)
 
         val tvUserName:TextView? = findViewById(R.id.tvUserName);
-        val ivUserPicture:ImageView? = findViewById(R.id.ivUserPicture);
+        ivUserPicture = findViewById(R.id.ivUserPicture);
         val tvUserEmail:TextView? = findViewById(R.id.tvUserEmail);
 
         //setSupportActionBar(toolbar)
         val actionbar = supportActionBar
         actionbar!!.setDisplayHomeAsUpEnabled(true)
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_launcher_foreground)
+        actionbar.setHomeAsUpIndicator(R.drawable.menu_icon)
 
         val mDrawerLayout: DrawerLayout? = findViewById(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -98,6 +97,7 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
                 })
         try {
             acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
+            Log.d("GoogleId",acct!!.id.toString())
             connexionToTheAppWithGoogle(acct!!.id.toString())
         }catch (e: Exception){
             connexionToTheAppWithGoogle("113363234856734569174")
@@ -134,11 +134,10 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
                 tvUserEmail!!.setText(acct!!.displayName.toString())
                 tvUserName!!.setText(acct!!.email.toString())
 
-                profile_pic_url = JSONObject(acct!!.photoUrl.toString())
+                val a : String = acct!!.photoUrl.toString()
 
                 Picasso.get()
-                        .load(profile_pic_url!!.getString("url"))
-                        .placeholder(R.drawable.image_profil)
+                        .load(acct!!.photoUrl.toString())
                         .into(ivUserPicture)
 
 
