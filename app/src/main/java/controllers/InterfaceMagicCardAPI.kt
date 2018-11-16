@@ -15,7 +15,7 @@ interface InterfaceMagicCardAPI {
 
     @GET("/MagicCard/web/index.php/googleConnexion/{googleId}")
     fun getUserByGoogle(
-            @Path("googleId") googleId: Int
+            @Path("googleId") googleId: String
     ): Call<User>
 
 }
