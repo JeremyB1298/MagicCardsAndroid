@@ -1,34 +1,29 @@
 package com.example.lpiem.magiccards
 
+import Views.UserCardList
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.common.api.GoogleApiClient
-import android.support.v4.widget.DrawerLayout
-import org.json.JSONObject
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.example.lpiem.magiccards.R.id.ivUserPicture
-import com.squareup.picasso.Picasso
-import com.example.lpiem.magiccards.R.id.tvUserName
-import com.example.lpiem.magiccards.R.id.tvUserEmail
-import android.widget.TextView
-import com.example.lpiem.magiccards.R.id.bLogOut
 import android.content.Intent
+import android.os.Bundle
 import android.os.Parcelable
 import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import Views.UserCardList
+import android.widget.TextView
 import android.widget.Toast
-import com.facebook.login.LoginManager
 import com.facebook.AccessToken
-import android.support.v4.view.GravityCompat
+import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
-import kotlinx.android.synthetic.main.activity_menu.*
+import com.squareup.picasso.Picasso
+import org.json.JSONObject
 
 
 class MenuActivity : AppCompatActivity() {
@@ -107,7 +102,7 @@ class MenuActivity : AppCompatActivity() {
             tvUserName!!.setText(response!!.get("name").toString())
             profile_pic_data = JSONObject(response!!.get("picture").toString())
             profile_pic_url = JSONObject(profile_pic_data!!.getString("data"))
-            Picasso.get()
+           Picasso.get()
                     .load(profile_pic_url!!.getString("url"))
                     .placeholder(R.drawable.image_profil)
                     .into(ivUserPicture)
@@ -126,20 +121,19 @@ class MenuActivity : AppCompatActivity() {
             tvUserName!!.setText(acct!!.email.toString())
 
             profile_pic_url = JSONObject(acct!!.photoUrl.toString())
-
+/*
             Picasso.get()
                     .load(profile_pic_url!!.getString("url"))
                     .placeholder(R.drawable.image_profil)
                     .into(ivUserPicture)
-
+*/
 
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
 
-        val controller = Controller()
-        controller.start()
+
 
     }
 
@@ -177,8 +171,8 @@ class MenuActivity : AppCompatActivity() {
     }
 
     fun goToCardList(view: View) {
-        val intent = Intent(this@MenuActivity, UserCardList::class.java)
-        startActivity(intent)
+        val intent2 = Intent(this, UserCardList::class.java)
+        startActivity(intent2)
     }
 
 

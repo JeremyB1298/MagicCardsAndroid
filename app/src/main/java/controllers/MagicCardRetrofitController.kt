@@ -1,5 +1,6 @@
 package controllers
 
+import Models.Card
 import Models.Example
 import android.util.Log
 import retrofit2.Call
@@ -7,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController, internal var listName: ArrayList<String>) {
+class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController, internal var listCard: ArrayList<Card>) {
     internal var message: String? = null
     internal var nextPage = 1
     internal var nbPages = 100
@@ -45,7 +46,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     private fun fetchData(response: Response<List<Example>>) {
 
         for (i in 0 until response.body()!!.size) {
-            listName.add(response.body()!![i].card!!.name!!)
+            listCard.add(response.body()!![i].card!!)
         }
         interfaceCallBackController.onWorkDone(true)
     }
