@@ -1,6 +1,7 @@
 package com.example.lpiem.magiccards
 
 import Views.UserCardList
+import Models.User
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -20,13 +21,18 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
+import android.support.v4.view.GravityCompat
+import android.util.Log
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
+import controllers.InterfaceCallBackController
+import controllers.MagicCardRetrofitController
+import kotlinx.android.synthetic.main.activity_menu.*
 
 
-class MenuActivity : AppCompatActivity() {
+class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
 
     private var tvId: TextView? = null
     private var ivUserPicture: ImageView? = null
@@ -34,6 +40,7 @@ class MenuActivity : AppCompatActivity() {
     private var response: JSONObject? = null
     private var profile_pic_data: JSONObject? = null
     private var profile_pic_url: JSONObject? = null
+    private var user: User? = User(-1)
 
 
 
@@ -89,52 +96,57 @@ class MenuActivity : AppCompatActivity() {
                         return true
                     }
                 })
-
-        val intent = intent
-
-
-
-
-        try {
-            val jsondata = intent.getStringExtra("userProfile")
-            response = JSONObject(jsondata)
-            tvUserEmail!!.setText(response!!.get("email").toString())
-            tvUserName!!.setText(response!!.get("name").toString())
-            profile_pic_data = JSONObject(response!!.get("picture").toString())
-            profile_pic_url = JSONObject(profile_pic_data!!.getString("data"))
-           Picasso.get()
-                    .load(profile_pic_url!!.getString("url"))
-                    .placeholder(R.drawable.image_profil)
-                    .into(ivUserPicture)
-
-            //connexionToTheAppWithGoogle("47892378546")
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-
         try {
             acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
-            tvUserEmail!!.setText(acct!!.displayName.toString())
-            tvUserName!!.setText(acct!!.email.toString())
-
-            profile_pic_url = JSONObject(acct!!.photoUrl.toString())
-/*
-            Picasso.get()
-                    .load(profile_pic_url!!.getString("url"))
-                    .placeholder(R.drawable.image_profil)
-                    .into(ivUserPicture)
-*/
-
-        } catch (e: Exception) {
-            e.printStackTrace()
+            connexionToTheAppWithGoogle(acct!!.id.toString())
+        }catch (e: Exception){
+            connexionToTheAppWithGoogle("113363234856734569174")
         }
 
+    }
+
+    override fun onWorkDone(result: Any) {
+        if (result as Boolean){
+            Log.d("workDone","WORKDONE")
+            Log.d("workDone", user!!.name)
+
+            try {
+
+                val jsondata = intent.getStringExtra("userProfile")
+                response = JSONObject(jsondata)
+                tvUserEmail!!.setText(response!!.get("email").toString())
+                tvUserName!!.setText(response!!.get("name").toString())
+                profile_pic_data = JSONObject(response!!.get("picture").toString())
+                profile_pic_url = JSONObject(profile_pic_data!!.getString("data"))
+                Picasso.get()
+                        .load(profile_pic_url!!.getString("url"))
+                        .placeholder(R.drawable.image_profil)
+                        .into(ivUserPicture)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
 
+            try {
+                acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
+                acct!!.id.toString()
+                tvUserEmail!!.setText(acct!!.displayName.toString())
+                tvUserName!!.setText(acct!!.email.toString())
 
+                profile_pic_url = JSONObject(acct!!.photoUrl.toString())
+
+                Picasso.get()
+                        .load(profile_pic_url!!.getString("url"))
+                        .placeholder(R.drawable.image_profil)
+                        .into(ivUserPicture)
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -177,6 +189,11 @@ class MenuActivity : AppCompatActivity() {
 
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
+
+
+        val controller = MagicCardRetrofitController(this )
+        controller.callUserGoogleId(googleId,user)
+
 
     }
 

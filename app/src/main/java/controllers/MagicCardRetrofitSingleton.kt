@@ -12,9 +12,8 @@ object MagicCardRetrofitSingleton {
     val instance: InterfaceMagicCardAPI?
         get() {
             if (magicCardAPIInstance == null)
-                synchronized(InterfaceMagicCardAPI::class.java) {
-                    createApiBuilder()
-                }
+                createApiBuilder()
+
             return magicCardAPIInstance
         }
 
