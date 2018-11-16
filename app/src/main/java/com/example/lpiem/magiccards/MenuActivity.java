@@ -66,7 +66,7 @@ public class MenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_launcher_foreground);
+        actionbar.setHomeAsUpIndicator(R.drawable.menu_icon);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -110,7 +110,7 @@ public class MenuActivity extends AppCompatActivity {
             String jsondata = intent.getStringExtra("userProfile");
             response = new JSONObject(jsondata);
             tvUserEmail.setText(response.get("email").toString());
-            tvUserName.setText(response.get("na me").toString());
+            tvUserName.setText(response.get("name").toString());
             profile_pic_data = new JSONObject(response.get("picture").toString());
             profile_pic_url = new JSONObject(profile_pic_data.getString("data"));
            Picasso.with(this).load(profile_pic_url.getString("url"))
@@ -140,8 +140,7 @@ public class MenuActivity extends AppCompatActivity {
         }
 
 
-        Controller controller = new Controller();
-        controller.start();
+
 
     }
 
