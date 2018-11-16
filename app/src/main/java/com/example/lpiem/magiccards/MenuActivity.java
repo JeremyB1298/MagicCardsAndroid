@@ -1,14 +1,13 @@
 package com.example.lpiem.magiccards;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.facebook.AccessToken;
-import com.facebook.FacebookSdk;
-
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -33,22 +27,14 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
-import java.util.List;
-
-import Models.User;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import Views.UserCardList;
 
 public class MenuActivity extends AppCompatActivity {
 
     private TextView tvUserName;
     private TextView tvUserEmail;
+    private TextView tvTokenId;
+    private TextView tvId;
     private ImageView ivUserPicture;
     private JSONObject response, profile_pic_data, profile_pic_url;
     private Button bLogOut;
@@ -98,6 +84,10 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.logOutNavDraw:
                                 logOut(findViewById(android.R.id.content));
                                 break;
+
+                            case R.id.listCardPage:
+                                goToCardList(findViewById(android.R.id.content));
+                                break;
                             default:
                                 //Action;
                         }
@@ -115,6 +105,7 @@ public class MenuActivity extends AppCompatActivity {
         tvUserName = (TextView) findViewById(R.id.tvUserName);
         ivUserPicture = (ImageView) findViewById(R.id.ivUserPicture);
         tvUserEmail = (TextView) findViewById(R.id.tvUserEmail);
+
         try {
             String jsondata = intent.getStringExtra("userProfile");
             response = new JSONObject(jsondata);
@@ -133,6 +124,12 @@ public class MenuActivity extends AppCompatActivity {
             acct = intent.getParcelableExtra("ACCOUNT");
             tvUserEmail.setText(acct.getDisplayName().toString());
             tvUserName.setText(acct.getEmail().toString());
+
+            profile_pic_url = new JSONObject(acct.getPhotoUrl().toString());
+            Picasso.with(this).load(profile_pic_url.getString("url"))
+                    .into(ivUserPicture);
+
+
         }
 
         catch (Exception e){
@@ -177,6 +174,11 @@ public class MenuActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    public void goToCardList (View view) {
+        Intent intent = new Intent(MenuActivity.this, UserCardList.class);
+        startActivity(intent);
     }
 
     
