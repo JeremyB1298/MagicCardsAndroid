@@ -1,6 +1,5 @@
 package com.example.lpiem.magiccards;
 
-import Models.Card;
 import Models.Example;
 import retrofit2.Call;
 import retrofit2.http.GET;
