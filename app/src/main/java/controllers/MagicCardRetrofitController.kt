@@ -15,7 +15,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     fun callWS() {
 
-        var magicCardAPI: InterfaceMagicCardAPI  = MagicCardRetrofitSingleton.getInstance()
+        var magicCardAPI: InterfaceMagicCardAPI  = MagicCardRetrofitSingleton.instance!!
 
 
         val callExemple = magicCardAPI.getCard(1)
