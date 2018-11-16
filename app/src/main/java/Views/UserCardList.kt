@@ -9,7 +9,13 @@ import com.example.lpiem.magiccards.R
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 
-class UserCardList : AppCompatActivity(), InterfaceCallBackController<Boolean> {
+class UserCardList : AppCompatActivity(), InterfaceCallBackController {
+    override fun onWorkDone(result: Any) {
+        if (result as Boolean){
+            adapter!!.notifyDataSetChanged()
+        }    }
+
+
 
     var listName = ArrayList<String>()
     var tv : TextView? = null;
@@ -21,13 +27,9 @@ class UserCardList : AppCompatActivity(), InterfaceCallBackController<Boolean> {
         var listView : ListView = findViewById(R.id.listView)
         adapter = ArrayAdapter<String>(this@UserCardList, android.R.layout.simple_list_item_1, listName)
         listView.adapter = adapter
-        val controller = MagicCardRetrofitController(this as InterfaceCallBackController<*>, listName)
+        val controller = MagicCardRetrofitController(this as InterfaceCallBackController, listName)
         controller.callWS()
     }
 
-    override fun onWorkDone(result: Boolean?) {
-        if (result!!!!){
-            adapter!!.notifyDataSetChanged()
-        }
-    }
+
 }
