@@ -40,13 +40,10 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
     private var tvId: TextView? = null
     private var ivUserPicture: ImageView? = null
 
-    private var response: JSONObject? = null
+    private var fbAccount: JSONObject? = null
     private var profile_pic_data: JSONObject? = null
     private var profile_pic_url: JSONObject? = null
     private var user: User? = User(-1)
-
-
-
 
     private var mGoogleApiClient: GoogleApiClient? = null
 
@@ -101,54 +98,58 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
                 })
         try {
             acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
+            Log.d("GOOGLEID", acct!!.id.toString())
             connexionToTheAppWithGoogle(acct!!.id.toString())
         }catch (e: Exception){
-            connexionToTheAppWithGoogle("113363234856734569174")
+
+        }
+        try {
+            val fbAccountJson = intent.getStringExtra("userProfile")
+            fbAccount = JSONObject(fbAccountJson)
+            Log.d("FBID", fbAccount!!.get("id").toString())
+            connexionToTheAppWithFacebook(fbAccount!!.get("id").toString())
+        }catch (e: Exception){
+
         }
 
     }
 
     override fun onWorkDone(result: Any) {
-        if (result as Boolean){
-            Log.d("workDone","WORKDONE")
-            Log.d("workDone", user!!.name)
+        if (result is Map<*, *>) {
+            if (result["google"] === true) {
+                try {
+                    acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
+                    acct!!.id.toString()
+                    tvUserEmail!!.setText(acct!!.displayName.toString())
+                    tvUserName!!.setText(acct!!.email.toString())
+                    profile_pic_url = JSONObject(acct!!.photoUrl.toString())
+                    Picasso.get()
+                            .load(profile_pic_url!!.getString("url"))
+                            .placeholder(R.drawable.image_profil)
+                            .into(ivUserPicture)
 
-            try {
 
-                val jsondata = intent.getStringExtra("userProfile")
-                response = JSONObject(jsondata)
-                tvUserEmail!!.setText(response!!.get("email").toString())
-                tvUserName!!.setText(response!!.get("name").toString())
-                profile_pic_data = JSONObject(response!!.get("picture").toString())
-                profile_pic_url = JSONObject(profile_pic_data!!.getString("data"))
-                Picasso.get()
-                        .load(profile_pic_url!!.getString("url"))
-                        .placeholder(R.drawable.image_profil)
-                        .into(ivUserPicture)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else if (result["facebook"] === true) {
+                try {
 
-            } catch (e: Exception) {
-                e.printStackTrace()
+                    val jsondata = intent.getStringExtra("userProfile")
+                    fbAccount = JSONObject(jsondata)
+                    tvUserEmail!!.setText(fbAccount!!.get("email").toString())
+                    tvUserName!!.setText(fbAccount!!.get("name").toString())
+                    profile_pic_data = JSONObject(fbAccount!!.get("picture").toString())
+                    profile_pic_url = JSONObject(profile_pic_data!!.getString("data"))
+                    Picasso.get()
+                            .load(profile_pic_url!!.getString("url"))
+                            .placeholder(R.drawable.image_profil)
+                            .into(ivUserPicture)
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
-
-
-            try {
-                acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
-                acct!!.id.toString()
-                tvUserEmail!!.setText(acct!!.displayName.toString())
-                tvUserName!!.setText(acct!!.email.toString())
-
-                profile_pic_url = JSONObject(acct!!.photoUrl.toString())
-
-                Picasso.get()
-                        .load(profile_pic_url!!.getString("url"))
-                        .placeholder(R.drawable.image_profil)
-                        .into(ivUserPicture)
-
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
         }
     }
 
@@ -165,7 +166,7 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
 
     fun logOut(view: View) {
 
-        if (response != null) {
+        if (fbAccount != null) {
             AccessToken.setCurrentAccessToken(null)
             LoginManager.getInstance().logOut()
             val intent = Intent(this@MenuActivity, MainActivity::class.java)
@@ -192,12 +193,13 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
 
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
-
-
         val controller = MagicCardRetrofitController(this )
-        controller.callUserGoogleId(googleId,user)
+        controller.callUserGoogleId(googleId, user)
+    }
 
-
+    private fun connexionToTheAppWithFacebook(fbId: String) {
+        val controller = MagicCardRetrofitController(this )
+        controller.callUserFbId(fbId, user)
     }
 
 }

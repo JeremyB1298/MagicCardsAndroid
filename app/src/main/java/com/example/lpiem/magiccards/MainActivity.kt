@@ -3,26 +3,20 @@ package com.example.lpiem.magiccards
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import com.facebook.FacebookException
-import android.support.annotation.NonNull
 import android.content.Intent
-import com.facebook.GraphResponse
-import org.json.JSONObject
 import com.facebook.GraphRequest
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 
 
@@ -31,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
     private val RC_SIGN_IN: Int = 9001
-
 
     private var callbackManager: CallbackManager? = null
 
@@ -95,9 +88,9 @@ class MainActivity : AppCompatActivity() {
             val personFamilyName = acct.familyName
             val personEmail = acct.email
 
-            Log.d("PersonalInfo", "person email: " + personEmail!!)
+ //           Log.d("PersonalInfo", "person email: " + personEmail!!)
             val personId = acct.id
-            Log.d("PersonalInfo", "person Name: " + personName!!)
+ //           Log.d("PersonalInfo", "person Name: " + personName!!)
             val personPhoto = acct.photoUrl
         }
     }

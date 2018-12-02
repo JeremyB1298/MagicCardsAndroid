@@ -8,6 +8,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
+import kotlin.collections.HashMap
+
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
     internal var message: String? = null
@@ -47,7 +50,36 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     fetchUser(response,user)
-                    interfaceCallBackController.onWorkDone(true)
+                    val readWriteMap = hashMapOf("google" to true)
+                    val map: Map<String, Boolean> = HashMap(readWriteMap)
+                    interfaceCallBackController.onWorkDone(map)
+                    // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
+                    Log.d("SwapiRetrofitController", user!!.name )
+
+                } else {
+                    Log.d("SwapiRetrofitController", "error : " + response.errorBody()!!)
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+
+    }
+
+    fun callUserFbId(fbId: String, user: User?){
+
+        val callUser = magicCardAPI.getUserByFacebook(fbId)
+
+
+        callUser.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    fetchUser(response,user)
+                    val readWriteMap = hashMapOf("facebook" to true)
+                    val map: Map<String, Boolean> = HashMap(readWriteMap)
+                    interfaceCallBackController.onWorkDone(map)
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
                     Log.d("SwapiRetrofitController", user!!.name )
 

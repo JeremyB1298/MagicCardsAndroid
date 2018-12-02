@@ -18,4 +18,8 @@ interface InterfaceMagicCardAPI {
             @Path("googleId") googleId: String
     ): Call<User>
 
+    @GET("/MagicCard/web/index.php/facebookConnexion/{fbId}")
+    fun getUserByFacebook(
+            @Path("fbId") fbId: String
+    ): Call<User>
 }
