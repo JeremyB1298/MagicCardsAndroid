@@ -3,8 +3,7 @@ package controllers
 import Models.Example
 import Models.User
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 interface InterfaceMagicCardAPI {
@@ -22,4 +21,8 @@ interface InterfaceMagicCardAPI {
     fun getUserByFacebook(
             @Path("fbId") fbId: String
     ): Call<User>
+
+    @POST("/MagicCard/web/index.php/inscription")
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    fun createUser(@Body user: User): Call<User>
 }

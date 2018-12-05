@@ -95,7 +95,22 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     }
 
+    fun createUser(user: User) {
+        val callUser = magicCardAPI.createUser(user)
 
+        callUser.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+
+                } else {
+                    Log.d("INSCRIPTION FAILED", response.errorBody()!!.toString())
+                }
+            }
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
 
     @Synchronized
     private fun fetchData(response: Response<List<Example>>,res: ArrayList<String>) {
