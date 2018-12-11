@@ -1,6 +1,8 @@
 package Views
 
 import Fragments.Fragment1
+import Fragments.Fragment2
+import Fragments.Fragment3
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -8,9 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.FrameLayout
 import com.example.lpiem.magiccards.R
-import fragment.Fragment1
-import fragment.Fragment2
-import fragment.Fragment3
 
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -28,12 +27,12 @@ class BottomNavigationActivity : AppCompatActivity() {
 
                     return true
                 }
-                R.id.navigation_dashboard -> {
+                R.id.navigation_2 -> {
                     val fragment = Fragment2()
                     addFragment(fragment)
                     return true
                 }
-                R.id.navigation_notifications -> {
+                R.id.navigation_3 -> {
                     var fragment = Fragment3()
                     addFragment(fragment)
                     return true
@@ -65,7 +64,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
 
-        val fragment = FragmentHome.Companion.newInstance()
+        val fragment = Fragment1()
         addFragment(fragment)
     }
 
