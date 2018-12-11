@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, MenuActivity::class.java)
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
-            intent.putExtra("ACCOUNT", acct)
+            intent.putExtra("google", acct)
             startActivity(intent)
         }
 
@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         val data_request = GraphRequest.newMeRequest(
                 loginResult) { json_object, response ->
             val intent = Intent(this@MainActivity, MenuActivity::class.java)
-            intent.putExtra("userProfile", json_object.toString())
+            intent.putExtra("facebook", json_object.toString())
             startActivity(intent)
         }
         val permission_param = Bundle()

@@ -8,7 +8,7 @@ import retrofit2.http.*
 
 interface InterfaceMagicCardAPI {
     @GET("/MagicCard/web/index.php/userCards/{id}")
-    fun getCard(
+    fun getUserCards(
             @Path("id") id: Int
     ): Call<List<Example>>
 

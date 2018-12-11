@@ -96,30 +96,26 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
                         return true
                     }
                 })
-        try {
-            acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
+
+        if (intent.getParcelableExtra<Parcelable>("google") != null) {
+            acct = intent.getParcelableExtra<Parcelable>("google") as GoogleSignInAccount?
             Log.d("GOOGLEID", acct!!.id.toString())
             connexionToTheAppWithGoogle(acct!!.id.toString())
-        }catch (e: Exception){
-
-        }
-        try {
-            val fbAccountJson = intent.getStringExtra("userProfile")
+        } else {
+            val fbAccountJson = intent.getStringExtra("facebook")
             fbAccount = JSONObject(fbAccountJson)
             Log.d("FBID", fbAccount!!.get("id").toString())
             connexionToTheAppWithFacebook(fbAccount!!.get("id").toString())
-        }catch (e: Exception){
-
         }
 
     }
 
+    @SuppressLint("LongLogTag")
     override fun onWorkDone(result: Any) {
         if (result is Map<*, *>) {
             if (result["google"] === true) {
                 try {
-                    acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
-                    acct!!.id.toString()
+                    acct = intent.getParcelableExtra<Parcelable>("google") as GoogleSignInAccount?
                     tvUserEmail!!.setText(acct!!.displayName.toString())
                     tvUserName!!.setText(acct!!.email.toString())
                     profile_pic_url = JSONObject(acct!!.photoUrl.toString())
@@ -135,7 +131,7 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
             } else if (result["facebook"] === true) {
                 try {
 
-                    val jsondata = intent.getStringExtra("userProfile")
+                    val jsondata = intent.getStringExtra("facebook")
                     fbAccount = JSONObject(jsondata)
                     tvUserEmail!!.setText(fbAccount!!.get("email").toString())
                     tvUserName!!.setText(fbAccount!!.get("name").toString())
@@ -149,6 +145,9 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
+            } else if (result["google"] === false){
+                acct = intent.getParcelableExtra<Parcelable>("google") as GoogleSignInAccount?
+                inscriptionGoogleAccount(acct!!.id.toString(),acct!!.displayName.toString())
             }
         }
     }
@@ -200,6 +199,11 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
     private fun connexionToTheAppWithFacebook(fbId: String) {
         val controller = MagicCardRetrofitController(this )
         controller.callUserFbId(fbId, user)
+    }
+
+    private fun inscriptionGoogleAccount(googleId: String,name: String) {
+        val controller = MagicCardRetrofitController(this )
+        controller.createUser(User(0,"0",googleId,name,true));
     }
 
 }

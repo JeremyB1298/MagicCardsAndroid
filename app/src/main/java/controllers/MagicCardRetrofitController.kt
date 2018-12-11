@@ -18,8 +18,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     internal var nbPages = 100
     val magicCardAPI: InterfaceMagicCardAPI  = MagicCardRetrofitSingleton.instance!!
 
-    fun callWS(res: ArrayList<String>) {
-        val callExemple = magicCardAPI.getCard(1)
+    fun callUserCards(res: ArrayList<String>) {
+        val callExemple = magicCardAPI.getUserCards(1)
         callExemple.enqueue(object : Callback<List<Example>> {
             override fun onResponse(call: Call<List<Example>>, response: Response<List<Example>>) {
                 if (response.isSuccessful) {
@@ -63,6 +63,9 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 t.printStackTrace()
+                val readWriteMap = hashMapOf("google" to false)
+                val map: Map<String, Boolean> = HashMap(readWriteMap)
+                interfaceCallBackController.onWorkDone(map)
             }
         })
 
@@ -128,7 +131,6 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         user!!.googleId = response.body()!!.googleId
         user!!.fbId = response.body()!!.fbId
         user!!.name = response.body()!!.name
-        user!!.email = response.body()!!.email
         user!!.isNew = response.body()!!.isNew
 
 
