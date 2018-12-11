@@ -6,12 +6,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -69,32 +65,6 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
         ivUserPicture = findViewById(R.id.ivUserPicture);
         val tvUserEmail:TextView? = findViewById(R.id.tvUserEmail);
 
-        //setSupportActionBar(toolbar)
-        val actionbar = supportActionBar
-        actionbar!!.setDisplayHomeAsUpEnabled(true)
-        actionbar.setHomeAsUpIndicator(R.drawable.menu_icon)
-
-        val mDrawerLayout: DrawerLayout? = findViewById(R.id.drawer_layout)
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(
-                object : NavigationView.OnNavigationItemSelectedListener {
-                    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true)
-                        // close drawer when item is tapped
-                        mDrawerLayout!!.closeDrawers()
-
-                        when (menuItem.getItemId()) {
-                            R.id.logOutNavDraw -> logOut(findViewById(android.R.id.content))
-
-                            R.id.listCardPage -> goToCardList(findViewById(android.R.id.content))
-                        }//Action;
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true
-                    }
-                })
         try {
             acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
             Log.d("GoogleId",acct!!.id.toString())
@@ -148,16 +118,7 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                val mDrawerLayout: DrawerLayout? = findViewById(R.id.drawer_layout)
-                mDrawerLayout!!.openDrawer(GravityCompat.START)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
 
     fun logOut(view: View) {
 
