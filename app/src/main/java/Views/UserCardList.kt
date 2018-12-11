@@ -28,7 +28,7 @@ class UserCardList : AppCompatActivity(), InterfaceCallBackController {
         adapter = ArrayAdapter<String>(this@UserCardList, android.R.layout.simple_list_item_1, listName)
         listView.adapter = adapter
         val controller = MagicCardRetrofitController(this as InterfaceCallBackController)
-        controller.callWS(listName)
+        controller.callUserCards(listName)
     }
 
 

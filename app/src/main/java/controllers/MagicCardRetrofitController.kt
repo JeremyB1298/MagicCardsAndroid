@@ -8,6 +8,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
+import kotlin.collections.HashMap
+
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
     internal var message: String? = null
@@ -15,8 +18,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     internal var nbPages = 100
     val magicCardAPI: InterfaceMagicCardAPI  = MagicCardRetrofitSingleton.instance!!
 
-    fun callWS(res: ArrayList<String>) {
-        val callExemple = magicCardAPI.getCard(1)
+    fun callUserCards(res: ArrayList<String>) {
+        val callExemple = magicCardAPI.getUserCards(1)
         callExemple.enqueue(object : Callback<List<Example>> {
             override fun onResponse(call: Call<List<Example>>, response: Response<List<Example>>) {
                 if (response.isSuccessful) {
@@ -47,7 +50,39 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     fetchUser(response,user)
-                    interfaceCallBackController.onWorkDone(true)
+                    val readWriteMap = hashMapOf("google" to true)
+                    val map: Map<String, Boolean> = HashMap(readWriteMap)
+                    interfaceCallBackController.onWorkDone(map)
+                    // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
+                    Log.d("SwapiRetrofitController", user!!.name )
+
+                } else {
+                    Log.d("SwapiRetrofitController", "error : " + response.errorBody()!!)
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                t.printStackTrace()
+                val readWriteMap = hashMapOf("google" to false)
+                val map: Map<String, Boolean> = HashMap(readWriteMap)
+                interfaceCallBackController.onWorkDone(map)
+            }
+        })
+
+    }
+
+    fun callUserFbId(fbId: String, user: User?){
+
+        val callUser = magicCardAPI.getUserByFacebook(fbId)
+
+
+        callUser.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    fetchUser(response,user)
+                    val readWriteMap = hashMapOf("facebook" to true)
+                    val map: Map<String, Boolean> = HashMap(readWriteMap)
+                    interfaceCallBackController.onWorkDone(map)
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
                     Log.d("SwapiRetrofitController", user!!.name )
 
@@ -63,7 +98,22 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     }
 
+    fun createUser(user: User) {
+        val callUser = magicCardAPI.createUser(user)
 
+        callUser.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+
+                } else {
+                    Log.d("INSCRIPTION FAILED", response.errorBody()!!.toString())
+                }
+            }
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
 
     @Synchronized
     private fun fetchData(response: Response<List<Example>>,res: ArrayList<String>) {
@@ -81,7 +131,6 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         user!!.googleId = response.body()!!.googleId
         user!!.fbId = response.body()!!.fbId
         user!!.name = response.body()!!.name
-        user!!.email = response.body()!!.email
         user!!.isNew = response.body()!!.isNew
 
 
