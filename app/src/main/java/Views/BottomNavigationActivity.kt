@@ -1,7 +1,7 @@
 package Views
 
+import Fragments.CardRecyclerViewFragment
 import Fragments.Fragment1
-import Fragments.Fragment2
 import Fragments.Fragment3
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -28,7 +28,7 @@ class BottomNavigationActivity : AppCompatActivity() {
                     return true
                 }
                 R.id.navigation_2 -> {
-                    val fragment = Fragment2()
+                    val fragment = CardRecyclerViewFragment()
                     addFragment(fragment)
                     return true
                 }
