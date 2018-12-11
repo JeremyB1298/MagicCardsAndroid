@@ -1,5 +1,6 @@
 package com.example.lpiem.magiccards
 
+import Views.BottomNavigationActivity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -134,7 +135,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToMenuActivity() {
-        val intent = Intent(this@MainActivity, MenuActivity::class.java)
+        val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
             intent.putExtra("google", acct)
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity() {
     protected fun getUserDetails(loginResult: AccessToken) {
         val data_request = GraphRequest.newMeRequest(
                 loginResult) { json_object, response ->
-            val intent = Intent(this@MainActivity, MenuActivity::class.java)
+            val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
             intent.putExtra("facebook", json_object.toString())
             startActivity(intent)
         }
