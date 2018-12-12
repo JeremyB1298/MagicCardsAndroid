@@ -27,9 +27,12 @@ class Fragment_home : Fragment() {
         var rootView = inflater!!.inflate(R.layout.fragment_home, container, false)
         val user = arguments?.getSerializable(INTENT_HOME_ID_USER) as User
         Log.d("userFragment", user.googleId.toString())
-        val tvUserName: TextView = rootView.findViewById(R.id.tvUserName);
+        val tvUserName: TextView = rootView.findViewById(R.id.tvName);
+        val tvUserLvl: TextView = rootView.findViewById(R.id.tvLvl);
+        val tvUserExp: TextView = rootView.findViewById(R.id.tvExp);
         tvUserName.text = user.name
-
+        tvUserLvl.text = user.lvl.toString()
+        tvUserExp.text = user.exp.toString()
         return rootView
     }
 

@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import com.facebook.FacebookException
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Parcelable
 import com.facebook.GraphRequest
 import com.google.android.gms.common.api.ApiException
@@ -87,8 +88,6 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
         //butons pour le compte google
         sign_in_button.setOnClickListener { signIn() }
-        button_sign_out.setOnClickListener{ signOut() }
-        button_disconnect.setOnClickListener { revokeAccess() }
     }
 
     override fun onResume() {
