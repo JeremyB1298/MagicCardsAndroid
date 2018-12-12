@@ -48,6 +48,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
         callUser.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
+
                 if (response.isSuccessful) {
                     fetchUser(response,user)
                     val readWriteMap = hashMapOf("google" to true)
@@ -100,11 +101,10 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     fun createUser(user: User) {
         val callUser = magicCardAPI.createUser(user)
-
         callUser.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
-
+                    Log.d("INSCRIPTION GOOD", response.errorBody()!!.toString())
                 } else {
                     Log.d("INSCRIPTION FAILED", response.errorBody()!!.toString())
                 }
@@ -132,8 +132,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         user!!.fbId = response.body()!!.fbId
         user!!.name = response.body()!!.name
         user!!.isNew = response.body()!!.isNew
-
-
+        user!!.lvl = response.body()!!.lvl
+        user!!.exp = response.body()!!.exp
     }
 
 }

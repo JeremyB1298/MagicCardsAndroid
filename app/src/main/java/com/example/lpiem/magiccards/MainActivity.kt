@@ -1,6 +1,8 @@
 package com.example.lpiem.magiccards
 
+import Models.User
 import Views.BottomNavigationActivity
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,12 +18,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import com.facebook.FacebookException
 import android.content.Intent
+import android.os.Parcelable
 import com.facebook.GraphRequest
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import controllers.InterfaceCallBackController
+import controllers.MagicCardRetrofitController
+import org.json.JSONObject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
@@ -30,6 +36,12 @@ class MainActivity : AppCompatActivity() {
     private var callbackManager: CallbackManager? = null
 
     private var accessToken: AccessToken? = null
+
+    private var user = User(-1)
+
+    private var acctGoogle: GoogleSignInAccount? = null
+    private var acctFacebook: JSONObject? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,11 +147,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToMenuActivity() {
-        val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
-        val acct = GoogleSignIn.getLastSignedInAccount(this)
-        if (acct != null) {
-            intent.putExtra("google", acct)
-            startActivity(intent)
+
+        acctGoogle = GoogleSignIn.getLastSignedInAccount(this)
+        if (acctGoogle != null) {
+            connexionToTheAppWithGoogle(acctGoogle!!.id.toString())
         }
 
     }
@@ -147,9 +158,8 @@ class MainActivity : AppCompatActivity() {
     protected fun getUserDetails(loginResult: AccessToken) {
         val data_request = GraphRequest.newMeRequest(
                 loginResult) { json_object, response ->
-            val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
-            intent.putExtra("facebook", json_object.toString())
-            startActivity(intent)
+            acctFacebook = json_object
+            connexionToTheAppWithFacebook(acctFacebook!!.get("id").toString())
         }
         val permission_param = Bundle()
         permission_param.putString("fields", "id,name,email,picture.width(120).height(120)")
@@ -170,6 +180,50 @@ class MainActivity : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
+    }
+
+    @SuppressLint("LongLogTag")
+    override fun onWorkDone(result: Any) {
+        if (result is Map<*, *>) {
+            if (result["google"] === true) {
+                try {
+
+                    val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
+                    intent.putExtra("user", user)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else if (result["facebook"] === true) {
+                try {
+
+                    val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
+                    intent.putExtra("user", user)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else if (result["google"] === false){
+                inscriptionGoogleAccount(user)
+            }
+        }
+    }
+
+
+    private fun connexionToTheAppWithGoogle(googleId: String) {
+        val controller = MagicCardRetrofitController(this )
+        controller.callUserGoogleId(googleId, user)
+    }
+
+    private fun connexionToTheAppWithFacebook(fbId: String) {
+        val controller = MagicCardRetrofitController(this )
+        controller.callUserFbId(fbId, user)
+    }
+
+    private fun inscriptionGoogleAccount(user: User) {
+        val controller = MagicCardRetrofitController(this )
+        controller.createUser(User(0,"0",acctGoogle!!.id.toString(),acctGoogle!!.displayName.toString(),true,0,0));
+        connexionToTheAppWithGoogle(user.googleId.toString())
     }
 
 }

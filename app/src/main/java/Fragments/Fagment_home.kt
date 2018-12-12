@@ -1,10 +1,13 @@
 package Fragments
 
+import Models.User
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.lpiem.magiccards.R
 
 
@@ -14,21 +17,27 @@ import com.example.lpiem.magiccards.R
 private const val INTENT_HOME_ID_USER = "User"
 class Fragment_home : Fragment() {
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var rootView = inflater!!.inflate(R.layout.fragment_home, container, false)
+        val user = arguments?.getSerializable(INTENT_HOME_ID_USER) as User
+        Log.d("userFragment", user.googleId.toString())
+        val tvUserName: TextView = rootView.findViewById(R.id.tvUserName);
+        tvUserName.text = user.name
+
         return rootView
     }
 
     companion object {
-
-        fun newInstance(marvelId: String): Fragment_home {
+        fun newInstance(user: User): Fragment_home {
             val fragment = Fragment_home()
             val args = Bundle()
-            args.putString(INTENT_HOME_ID_USER,marvelId)
+            args.putSerializable(INTENT_HOME_ID_USER,user)
             fragment.arguments = args
 
             return fragment
