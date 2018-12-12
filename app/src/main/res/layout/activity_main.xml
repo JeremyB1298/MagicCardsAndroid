@@ -11,8 +11,10 @@
         android:id="@+id/ivBackground"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/img_background_3"
-        android:foreground="#60000000" />
+        android:background="@drawable/img_background_4"
+        android:foreground="#60000000"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"/>
 
 
     <android.support.constraint.ConstraintLayout
@@ -34,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.131" />
+            app:layout_constraintVertical_bias="0.316" />
 </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
