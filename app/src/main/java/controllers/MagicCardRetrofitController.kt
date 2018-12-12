@@ -7,10 +7,6 @@ import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
-import kotlin.collections.HashMap
 
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
@@ -19,7 +15,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     internal var nbPages = 100
     val magicCardAPI: InterfaceMagicCardAPI  = MagicCardRetrofitSingleton.instance!!
 
-    fun callUserCards(res: ArrayList<String>) {
+    fun callWS(listCard: ArrayList<Card>) {
         val callExemple = magicCardAPI.getUserCards(1)
         callExemple.enqueue(object : Callback<List<Example>> {
             override fun onResponse(call: Call<List<Example>>, response: Response<List<Example>>) {
@@ -39,7 +35,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                 t.printStackTrace()
             }
         })
-        interfaceCallBackController.onWorkDone(true)
+
     }
 
     fun callUserGoogleId(googleId: String, user: User?){

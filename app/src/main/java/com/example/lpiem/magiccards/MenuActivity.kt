@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_menu.*
 import org.json.JSONObject
 
 
-class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
+class MenuActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private var tvId: TextView? = null
     private var ivUserPicture: ImageView? = null
@@ -58,36 +58,11 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        val tvUserName:TextView? = findViewById(R.id.tvUserName);
+        val tvUserName: TextView? = findViewById(R.id.tvUserName);
         ivUserPicture = findViewById(R.id.ivUserPicture);
-        val tvUserEmail:TextView? = findViewById(R.id.tvUserEmail);
+        val tvUserEmail: TextView? = findViewById(R.id.tvUserEmail);
 
-        //setSupportActionBar(toolbar)
-        val actionbar = supportActionBar
-        actionbar!!.setDisplayHomeAsUpEnabled(true)
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_launcher_foreground)
 
-        val mDrawerLayout: DrawerLayout? = findViewById(R.id.drawer_layout)
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(
-                object : NavigationView.OnNavigationItemSelectedListener {
-                    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true)
-                        // close drawer when item is tapped
-                        mDrawerLayout!!.closeDrawers()
-
-                        when (menuItem.getItemId()) {
-                            R.id.logOutNavDraw -> logOut(findViewById(android.R.id.content))
-
-                            R.id.listCardPage -> goToCardList(findViewById(android.R.id.content))
-                        }//Action;
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true
-                    }
-                })
 
         if (intent.getParcelableExtra<Parcelable>("google") != null) {
             acct = intent.getParcelableExtra<Parcelable>("google") as GoogleSignInAccount?
@@ -134,17 +109,36 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
                             .placeholder(R.drawable.image_profil)
                             .into(ivUserPicture)
 
-                } catch (e: Exception) {
+
+                    try {
+                        acct = intent.getParcelableExtra<Parcelable>("ACCOUNT") as GoogleSignInAccount?
+                        acct!!.id.toString()
+                        tvUserEmail!!.setText(acct!!.displayName.toString())
+                        tvUserName!!.setText(acct!!.email.toString())
+
+                        val a: String = acct!!.photoUrl.toString()
+
+                        Picasso.get()
+                                .load(acct!!.photoUrl.toString())
+                                .into(ivUserPicture)
+
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }catch (e : Exception){
                     e.printStackTrace()
+
                 }
-            } else if (result["google"] === false){
-                acct = intent.getParcelableExtra<Parcelable>("google") as GoogleSignInAccount?
-                inscriptionGoogleAccount(acct!!.id.toString(),acct!!.displayName.toString())
             }
+
+
+
+
+
+
         }
     }
-
-
 
     fun logOut(view: View) {
 
@@ -166,6 +160,9 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
                         }
                     })
         }
+
+
+
     }
 
     fun goToCardList(view: View) {
@@ -174,19 +171,18 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
     }
 
 
-    private fun connexionToTheAppWithGoogle(googleId: String) {
-        val controller = MagicCardRetrofitController(this )
+    fun connexionToTheAppWithGoogle(googleId: String) {
+        val controller = MagicCardRetrofitController(this)
         controller.callUserGoogleId(googleId, user)
     }
 
-    private fun connexionToTheAppWithFacebook(fbId: String) {
-        val controller = MagicCardRetrofitController(this )
+    fun connexionToTheAppWithFacebook(fbId: String) {
+        val controller = MagicCardRetrofitController(this)
         controller.callUserFbId(fbId, user)
     }
 
-    private fun inscriptionGoogleAccount(googleId: String,name: String) {
-        val controller = MagicCardRetrofitController(this )
-        controller.createUser(User(0,"0",googleId,name,true));
+    fun inscriptionGoogleAccount(googleId: String, name: String) {
+        val controller = MagicCardRetrofitController(this)
+        controller.createUser(User(0, "0", googleId, name, true));
     }
-
 }
