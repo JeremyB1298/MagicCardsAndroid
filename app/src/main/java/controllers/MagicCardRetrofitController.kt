@@ -1,5 +1,6 @@
 package controllers
 
+import Models.Card
 import Models.Example
 import Models.User
 import android.util.Log
@@ -24,7 +25,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
             override fun onResponse(call: Call<List<Example>>, response: Response<List<Example>>) {
                 if (response.isSuccessful) {
                     val listExample = response.body()
-                    fetchData(response, res)
+                    fetchData(response, listCard)
                     val card = listExample!![0].card
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
                     Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
@@ -116,10 +117,10 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     }
 
     @Synchronized
-    private fun fetchData(response: Response<List<Example>>,res: ArrayList<String>) {
+    private fun fetchData(response: Response<List<Example>>,listCard: ArrayList<Card>) {
 
         for (i in 0 until response.body()!!.size) {
-            res.add(response.body()!![i].card!!.name!!)
+            listCard.add(response.body()!![i].card!!)
         }
 
         interfaceCallBackController.onWorkDone(true)

@@ -1,38 +1,30 @@
 package com.example.lpiem.magiccards
 
 import Models.User
+import Views.UserCardList
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.common.api.GoogleApiClient
-import android.support.v4.widget.DrawerLayout
-import org.json.JSONObject
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.example.lpiem.magiccards.R.id.ivUserPicture
-import com.squareup.picasso.Picasso
-import com.example.lpiem.magiccards.R.id.tvUserName
-import com.example.lpiem.magiccards.R.id.tvUserEmail
-import android.widget.TextView
-import com.example.lpiem.magiccards.R.id.bLogOut
 import android.content.Intent
+import android.os.Bundle
 import android.os.Parcelable
-import android.support.design.widget.NavigationView
-import android.view.MenuItem
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import Views.UserCardList
+import android.widget.TextView
 import android.widget.Toast
-import com.facebook.login.LoginManager
 import com.facebook.AccessToken
-import android.support.v4.view.GravityCompat
-import android.util.Log
+import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
+import com.squareup.picasso.Picasso
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.activity_menu.*
+import org.json.JSONObject
 
 
 class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
@@ -67,7 +59,7 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
         setContentView(R.layout.activity_menu)
 
         val tvUserName:TextView? = findViewById(R.id.tvUserName);
-        val ivUserPicture:ImageView? = findViewById(R.id.ivUserPicture);
+        ivUserPicture = findViewById(R.id.ivUserPicture);
         val tvUserEmail:TextView? = findViewById(R.id.tvUserEmail);
 
         //setSupportActionBar(toolbar)
@@ -152,16 +144,7 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                val mDrawerLayout: DrawerLayout? = findViewById(R.id.drawer_layout)
-                mDrawerLayout!!.openDrawer(GravityCompat.START)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
 
     fun logOut(view: View) {
 
@@ -186,8 +169,8 @@ class MenuActivity : AppCompatActivity(),InterfaceCallBackController {
     }
 
     fun goToCardList(view: View) {
-        val intent = Intent(this@MenuActivity, UserCardList::class.java)
-        startActivity(intent)
+        val intent2 = Intent(this, UserCardList::class.java)
+        startActivity(intent2)
     }
 
 
