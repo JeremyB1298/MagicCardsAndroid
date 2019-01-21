@@ -14,6 +14,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="HomeNamePlayer">
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
+    <style name="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="HomeExpPlayer">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/ColorExp</item>
+    </style>
+
+    <style name="HomeExpPlayerFix" parent="HomeExpPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ColorExpFix</item>
+    </style>
+
+    <style name="HomeNbrCard1Star" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/ColorBlack</item>
+    </style>
 
 </resources>
