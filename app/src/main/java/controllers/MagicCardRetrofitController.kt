@@ -1,15 +1,12 @@
 package controllers
 
+import Models.Card
 import Models.Example
 import Models.User
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
-import kotlin.collections.HashMap
 
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
@@ -18,13 +15,13 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     internal var nbPages = 100
     val magicCardAPI: InterfaceMagicCardAPI  = MagicCardRetrofitSingleton.instance!!
 
-    fun callUserCards(res: ArrayList<String>) {
+    fun callWS(listCard: ArrayList<Card>) {
         val callExemple = magicCardAPI.getUserCards(1)
         callExemple.enqueue(object : Callback<List<Example>> {
             override fun onResponse(call: Call<List<Example>>, response: Response<List<Example>>) {
                 if (response.isSuccessful) {
                     val listExample = response.body()
-                    fetchData(response, res)
+                    fetchData(response, listCard)
                     val card = listExample!![0].card
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
                     Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
@@ -38,7 +35,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                 t.printStackTrace()
             }
         })
-        interfaceCallBackController.onWorkDone(true)
+
     }
 
     fun callUserGoogleId(googleId: String, user: User?){
@@ -116,10 +113,10 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     }
 
     @Synchronized
-    private fun fetchData(response: Response<List<Example>>,res: ArrayList<String>) {
+    private fun fetchData(response: Response<List<Example>>,listCard: ArrayList<Card>) {
 
         for (i in 0 until response.body()!!.size) {
-            res.add(response.body()!![i].card!!.name!!)
+            listCard.add(response.body()!![i].card!!)
         }
 
         interfaceCallBackController.onWorkDone(true)
