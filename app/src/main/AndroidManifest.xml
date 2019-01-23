@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="Views.BottomNavigationActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppThemeMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,8 +46,7 @@
             </intent-filter>
         </activity>
         <activity android:name="Views.UserCardList" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name="Views.BottomNavigationActivity"></activity>
     </application>
 
 </manifest>
