@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/ColorExp">
+    android:background="@color/ColorDark">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
 
@@ -134,7 +134,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/ColorLightGray"
+        android:background="@drawable/Gray_Patterned_BG"
         android:orientation="horizontal"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
@@ -153,8 +153,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/circle_card_1_star"
+                android:background="@drawable/circle_card_star"
                 android:gravity="center"
+                android:textColor="@color/ColorWhite"
                 android:text="@string/home_nbr_card_1_star" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -209,7 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/circle_card_1_star"
+                android:background="@drawable/circle_card_star"
                 android:gravity="center"
                 android:text="@string/home_nbr_card_2_star" />
 
@@ -272,7 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/circle_card_1_star"
+                android:background="@drawable/circle_card_star"
                 android:gravity="center"
                 android:text="@string/home_nbr_card_3_star" />
 

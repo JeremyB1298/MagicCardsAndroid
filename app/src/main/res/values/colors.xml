@@ -10,4 +10,5 @@
     <color name="Color2Star">#098A7D</color>
     <color name="Color3Star">#800D80</color>
     <color name="ColorLightGray">#D7D7D7</color>
+    <color name="ColorDark">#191919</color>
 </resources>
