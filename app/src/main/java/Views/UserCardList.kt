@@ -3,8 +3,8 @@ package Views
 import Models.Card
 import Views.Adapters.CardListAdapter
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lpiem.magiccards.R
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
@@ -25,7 +25,7 @@ class UserCardList : AppCompatActivity(), InterfaceCallBackController {
 
         val controller = MagicCardRetrofitController(this as InterfaceCallBackController)
 
-        rv_animal_list.layoutManager = LinearLayoutManager(this);
+        rv_animal_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this);
         controller.callWS(listCard)
     }
 

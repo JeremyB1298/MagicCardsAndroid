@@ -2,7 +2,7 @@ package Fragments
 
 import Models.Card
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,11 @@ import com.example.lpiem.magiccards.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_card_detail.*
 
-class CardDetailFragment : Fragment() {
+
+
+
+
+class CardDetailFragment : androidx.fragment.app.Fragment() {
 
     lateinit var card: Card;
 
@@ -28,5 +32,5 @@ class CardDetailFragment : Fragment() {
         cardDetailTitle.text = card.name
     }
 
-
+    
 }

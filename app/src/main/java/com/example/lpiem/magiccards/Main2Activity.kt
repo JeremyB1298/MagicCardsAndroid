@@ -1,7 +1,7 @@
 package com.example.lpiem.magiccards
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 class Main2Activity : AppCompatActivity() {
 
