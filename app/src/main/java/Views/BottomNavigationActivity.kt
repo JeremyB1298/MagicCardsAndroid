@@ -1,16 +1,15 @@
 package Views
 
+import Fragments.CardRecyclerViewFragment
 import Fragments.Fragment1
+import Fragments.Fragment3
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.FrameLayout
 import com.example.lpiem.magiccards.R
-import fragment.Fragment1
-import fragment.Fragment2
-import fragment.Fragment3
 
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -28,12 +27,12 @@ class BottomNavigationActivity : AppCompatActivity() {
 
                     return true
                 }
-                R.id.navigation_dashboard -> {
-                    val fragment = Fragment2()
+                R.id.navigation_2 -> {
+                    val fragment = CardRecyclerViewFragment()
                     addFragment(fragment)
                     return true
                 }
-                R.id.navigation_notifications -> {
+                R.id.navigation_3 -> {
                     var fragment = Fragment3()
                     addFragment(fragment)
                     return true
@@ -47,7 +46,7 @@ class BottomNavigationActivity : AppCompatActivity() {
     /**
      * add/replace fragment in container [framelayout]
      */
-    private fun addFragment(fragment: Fragment) {
+    private fun addFragment(fragment: androidx.fragment.app.Fragment) {
         supportFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
@@ -65,7 +64,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
 
-        val fragment = FragmentHome.Companion.newInstance()
+        val fragment = Fragment1()
         addFragment(fragment)
     }
 
