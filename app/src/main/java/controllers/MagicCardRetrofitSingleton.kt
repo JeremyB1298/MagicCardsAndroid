@@ -8,6 +8,7 @@ object MagicCardRetrofitSingleton {
     //internal val BASE_URL = "http://17ruecroixberthet.freeboxos.fr/"
     internal val BASE_URL = "http://10.0.2.2:8888/"
 
+
     private var magicCardAPIInstance: InterfaceMagicCardAPI? = null
 
     val instance: InterfaceMagicCardAPI?

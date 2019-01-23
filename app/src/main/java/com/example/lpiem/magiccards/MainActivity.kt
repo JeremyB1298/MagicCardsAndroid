@@ -1,5 +1,6 @@
 package com.example.lpiem.magiccards
 
+import androidx.appcompat.app.AppCompatActivity
 import Models.User
 import Views.BottomNavigationActivity
 import android.annotation.SuppressLint
