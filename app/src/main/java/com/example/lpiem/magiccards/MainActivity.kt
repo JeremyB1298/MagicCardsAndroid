@@ -42,8 +42,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private var acctGoogle: GoogleSignInAccount? = null
     private var acctFacebook: JSONObject? = null
-
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
