@@ -16,4 +16,8 @@
     <string name="home_max_exp">50000</string>
     <string name="home_nbr_card_1_star">50</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
