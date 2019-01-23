@@ -2,14 +2,14 @@ package Adapter
 
 import Models.Card
 import Utils.inflate
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.lpiem.magiccards.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.rcycl_view_item.view.*
 
-class CardRcyclViewAdapter() : RecyclerView.Adapter<CardRcyclViewHolder>() {
+class CardRcyclViewAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<CardRcyclViewHolder>() {
 
     private var myDataset =  ArrayList<Card>()
     private lateinit var onClick: (Card)->Unit
@@ -41,7 +41,7 @@ class CardRcyclViewAdapter() : RecyclerView.Adapter<CardRcyclViewHolder>() {
 
 
 
-class CardRcyclViewHolder(val v: View) : RecyclerView.ViewHolder(v){
+class CardRcyclViewHolder(val v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v){
     fun bindCard(myDataset: Card, onClick: (Card) -> Unit){
 
 
