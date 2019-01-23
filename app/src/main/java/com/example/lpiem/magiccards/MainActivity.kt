@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import Models.User
 import Views.BottomNavigationActivity
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast

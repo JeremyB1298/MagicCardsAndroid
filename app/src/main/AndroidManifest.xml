@@ -46,8 +46,7 @@
             </intent-filter>
         </activity>
         <activity android:name="Views.UserCardList" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name="Views.BottomNavigationActivity"></activity>
     </application>
 
 </manifest>

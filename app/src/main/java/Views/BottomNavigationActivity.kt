@@ -1,17 +1,12 @@
 package Views
 
 import Fragments.CardRecyclerViewFragment
-import Fragments.Fragment1
 import Fragments.Fragment_home
-import Fragments.Fragment2
 import Fragments.Fragment3
 import Models.User
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
