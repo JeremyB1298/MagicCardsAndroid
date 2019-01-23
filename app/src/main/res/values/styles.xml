@@ -27,7 +27,7 @@
 
     <style name="HomeExpPlayer">
         <item name="android:textSize">15dp</item>
-        <item name="android:textColor">@color/ColorExp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
     </style>
 
     <style name="HomeExpPlayerFix" parent="HomeExpPlayer">
