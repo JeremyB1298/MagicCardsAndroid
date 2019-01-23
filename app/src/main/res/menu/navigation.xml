@@ -3,14 +3,17 @@
 
     <item
         android:id="@+id/navigation_1"
-        android:title="1" />
+        android:icon="@drawable/home"
+        android:title="home"/>
 
     <item
         android:id="@+id/navigation_2"
-        android:title="2" />
+        android:icon="@drawable/deck"
+        android:title="cards" />
 
     <item
         android:id="@+id/navigation_3"
-        android:title="3" />
+        android:icon="@drawable/coins"
+        android:title="shop" />
 
 </menu>
