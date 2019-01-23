@@ -1,30 +1,24 @@
 package com.example.lpiem.magiccards
 
-import androidx.appcompat.app.AppCompatActivity
 import Models.User
 import Views.BottomNavigationActivity
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
+import androidx.appcompat.app.AppCompatActivity
+import com.facebook.*
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import kotlinx.android.synthetic.main.activity_main.*
-import com.facebook.FacebookException
-import android.content.Intent
-import android.graphics.PorterDuff
-import android.os.Parcelable
-import com.facebook.GraphRequest
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
 
@@ -195,7 +189,6 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
                 }
             } else if (result["facebook"] === true) {
                 try {
-
                     val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
                     intent.putExtra("user", user)
                     startActivity(intent)
