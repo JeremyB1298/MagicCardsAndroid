@@ -78,6 +78,7 @@
             app:layout_constraintBottom_toTopOf="@id/bRareCard"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
             android:background="@color/colorPrimaryDark"
             android:paddingBottom="5dp"/>
 
@@ -94,6 +95,7 @@
             app:layout_constraintTop_toTopOf="@id/clCards"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@color/colorPrimaryDark"
             android:paddingBottom="5dp"/>
 
@@ -110,6 +112,7 @@
             app:layout_constraintTop_toBottomOf="@id/bCommonCard"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
             android:background="@color/colorPrimaryDark"
             android:paddingBottom="5dp"/>
 
@@ -126,6 +129,7 @@
             app:layout_constraintTop_toBottomOf="@id/bUncommonCard"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@color/colorPrimaryDark"
             android:paddingBottom="5dp"/>
 
