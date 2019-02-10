@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Use DrawerLayout as root container for activity -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/gray_patterned_bg">
+
+    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+
+    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintPersoData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ColorDark"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="15dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:elevation="12dp"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardCornerRadius="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvHomeTitleLevel">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/image_profil"></ImageView>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/HomeNamePlayer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="Name Player"
+            app:layout_constraintBottom_toBottomOf="@+id/view2"
+            app:layout_constraintEnd_toStartOf="@+id/tvHomeTitleLevel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+
+        <TextView
+            android:id="@+id/tvHomeTitleLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/home_title_level"
+            android:textColor="@color/ColorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/tvName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLvl"
+            style="@style/HomeLevelPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_textview"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="100"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvHomeTitleLevel" />
+
+
+        <TextView
+            android:id="@+id/tvHomeTitleExp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="left"
+            android:text="@string/home_title_exp"
+            android:textColor="@color/ColorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tvExp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvLvl" />
+
+        <TextView
+            android:id="@+id/tvExp"
+            style="@style/HomeExpPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10000"
+            app:layout_constraintEnd_toStartOf="@id/tvSeparatorExp"
+            app:layout_constraintStart_toEndOf="@id/tvHomeTitleExp"
+            app:layout_constraintTop_toTopOf="@+id/tvHomeTitleExp" />
+
+        <TextView
+            android:id="@+id/tvSeparatorExp"
+            style="@style/HomeExpPlayerFix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_separator_exp"
+            app:layout_constraintEnd_toStartOf="@id/tvHomeMaxExp"
+            app:layout_constraintStart_toEndOf="@id/tvExp"
+            app:layout_constraintTop_toTopOf="@+id/tvExp" />
+
+        <TextView
+            android:id="@+id/tvHomeMaxExp"
+            style="@style/HomeExpPlayerFix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_max_exp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvSeparatorExp"
+            app:layout_constraintTop_toTopOf="@+id/tvSeparatorExp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutCardsData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintPersoData"
+        android:paddingBottom="10dp"
+        android:paddingTop="15dp">
+
+        <ImageView
+            android:id="@+id/ivDeck1Star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvCard1Stars"
+            app:layout_constraintEnd_toStartOf="@id/ivStar1star"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/tvCard1Stars"
+            app:layout_constraintTop_toTopOf="@id/tvCard1Stars"
+            app:layout_constraintVertical_bias="0.9"
+            app:srcCompat="@drawable/deck"
+            tools:ignore="NotSibling" />
+
+        <ImageView
+            android:id="@+id/ivStar1star"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck1Star"
+            app:layout_constraintEnd_toEndOf="@id/tvCard1Stars"
+            app:layout_constraintStart_toEndOf="@id/ivDeck1Star"
+            app:layout_constraintTop_toTopOf="@id/ivDeck1Star"
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/star" />
+
+        <TextView
+            android:id="@+id/tvCard1Stars"
+            style="@style/HomeNbrCard1Star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circle_card_star"
+            android:gravity="center"
+            android:text="@string/home_nbr_card_1_star"
+            android:textColor="@color/ColorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutCardsData"
+            app:layout_constraintEnd_toStartOf="@id/tvCard2Stars"
+            app:layout_constraintStart_toStartOf="@id/constraintLayoutCardsData"
+            app:layout_constraintTop_toTopOf="@id/constraintLayoutCardsData" />
+
+        <ImageView
+            android:id="@+id/ivDeck2Star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvCard2Stars"
+            app:layout_constraintEnd_toStartOf="@id/ivStar2star"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/tvCard2Stars"
+            app:layout_constraintTop_toTopOf="@id/tvCard2Stars"
+            app:layout_constraintVertical_bias="0.9"
+            app:srcCompat="@drawable/deck"
+            tools:ignore="NotSibling" />
+
+        <ImageView
+            android:id="@+id/ivStar2star"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck2Star"
+            app:layout_constraintEnd_toStartOf="@id/ivStar2star2"
+            app:layout_constraintStart_toEndOf="@id/ivDeck2Star"
+            app:layout_constraintTop_toTopOf="@id/ivDeck2Star"
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/ivStar2star2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck2Star"
+            app:layout_constraintEnd_toEndOf="@id/tvCard2Stars"
+            app:layout_constraintStart_toEndOf="@id/ivStar2star"
+            app:layout_constraintTop_toTopOf="@id/ivDeck2Star"
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/star" />
+
+        <TextView
+            android:id="@+id/tvCard2Stars"
+            style="@style/HomeNbrCard2Star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circle_card_star"
+            android:gravity="center"
+            android:text="@string/home_nbr_card_2_star"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutCardsData"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayoutCardsData"
+            app:layout_constraintStart_toEndOf="@id/tvCard1Stars"
+            app:layout_constraintTop_toTopOf="@id/constraintLayoutCardsData" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutCardsData2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayoutCardsData"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/ivDeck3Star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvCard3Stars"
+            app:layout_constraintEnd_toStartOf="@id/ivStar3star"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/tvCard3Stars"
+            app:layout_constraintTop_toTopOf="@id/tvCard3Stars"
+            app:layout_constraintVertical_bias="0.9"
+            app:srcCompat="@drawable/deck"
+            tools:ignore="NotSibling" />
+
+        <ImageView
+            android:id="@+id/ivStar3star"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck3Star"
+            app:layout_constraintEnd_toStartOf="@id/ivStar3star2"
+            app:layout_constraintStart_toEndOf="@id/ivDeck3Star"
+            app:layout_constraintTop_toTopOf="@id/ivDeck3Star"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/ivStar3star2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck3Star"
+            app:layout_constraintEnd_toEndOf="@id/tvCard3Stars"
+            app:layout_constraintStart_toEndOf="@id/ivStar3star"
+            app:layout_constraintTop_toTopOf="@id/ivDeck3Star"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/ivStar3star3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck3Star"
+            app:layout_constraintEnd_toEndOf="@id/ivStar3star2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/ivDeck3Star"
+            app:layout_constraintTop_toBottomOf="@id/ivStar3star"
+            app:srcCompat="@drawable/star" />
+
+        <TextView
+            android:id="@+id/tvCard3Stars"
+            style="@style/HomeNbrCard3Star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circle_card_star"
+            android:gravity="center"
+            android:text="@string/home_nbr_card_3_star"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutCardsData2"
+            app:layout_constraintEnd_toStartOf="@id/tvCard4Stars"
+            app:layout_constraintStart_toStartOf="@id/constraintLayoutCardsData2"
+            app:layout_constraintTop_toTopOf="@id/constraintLayoutCardsData2" />
+
+        <ImageView
+            android:id="@+id/ivDeck4Star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvCard4Stars"
+            app:layout_constraintEnd_toStartOf="@id/ivStar4Star"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/tvCard4Stars"
+            app:layout_constraintTop_toTopOf="@id/tvCard4Stars"
+            app:layout_constraintVertical_bias="0.9"
+            app:srcCompat="@drawable/deck"
+            tools:ignore="NotSibling" />
+
+        <ImageView
+            android:id="@+id/ivStar4Star"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck4Star"
+            app:layout_constraintEnd_toStartOf="@id/ivStar4Star2"
+            app:layout_constraintStart_toEndOf="@id/ivDeck4Star"
+            app:layout_constraintTop_toTopOf="@id/ivDeck4Star"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/ivStar4Star2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck4Star"
+            app:layout_constraintEnd_toEndOf="@id/tvCard4Stars"
+            app:layout_constraintStart_toEndOf="@id/ivStar4Star"
+            app:layout_constraintTop_toTopOf="@id/ivDeck4Star"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/ivStar4Star3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck4Star"
+            app:layout_constraintEnd_toStartOf="@id/ivStar4Star4"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/ivDeck4Star"
+            app:layout_constraintTop_toBottomOf="@id/ivStar4Star"
+            app:srcCompat="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/ivStar4Star4"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDeck4Star"
+            app:layout_constraintEnd_toEndOf="@id/ivStar4Star2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/ivStar4Star3"
+            app:layout_constraintTop_toBottomOf="@id/ivStar4Star"
+            app:srcCompat="@drawable/star"/>
+
+        <TextView
+            android:id="@+id/tvCard4Stars"
+            style="@style/HomeNbrCard4Star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circle_card_star"
+            android:gravity="center"
+            android:text="@string/home_nbr_card_4_star"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutCardsData2"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayoutCardsData2"
+            app:layout_constraintStart_toEndOf="@id/tvCard3Stars"
+            app:layout_constraintTop_toTopOf="@id/constraintLayoutCardsData2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

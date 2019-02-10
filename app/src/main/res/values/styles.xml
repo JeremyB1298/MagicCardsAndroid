@@ -3,9 +3,61 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppThemeMain" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="HomeNamePlayer">
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="HomeExpPlayer">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="HomeExpPlayerFix" parent="HomeExpPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ColorExpFix</item>
+    </style>
+
+    <style name="HomeNbrCard1Star" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/ColorBlack</item>
+    </style>
+
+    <style name="HomeNbrCard2Star" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/Color2Star</item>
+    </style>
+
+    <style name="HomeNbrCard3Star" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/Color3Star</item>
+    </style>
+
+    <style name="HomeNbrCard4Star" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/Color4Star</item>
     </style>
 
 </resources>

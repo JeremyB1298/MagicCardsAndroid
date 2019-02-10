@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">MagicCards</string>
+
+    <string name="logout">Logout</string>
+
     <string name="facebook_app_id">246160442735223</string>
     <string name="fb_login_protocol_scheme">fb246160442735223</string>
+    <string name="imp">Import</string>
+    <string name="gallery">Gallery</string>
+    <string name="slideshow">SlideShow</string>
+    <string name="tools">Tools</string>
+    <string name="listCard">List Card</string>
+    <string name="home_title_level">Niveaux :</string>
+    <string name="home_title_exp">Exp. : </string>
+    <string name="home_separator_exp">/</string>
+    <string name="home_max_exp">50000</string>
+    <string name="home_nbr_card_1_star">50</string>
+    <string name="home_nbr_card_2_star">20</string>
+    <string name="home_nbr_card_3_star">10</string>
+    <string name="home_nbr_card_4_star">5</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
