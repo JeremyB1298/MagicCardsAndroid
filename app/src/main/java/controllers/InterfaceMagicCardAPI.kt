@@ -24,5 +24,5 @@ interface InterfaceMagicCardAPI {
 
     @POST("/MagicCard/web/index.php/inscription")
     @Headers("Content-Type: application/json;charset=UTF-8")
-    fun createUser(@Body user: User): Call<User>
+    fun createUser(@Body user: User): Call<String>
 }
