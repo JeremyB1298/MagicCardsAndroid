@@ -2,25 +2,16 @@ package Views
 
 import Fragments.CardRecyclerViewFragment
 import Fragments.Fragment_home
-import Fragments.Fragment3
+import Fragments.Fragment_shop
 import Models.User
-import android.annotation.SuppressLint
+import Singletons.ShopManager
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.FrameLayout
 import com.example.lpiem.magiccards.R
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.squareup.picasso.Picasso
-import controllers.AccountConnexion
-import controllers.InterfaceCallBackController
-import controllers.MagicCardRetrofitController
-import kotlinx.android.synthetic.main.activity_menu.*
-import org.json.JSONObject
 
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -29,7 +20,6 @@ class BottomNavigationActivity : AppCompatActivity() {
     private var user: User? = null
 
     private val mOnNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
-
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.navigation_1 -> {
@@ -44,7 +34,7 @@ class BottomNavigationActivity : AppCompatActivity() {
                     return true
                 }
                 R.id.navigation_3 -> {
-                    var fragment = Fragment3()
+                    var fragment = Fragment_shop()
                     addFragment(fragment)
                     return true
                 }
