@@ -1,7 +1,6 @@
 package controllers
 
 import Models.Card
-import Models.Example
 import Models.User
 import android.util.Log
 import retrofit2.Call
@@ -17,12 +16,12 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     fun callWS(listCard: ArrayList<Card>) {
         val callExemple = magicCardAPI.getUserCards(1)
-        callExemple.enqueue(object : Callback<List<Example>> {
-            override fun onResponse(call: Call<List<Example>>, response: Response<List<Example>>) {
+        callExemple.enqueue(object : Callback<List<Card>> {
+            override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
                 if (response.isSuccessful) {
                     val listExample = response.body()
                     fetchData(response, listCard)
-                    val card = listExample!![0].card
+                    val card = listExample!![0]
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
                     Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
 
@@ -31,7 +30,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                 }
             }
 
-            override fun onFailure(call: Call<List<Example>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Card>>, t: Throwable) {
                 t.printStackTrace()
             }
         })
@@ -119,10 +118,10 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     }
 
     @Synchronized
-    private fun fetchData(response: Response<List<Example>>,listCard: ArrayList<Card>) {
+    private fun fetchData(response: Response<List<Card>>,listCard: ArrayList<Card>) {
 
         for (i in 0 until response.body()!!.size) {
-            listCard.add(response.body()!![i].card!!)
+            listCard.add(response.body()!![i])
         }
 
         interfaceCallBackController.onWorkDone(true)
