@@ -1,6 +1,7 @@
 package Fragments
 
 import Adapter.CardRcyclViewAdapter
+import Managers.UserManager
 import Models.Card
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +18,6 @@ class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallB
     override fun onWorkDone(result: Any) {
         if (result as Boolean) {
             viewAdapter.addCardList(listCard);
-            listCard.clear();
         }
     }
 
@@ -25,7 +25,9 @@ class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallB
     private lateinit var viewAdapter: CardRcyclViewAdapter
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     private lateinit var controller: MagicCardRetrofitController
-    private var listCard = ArrayList<Card>()
+
+    private var userManager = UserManager.getInstance()
+    private var listCard = userManager.getUserCards()
 
     override fun onAttach(context: Context) {
         super.onAttach(context!!)

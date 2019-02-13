@@ -25,4 +25,7 @@ interface InterfaceMagicCardAPI {
     @POST("/MagicCard/web/index.php/inscription")
     @Headers("Content-Type: application/json;charset=UTF-8")
     fun createUser(@Body user: User): Call<String>
+
+    @GET("/MagicCard/web/index.php/randomCard")
+    fun getRandomCards(): Call<List<Card>>
 }

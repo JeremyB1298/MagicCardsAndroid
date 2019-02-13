@@ -1,6 +1,7 @@
 package com.example.lpiem.magiccards
 
 import Models.User
+import Singletons.ShopManager
 import Views.BottomNavigationActivity
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -47,8 +48,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
                 .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
-
-
+        
         Toast.makeText(this, "account",Toast.LENGTH_SHORT).show()
 
         callbackManager = CallbackManager.Factory.create()

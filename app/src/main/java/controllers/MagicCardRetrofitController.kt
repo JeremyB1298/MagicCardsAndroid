@@ -115,6 +115,23 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         })
     }
 
+    fun getRandomCards() {
+        val callRandomCard = magicCardAPI.getRandomCards()
+        callRandomCard.enqueue(object : Callback<List<Card>>{
+            override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
+               if (response.isSuccessful) {
+                       interfaceCallBackController.onWorkDone(response.body() as ArrayList<Card>)
+               } else {
+
+               }
+            }
+
+            override fun onFailure(call: Call<List<Card>>, t: Throwable) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
+    }
+
     @Synchronized
     private fun fetchData(response: Response<List<Card>>,listCard: ArrayList<Card>) {
 

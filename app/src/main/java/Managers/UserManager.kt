@@ -1,29 +1,13 @@
 package Managers
 
+import Models.Card
 import Models.User
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import org.json.JSONObject
 
 class UserManager private constructor() {
 
     private var user : User? = null;
 
-    private val mCache: MutableMap<String, String> = mutableMapOf()
-
-    private var mGoogleSignInClient: GoogleSignInClient? = null
-
-    private val RC_SIGN_IN: Int = 9001
-
-    private var callbackManager: CallbackManager? = null
-
-    private var accessToken: AccessToken? = null
-
-
-    private var acctGoogle: GoogleSignInAccount? = null
-    private var acctFacebook: JSONObject? = null
+    private var cards =  ArrayList<Card>()
 
     init {
        ++myInstancesCount
@@ -48,6 +32,15 @@ class UserManager private constructor() {
 
     public fun getUser(): User? {
         return this.user
+    }
+
+    public fun addCardList(cardList: ArrayList<Card>){
+        this.cards.clear()
+        this.cards.addAll(cardList)
+    }
+
+    public fun getUserCards() : ArrayList<Card>{
+        return cards
     }
 
 

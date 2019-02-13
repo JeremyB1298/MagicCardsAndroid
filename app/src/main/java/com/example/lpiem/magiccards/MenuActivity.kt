@@ -1,6 +1,7 @@
 package com.example.lpiem.magiccards
 
 import Models.User
+import Singletons.ShopManager
 import Views.UserCardList
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -57,12 +58,9 @@ class MenuActivity : AppCompatActivity(), InterfaceCallBackController {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-
         val tvUserName: TextView? = findViewById(R.id.tvUserName);
         ivUserPicture = findViewById(R.id.ivUserPicture);
         val tvUserEmail: TextView? = findViewById(R.id.tvUserEmail);
-
-
 
         if (intent.getParcelableExtra<Parcelable>("google") != null) {
             acct = intent.getParcelableExtra<Parcelable>("google") as GoogleSignInAccount?
