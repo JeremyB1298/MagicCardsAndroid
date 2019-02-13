@@ -23,6 +23,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                     fetchData(response, listCard)
                     val card = listExample!![0]
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
+
                     Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
 
                 } else {
@@ -63,9 +64,6 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 t.printStackTrace()
-                val readWriteMap = hashMapOf("google" to false)
-                val map: Map<String, Boolean> = HashMap(readWriteMap)
-                interfaceCallBackController.onWorkDone(map)
             }
         })
 
