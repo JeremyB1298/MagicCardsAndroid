@@ -1,3 +1,5 @@
+package com.example.lpiem.magiccards
+
 import Singletons.ShopManager
 import android.app.Application
 
