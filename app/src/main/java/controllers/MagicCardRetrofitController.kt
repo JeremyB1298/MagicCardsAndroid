@@ -1,6 +1,7 @@
 package controllers
 
 import Models.Card
+import Models.CardDB
 import Models.User
 import android.util.Log
 import retrofit2.Call
@@ -128,6 +129,20 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
             override fun onFailure(call: Call<List<Card>>, t: Throwable) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
+    }
+
+    fun addCard(card: CardDB) {
+        val callAddCard = magicCardAPI.addCard(card)
+        callAddCard.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful && response.body().equals("OK")) {
+                } else {
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
             }
         })
     }

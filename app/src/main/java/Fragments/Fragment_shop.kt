@@ -1,5 +1,7 @@
 package Fragments
 
+import Managers.UserManager
+import Models.CardDB
 import Singletons.ShopManager
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.lpiem.magiccards.R
-import kotlinx.android.synthetic.main.fragment_shop.*
 
 class Fragment_shop: androidx.fragment.app.Fragment() {
 
@@ -25,16 +26,17 @@ class Fragment_shop: androidx.fragment.app.Fragment() {
         val bMythc: Button = rootView.findViewById(R.id.bMythicrareCard)
 
         bCommon.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(0))
+            Log.i("CARDADD",ShopManager.getRandomCard(0).id+ "  /  " +ShopManager.getRandomCard(0).name)
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(0).id,ShopManager.getRandomCard(0).name, UserManager.getInstance().getUser()!!.id))
         }
         bUnCommon.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(1))
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(1).id,ShopManager.getRandomCard(1).name))
         }
         bRare.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(2))
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(2).id,ShopManager.getRandomCard(2).name))
         }
         bMythc.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(3))
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(3).id,ShopManager.getRandomCard(3).name))
         }
 
         return rootView

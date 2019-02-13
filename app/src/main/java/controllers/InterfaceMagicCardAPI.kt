@@ -1,6 +1,7 @@
 package controllers
 
 import Models.Card
+import Models.CardDB
 import Models.User
 import retrofit2.Call
 import retrofit2.http.*
@@ -28,4 +29,8 @@ interface InterfaceMagicCardAPI {
 
     @GET("/MagicCard/web/index.php/randomCard")
     fun getRandomCards(): Call<List<Card>>
+
+    @POST("/MagicCard/web/index.php/addCard")
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    fun addCard(@Body card: CardDB): Call<String>
 }
