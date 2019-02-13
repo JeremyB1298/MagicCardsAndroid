@@ -214,8 +214,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private fun inscriptionGoogleAccount(user: User) {
         val controller = MagicCardRetrofitController(this )
-        controller.createUser(User(0,"0",acctGoogle!!.id.toString(),acctGoogle!!.displayName.toString(),true,0,0));
-        connexionToTheAppWithGoogle(user.googleId.toString())
+        controller.createUser(User(null,acctGoogle!!.id.toString(),null,acctGoogle!!.displayName.toString()));
     }
 
 }

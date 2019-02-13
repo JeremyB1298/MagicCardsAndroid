@@ -2,7 +2,6 @@ package Views.Adapters
 
 import Models.Card
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,7 @@ class CardListAdapter(val items : ArrayList<Card>, val context: Context) : andro
         holder?.tvCardName?.text = items[position].name
         Picasso
                 .get() // give it the context
-                .load(items[position].imageUrl) // load the image
+                .load(items[position].imageUris!!.png) // load the image
                 .into(holder.cardImageView) // select the ImageView to load it into
     }
 

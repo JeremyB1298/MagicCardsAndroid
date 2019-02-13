@@ -2,7 +2,6 @@ package Adapter
 
 import Models.Card
 import Utils.inflate
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.lpiem.magiccards.R
@@ -47,7 +46,7 @@ class CardRcyclViewHolder(val v: View) : androidx.recyclerview.widget.RecyclerVi
 
         v.cardTitle.text = myDataset.name
 
-        Picasso.get().load(myDataset.imageUrl).into(v.cardDetailImageView)
+        Picasso.get().load(myDataset.imageUris!!.png).into(v.cardDetailImageView)
 
 
         itemView.setOnClickListener{
