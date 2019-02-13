@@ -1,6 +1,7 @@
 package Fragments
 
 import Models.User
+import Singletons.ShopManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater

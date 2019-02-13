@@ -4,14 +4,19 @@ import Fragments.CardRecyclerViewFragment
 import Fragments.Fragment3
 import Fragments.Fragment_home
 import Managers.UserManager
+import Fragments.Fragment_home
+import Fragments.Fragment_shop
 import Models.User
+import Singletons.ShopManager
 import android.os.Bundle
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lpiem.magiccards.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -20,7 +25,6 @@ class BottomNavigationActivity : AppCompatActivity() {
     private var user: User? = null
 
     private val mOnNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
-
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.navigation_1 -> {
@@ -35,7 +39,7 @@ class BottomNavigationActivity : AppCompatActivity() {
                     return true
                 }
                 R.id.navigation_3 -> {
-                    var fragment = Fragment3()
+                    var fragment = Fragment_shop()
                     addFragment(fragment)
                     return true
                 }
