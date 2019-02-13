@@ -1,8 +1,6 @@
 package Views
 
 import Fragments.CardRecyclerViewFragment
-import Fragments.Fragment3
-import Fragments.Fragment_home
 import Managers.UserManager
 import Fragments.Fragment_home
 import Fragments.Fragment_shop
@@ -14,8 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.lpiem.magiccards.R
 
 
