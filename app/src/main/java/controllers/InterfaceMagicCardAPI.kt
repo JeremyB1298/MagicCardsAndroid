@@ -3,7 +3,6 @@ package controllers
 import Models.Card
 import Models.CardDB
 import Models.User
-import Models.UserCard
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -34,8 +33,4 @@ interface InterfaceMagicCardAPI {
     @POST("/MagicCard/web/index.php/addCard")
     @Headers("Content-Type: application/json;charset=UTF-8")
     fun addCard(@Body card: CardDB): Call<String>
-
-    @POST("/MagicCard/web/index.php/addUserCard")
-    @Headers("Content-Type: application/json;charset=UTF-8")
-    fun addUserCard(@Body userCard: UserCard): Call<String>
 }

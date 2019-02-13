@@ -1,8 +1,7 @@
 package Fragments
 
+import Managers.UserManager
 import Models.CardDB
-import Models.User
-import Models.UserCard
 import Singletons.ShopManager
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.lpiem.magiccards.R
-import kotlinx.android.synthetic.main.fragment_shop.*
 
 class Fragment_shop: androidx.fragment.app.Fragment() {
 
@@ -28,8 +26,8 @@ class Fragment_shop: androidx.fragment.app.Fragment() {
         val bMythc: Button = rootView.findViewById(R.id.bMythicrareCard)
 
         bCommon.setOnClickListener {
-            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(0).id,ShopManager.getRandomCard(0).name))
-            //ShopManager.addUserCard(UserCard(null,ShopManager.getRandomCard(0).id,))
+            Log.i("CARDADD",ShopManager.getRandomCard(0).id+ "  /  " +ShopManager.getRandomCard(0).name)
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(0).id,ShopManager.getRandomCard(0).name, UserManager.getInstance().getUser()!!.id))
         }
         bUnCommon.setOnClickListener {
             ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(1).id,ShopManager.getRandomCard(1).name))

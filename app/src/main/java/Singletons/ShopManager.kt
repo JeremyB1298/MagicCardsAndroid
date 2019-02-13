@@ -2,7 +2,6 @@ package Singletons
 
 import Models.Card
 import Models.CardDB
-import Models.UserCard
 import android.util.Log
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
@@ -36,10 +35,5 @@ object ShopManager : InterfaceCallBackController {
     fun addCard(card: CardDB) {
         val controller = MagicCardRetrofitController(this)
         controller.addCard(card)
-    }
-
-    fun addUserCard(userCard: UserCard) {
-        val controller = MagicCardRetrofitController(this)
-        controller.addUserCard(userCard)
     }
 }

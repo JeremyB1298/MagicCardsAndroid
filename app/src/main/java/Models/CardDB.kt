@@ -6,4 +6,5 @@ import java.io.Serializable
 
 class CardDB (@SerializedName("id") @Expose var id: Int? = null,
               @SerializedName("cardId") @Expose var cardId: String?= null,
-              @SerializedName("cardName") @Expose var cardName: String? = null) : Serializable
+              @SerializedName("cardName") @Expose var cardName: String? = null,
+              @SerializedName("userId") @Expose var userId: Int? = null) : Serializable
