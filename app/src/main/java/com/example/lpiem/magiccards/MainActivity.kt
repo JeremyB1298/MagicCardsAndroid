@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private var accessToken: AccessToken? = null
 
-    private var user = User(-1)
+    private var userManager = Managers.UserManager.getInstance();
 
     private var acctGoogle: GoogleSignInAccount? = null
     private var acctFacebook: JSONObject? = null
@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
                 try {
 
                     val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
-                    intent.putExtra("user", user)
+                    //intent.putExtra("user", user)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -190,26 +190,27 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
             } else if (result["facebook"] === true) {
                 try {
                     val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
-                    intent.putExtra("user", user)
+                    //intent.putExtra("user", user)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             } else if (result["google"] === false){
-                inscriptionGoogleAccount(user)
+                inscriptionGoogleAccount(userManager.getUser()!!)
             }
+
         }
     }
 
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
         val controller = MagicCardRetrofitController(this )
-        controller.callUserGoogleId(googleId, user)
+        controller.callUserGoogleId(googleId, userManager.getUser()!!)
     }
 
     private fun connexionToTheAppWithFacebook(fbId: String) {
         val controller = MagicCardRetrofitController(this )
-        controller.callUserFbId(fbId, user)
+        controller.callUserFbId(fbId, userManager.getUser()!!)
     }
 
     private fun inscriptionGoogleAccount(user: User) {

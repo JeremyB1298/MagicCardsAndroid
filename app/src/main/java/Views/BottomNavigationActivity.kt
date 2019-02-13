@@ -1,26 +1,17 @@
 package Views
 
 import Fragments.CardRecyclerViewFragment
-import Fragments.Fragment_home
 import Fragments.Fragment3
+import Fragments.Fragment_home
+import Managers.UserManager
 import Models.User
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.lpiem.magiccards.R
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.squareup.picasso.Picasso
-import controllers.AccountConnexion
-import controllers.InterfaceCallBackController
-import controllers.MagicCardRetrofitController
-import kotlinx.android.synthetic.main.activity_menu.*
-import org.json.JSONObject
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -82,7 +73,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        user = intent.getSerializableExtra("user") as User
+        user = UserManager.getInstance().getUser()
         val fragment = Fragment_home.newInstance(user!!)
 
         addHomeFragment(fragment)
