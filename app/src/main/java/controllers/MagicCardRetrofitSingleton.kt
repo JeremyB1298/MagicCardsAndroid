@@ -5,8 +5,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MagicCardRetrofitSingleton {
-    //internal val BASE_URL = "http://17ruecroixberthet.freeboxos.fr/"
-    internal val BASE_URL = "http://10.0.2.2:8888/" // http://10.0.2.2:8888/
+    internal val BASE_URL = "http://17ruecroixberthet.freeboxos.fr/"
+  //internal val BASE_URL = "http://10.0.2.2:8888/"
+
 
 
     private var magicCardAPIInstance: InterfaceMagicCardAPI? = null

@@ -1,6 +1,7 @@
 package Fragments
 
 import Adapter.CardRcyclViewAdapter
+import Managers.UserManager
 import Models.Card
 import android.content.Context
 import android.os.Bundle
@@ -16,8 +17,8 @@ import kotlinx.android.synthetic.main.recycler_view_fragment.*
 class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallBackController {
     override fun onWorkDone(result: Any) {
         if (result as Boolean) {
+
             viewAdapter.addCardList(listCard);
-            listCard.clear();
         }
     }
 
@@ -25,7 +26,8 @@ class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallB
     private lateinit var viewAdapter: CardRcyclViewAdapter
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     private lateinit var controller: MagicCardRetrofitController
-    private var listCard = ArrayList<Card>()
+    private var listCard = UserManager.getInstance().getUserCards()
+    private var userManager = UserManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context!!)
