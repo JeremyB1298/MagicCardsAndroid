@@ -1,5 +1,8 @@
 package Fragments
 
+import Models.CardDB
+import Models.User
+import Models.UserCard
 import Singletons.ShopManager
 import android.os.Bundle
 import android.util.Log
@@ -25,16 +28,17 @@ class Fragment_shop: androidx.fragment.app.Fragment() {
         val bMythc: Button = rootView.findViewById(R.id.bMythicrareCard)
 
         bCommon.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(0))
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(0).id,ShopManager.getRandomCard(0).name))
+            //ShopManager.addUserCard(UserCard(null,ShopManager.getRandomCard(0).id,))
         }
         bUnCommon.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(1))
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(1).id,ShopManager.getRandomCard(1).name))
         }
         bRare.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(2))
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(2).id,ShopManager.getRandomCard(2).name))
         }
         bMythc.setOnClickListener {
-            Log.i("BUTTONCARD",ShopManager.getRandomCard(3))
+            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(3).id,ShopManager.getRandomCard(3).name))
         }
 
         return rootView
