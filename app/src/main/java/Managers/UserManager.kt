@@ -1,6 +1,11 @@
 package Managers
 
 import Models.User
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import org.json.JSONObject
 
 class UserManager private constructor() {
 
@@ -8,9 +13,21 @@ class UserManager private constructor() {
 
     private val mCache: MutableMap<String, String> = mutableMapOf()
 
+    private var mGoogleSignInClient: GoogleSignInClient? = null
+
+    private val RC_SIGN_IN: Int = 9001
+
+    private var callbackManager: CallbackManager? = null
+
+    private var accessToken: AccessToken? = null
+
+
+    private var acctGoogle: GoogleSignInAccount? = null
+    private var acctFacebook: JSONObject? = null
 
     init {
        ++myInstancesCount
+        user = User(-1)
     }
 
 
@@ -28,6 +45,11 @@ class UserManager private constructor() {
     public fun initUserManager(user : User){
         this.user = user;
     }
+
+    public fun getUser(): User? {
+        return this.user
+    }
+
 
 
 

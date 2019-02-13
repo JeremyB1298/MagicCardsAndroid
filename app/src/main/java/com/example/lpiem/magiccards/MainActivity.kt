@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private var accessToken: AccessToken? = null
 
-    private var user = User(-1)
+    private var userManager = Managers.UserManager.getInstance();
 
     private var acctGoogle: GoogleSignInAccount? = null
     private var acctFacebook: JSONObject? = null
@@ -197,20 +197,21 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
                     e.printStackTrace()
                 }
             } else if (result["google"] === false){
-                inscriptionGoogleAccount(user)
+                inscriptionGoogleAccount(userManager.getUser()!!)
             }
+
         }
     }
 
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
         val controller = MagicCardRetrofitController(this )
-        controller.callUserGoogleId(googleId, user)
+        controller.callUserGoogleId(googleId, userManager.getUser()!!)
     }
 
     private fun connexionToTheAppWithFacebook(fbId: String) {
         val controller = MagicCardRetrofitController(this )
-        controller.callUserFbId(fbId, user)
+        controller.callUserFbId(fbId, userManager.getUser()!!)
     }
 
     private fun inscriptionGoogleAccount(user: User) {
