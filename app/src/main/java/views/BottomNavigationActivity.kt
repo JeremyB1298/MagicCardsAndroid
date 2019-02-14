@@ -1,11 +1,10 @@
-package Views
+package views
 
 import Fragments.CardRecyclerViewFragment
 import Managers.UserManager
 import Fragments.Fragment_home
 import Fragments.Fragment_shop
 import Models.User
-import Singletons.ShopManager
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.MenuItem

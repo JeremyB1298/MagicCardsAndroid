@@ -1,7 +1,7 @@
-package Views
+package views
 
 import Models.Card
-import Views.Adapters.CardListAdapter
+import views.Adapters.CardListAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lpiem.magiccards.R

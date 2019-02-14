@@ -1,8 +1,7 @@
 package com.example.lpiem.magiccards
 
 import Models.User
-import Singletons.ShopManager
-import Views.BottomNavigationActivity
+import views.BottomNavigationActivity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle

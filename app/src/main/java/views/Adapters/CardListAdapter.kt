@@ -1,4 +1,4 @@
-package Views.Adapters
+package views.Adapters
 
 import Models.Card
 import android.content.Context
