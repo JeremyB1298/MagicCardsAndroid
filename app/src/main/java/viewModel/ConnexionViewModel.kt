@@ -3,6 +3,7 @@ package viewModel
 
 import Models.Card
 import Models.CardDB
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -23,6 +24,7 @@ import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
+@SuppressLint("StaticFieldLeak")
 object ConnexionViewModel: AppCompatActivity() {
     var mGoogleSignInClient: GoogleSignInClient? = null
 
