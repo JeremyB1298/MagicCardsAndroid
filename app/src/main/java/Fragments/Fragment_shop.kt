@@ -2,14 +2,18 @@ package Fragments
 
 import Managers.UserManager
 import Models.CardDB
-import Singletons.ShopManager
+import android.app.Dialog
+import viewModel.ShopViewModel
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
+import android.widget.TextView
 import com.example.lpiem.magiccards.R
+import kotlinx.android.synthetic.main.buy_dialog.*
 
 class Fragment_shop: androidx.fragment.app.Fragment() {
 
@@ -26,20 +30,51 @@ class Fragment_shop: androidx.fragment.app.Fragment() {
         val bMythc: Button = rootView.findViewById(R.id.bMythicrareCard)
 
         bCommon.setOnClickListener {
-            Log.i("CARDADD",ShopManager.getRandomCard(0).id+ "  /  " +ShopManager.getRandomCard(0).name)
-            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(0).id,ShopManager.getRandomCard(0).name, UserManager.getInstance().getUser()!!.id))
+            showDialog(0)
         }
         bUnCommon.setOnClickListener {
-            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(1).id,ShopManager.getRandomCard(1).name))
+            showDialog(1)
         }
         bRare.setOnClickListener {
-            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(2).id,ShopManager.getRandomCard(2).name))
+            showDialog(2)
         }
         bMythc.setOnClickListener {
-            ShopManager.addCard(CardDB(null,ShopManager.getRandomCard(3).id,ShopManager.getRandomCard(3).name))
+            showDialog(3)
         }
 
         return rootView
     }
+
+    private fun showDialog(id: Int) {
+
+        var dialogs = Dialog(activity)
+        dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogs.setCancelable(true)
+        dialogs.setContentView(R.layout.buy_dialog)
+        val priceBtn = dialogs.findViewById(R.id.bPrice) as Button
+        val text = dialogs.findViewById(R.id.tvBuy) as TextView
+
+        if (UserManager.user!!.money!! > 500) {
+
+            text.text = "Carte aléatoire"
+
+            priceBtn.text = "500"
+
+            priceBtn.setOnClickListener {
+                ShopViewModel.addCard(CardDB(null, ShopViewModel.getRandomCard(id).id, ShopViewModel.getRandomCard(id).name,
+                        UserManager.getCurrentUser()!!.id), id)
+                dialogs.dismiss()
+            }
+
+        } else {
+            text.text = "Pas assez d'argent"
+            priceBtn.text = "ok"
+                dialogs.dismiss()
+            }
+
+        dialogs.show()
+        }
+
+
 }
 

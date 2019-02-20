@@ -18,6 +18,8 @@
     <string name="home_nbr_card_2_star">20</string>
     <string name="home_nbr_card_3_star">10</string>
     <string name="home_nbr_card_4_star">5</string>
+    <string name="dialog_buy_card_alea_title_question">Carte aléatoire</string>
+    <string name="dialog_buy_card_alea_price">500</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

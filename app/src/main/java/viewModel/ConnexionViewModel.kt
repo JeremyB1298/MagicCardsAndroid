@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.UserManager
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,8 +32,6 @@ object ConnexionViewModel: AppCompatActivity() {
     val RC_SIGN_IN: Int = 9001
 
     var accessToken: AccessToken? = null
-
-    var userManager = Managers.UserManager.getInstance();
 
     var acctGoogle: GoogleSignInAccount? = null
 
@@ -78,6 +77,6 @@ object ConnexionViewModel: AppCompatActivity() {
 
     private fun connexionToTheAppWithFacebook(fbId: String) {
         val controller = MagicCardRetrofitController(this!!.inter!! )
-        controller.callUserFbId(fbId,userManager.getUser()!!)
+        controller.callUserFbId(fbId, Managers.UserManager.getCurrentUser())
     }
 }

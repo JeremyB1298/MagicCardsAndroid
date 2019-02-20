@@ -27,6 +27,8 @@ class CardDetailFragment : androidx.fragment.app.Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity
+
         Picasso.get().load(card.imageUris!!.png).into(cardDetailImageView)
         cardDetailTitle.text = card.name
     }

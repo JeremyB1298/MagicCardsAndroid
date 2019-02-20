@@ -72,7 +72,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        user = UserManager.getInstance().getUser()
+        user = UserManager.getCurrentUser()
         val fragment = Fragment_home.newInstance(user!!)
 
         addHomeFragment(fragment)

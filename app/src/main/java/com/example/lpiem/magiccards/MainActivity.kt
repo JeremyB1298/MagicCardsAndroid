@@ -1,5 +1,6 @@
 package com.example.lpiem.magiccards
 
+import Managers.UserManager
 import Models.User
 import views.BottomNavigationActivity
 import android.annotation.SuppressLint
@@ -162,7 +163,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
                     e.printStackTrace()
                 }
             } else if (result["google"] === false){
-                inscriptionGoogleAccount(ConnexionViewModel.userManager.getUser()!!)
+                inscriptionGoogleAccount(UserManager.getCurrentUser()!!)
             }
 
         }
@@ -171,7 +172,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
         val controller = MagicCardRetrofitController(this )
-        controller.callUserGoogleId(googleId, ConnexionViewModel.userManager.getUser()!!)
+        controller.callUserGoogleId(googleId, UserManager.getCurrentUser()!!)
     }
 
     private fun inscriptionGoogleAccount(user: User) {
