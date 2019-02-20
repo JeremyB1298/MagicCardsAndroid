@@ -1,7 +1,9 @@
 package Fragments
 
+import Managers.UserManager.user
 import Models.User
 import android.os.Bundle
+import android.os.UserManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.lpiem.magiccards.R
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 /**
@@ -19,14 +22,14 @@ class Fragment_home : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var rootView = inflater!!.inflate(R.layout.fragment_home, container, false)
-        val user = arguments?.getSerializable(INTENT_HOME_ID_USER) as User
-        Log.d("userFragment", user.googleId.toString())
         val tvUserName: TextView = rootView.findViewById(R.id.tvName);
         val tvUserLvl: TextView = rootView.findViewById(R.id.tvLvl);
         val tvUserExp: TextView = rootView.findViewById(R.id.tvExp);
-        tvUserName.text = user.name
-        tvUserLvl.text = user.lvl.toString()
-        tvUserExp.text = user.exp.toString()
+        val tvMoney : TextView = rootView.findViewById(R.id.tvMoney)
+        tvUserName.text = Managers.UserManager.user!!.name
+        tvUserLvl.text = Managers.UserManager.user!!.lvl.toString()
+        tvUserExp.text = Managers.UserManager.user!!.exp.toString()
+        tvMoney.text = Managers.UserManager.user!!.money.toString()
         return rootView
     }
 

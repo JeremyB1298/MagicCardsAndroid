@@ -1,7 +1,8 @@
 package com.example.lpiem.magiccards
 
+import Managers.UserManager
 import Models.User
-import Views.BottomNavigationActivity
+import views.BottomNavigationActivity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -20,53 +21,32 @@ import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
+import viewModel.ConnexionViewModel
 
 
 class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
-    private var mGoogleSignInClient: GoogleSignInClient? = null
-
-    private val RC_SIGN_IN: Int = 9001
-
-    private var callbackManager: CallbackManager? = null
-
-    private var accessToken: AccessToken? = null
-
-    private var user = User(-1)
-
-    private var acctGoogle: GoogleSignInAccount? = null
-    private var acctFacebook: JSONObject? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
+        ConnexionViewModel.initialize(this, this)
 
 
-        Toast.makeText(this, "account",Toast.LENGTH_SHORT).show()
 
-        callbackManager = CallbackManager.Factory.create()
-
-        accessToken= AccessToken.getCurrentAccessToken()
-        var isLoggedIn: Boolean = accessToken != null && !accessToken!!.isExpired()
-
-        if(isLoggedIn) {
-            getUserDetails(AccessToken.getCurrentAccessToken())
+        if(ConnexionViewModel.isLoggedIn!!) {
+            ConnexionViewModel.getUserDetails(AccessToken.getCurrentAccessToken())
         }
 
         login_button.setReadPermissions("email")
 
         //Bouton login de facebook
-        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+        login_button.registerCallback(ConnexionViewModel.callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
 
-                getUserDetails(loginResult.accessToken)
+                ConnexionViewModel.getUserDetails(loginResult.accessToken)
 
                 Log.e("succesLogButton", "yes")
             }
@@ -102,13 +82,13 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
     }
 
     private fun signIn() {
-        val signInIntent = mGoogleSignInClient!!.getSignInIntent()
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        val signInIntent = ConnexionViewModel.mGoogleSignInClient!!.getSignInIntent()
+        startActivityForResult(signInIntent, ConnexionViewModel.RC_SIGN_IN)
     }
 
     private fun signOut() {
         Log.d("connect", "signOut: ")
-        mGoogleSignInClient!!.signOut()
+        ConnexionViewModel.mGoogleSignInClient!!.signOut()
                 .addOnCompleteListener(this) {
                     // ...
                 }
@@ -116,7 +96,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private fun revokeAccess() {
         Log.d("connect", "revokeAccess: ")
-        mGoogleSignInClient!!.revokeAccess()
+        ConnexionViewModel.mGoogleSignInClient!!.revokeAccess()
                 .addOnCompleteListener(this) {
                     // ...
                 }
@@ -141,31 +121,18 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private fun goToMenuActivity() {
 
-        acctGoogle = GoogleSignIn.getLastSignedInAccount(this)
-        if (acctGoogle != null) {
-            connexionToTheAppWithGoogle(acctGoogle!!.id.toString())
+        ConnexionViewModel.acctGoogle = GoogleSignIn.getLastSignedInAccount(this)
+        if (ConnexionViewModel.acctGoogle != null) {
+            connexionToTheAppWithGoogle(ConnexionViewModel.acctGoogle!!.id.toString())
         }
-
-    }
-
-    protected fun getUserDetails(loginResult: AccessToken) {
-        val data_request = GraphRequest.newMeRequest(
-                loginResult) { json_object, response ->
-            acctFacebook = json_object
-            connexionToTheAppWithFacebook(acctFacebook!!.get("id").toString())
-        }
-        val permission_param = Bundle()
-        permission_param.putString("fields", "id,name,email,picture.width(120).height(120)")
-        data_request.parameters = permission_param
-        data_request.executeAsync()
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager!!.onActivityResult(requestCode, resultCode, data)
+        ConnexionViewModel.callbackManager!!.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == ConnexionViewModel.RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
 
@@ -181,41 +148,36 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
             if (result["google"] === true) {
                 try {
 
-                    val intent = Intent(this@MainActivity, splashScreenActivity::class.java)
-                    intent.putExtra("user", user)
+                    val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
+                    //intent.putExtra("user", user)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             } else if (result["facebook"] === true) {
                 try {
-                    val intent = Intent(this@MainActivity, splashScreenActivity::class.java)
-                    intent.putExtra("user", user)
+                    val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
+                    //intent.putExtra("user", user)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             } else if (result["google"] === false){
-                inscriptionGoogleAccount(user)
+                inscriptionGoogleAccount(UserManager.getCurrentUser()!!)
             }
+
         }
     }
 
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
         val controller = MagicCardRetrofitController(this )
-        controller.callUserGoogleId(googleId, user)
-    }
-
-    private fun connexionToTheAppWithFacebook(fbId: String) {
-        val controller = MagicCardRetrofitController(this )
-        controller.callUserFbId(fbId, user)
+        controller.callUserGoogleId(googleId, UserManager.getCurrentUser()!!)
     }
 
     private fun inscriptionGoogleAccount(user: User) {
         val controller = MagicCardRetrofitController(this )
-        controller.createUser(User(0,"0",acctGoogle!!.id.toString(),acctGoogle!!.displayName.toString(),true,0,0));
-        connexionToTheAppWithGoogle(user.googleId.toString())
+        controller.createUser(User(null,ConnexionViewModel.acctGoogle!!.id.toString(),null,ConnexionViewModel.acctGoogle!!.displayName.toString()));
     }
 
 }

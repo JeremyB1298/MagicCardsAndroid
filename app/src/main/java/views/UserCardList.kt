@@ -1,10 +1,9 @@
-package Views
+package views
 
 import Models.Card
-import Views.Adapters.CardListAdapter
+import views.Adapters.CardListAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lpiem.magiccards.R
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController

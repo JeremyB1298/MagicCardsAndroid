@@ -12,6 +12,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name="com.example.lpiem.magiccards.MagicApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -48,8 +49,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="Views.UserCardList" />
-        <activity android:name="Views.BottomNavigationActivity" />
+        <activity android:name="views.UserCardList" />
+        <activity android:name="views.BottomNavigationActivity"></activity>
     </application>
 
 </manifest>

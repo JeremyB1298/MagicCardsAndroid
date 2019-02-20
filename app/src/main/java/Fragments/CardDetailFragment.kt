@@ -2,7 +2,6 @@ package Fragments
 
 import Models.Card
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +27,9 @@ class CardDetailFragment : androidx.fragment.app.Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Picasso.get().load(card.imageUrl).into(cardDetailImageView)
+        activity
+
+        Picasso.get().load(card.imageUris!!.png).into(cardDetailImageView)
         cardDetailTitle.text = card.name
     }
 
