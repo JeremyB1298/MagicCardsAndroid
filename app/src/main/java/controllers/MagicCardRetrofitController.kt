@@ -159,6 +159,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     @Synchronized
     private fun fetchUser(response: Response<User>, user: User?){
+
         user!!.id = response.body()!!.id
         user!!.googleId = response.body()!!.googleId
         user!!.fbId = response.body()!!.fbId
@@ -166,6 +167,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         user!!.isNew = response.body()!!.isNew
         user!!.lvl = response.body()!!.lvl
         user!!.exp = response.body()!!.exp
+        user!!.money = response.body()!!.money
     }
 
 }

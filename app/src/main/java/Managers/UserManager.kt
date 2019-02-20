@@ -3,47 +3,21 @@ package Managers
 import Models.Card
 import Models.User
 
-class UserManager private constructor() {
+object UserManager {
 
-    private var user : User? = null;
+    var user: User? = null
+    var listCards: ArrayList<Card>? = null
 
-    private var cards =  ArrayList<Card>()
-
-    init {
-       ++myInstancesCount
-        user = User(-1)
+    fun initialize() {
+        this.user = User()
+        this.listCards = ArrayList()
     }
 
-
-    companion object {
-        //Debuggable field to check instance count
-        var myInstancesCount = 0;
-        private val mInstance: UserManager = UserManager()
-
-        @Synchronized
-        fun getInstance(): UserManager {
-            return mInstance
-        }
+    fun getCurrentUser(): User? {
+        return user
     }
 
-    public fun initUserManager(user : User){
-        this.user = user;
+    fun getUserCards(): ArrayList<Card>? {
+        return listCards
     }
-
-    public fun getUser(): User? {
-        return this.user
-    }
-
-    public fun addCardList(cardList: ArrayList<Card>){
-        this.cards.clear()
-        this.cards.addAll(cardList)
-    }
-
-    public fun getUserCards() : ArrayList<Card>{
-        return cards
-    }
-
-
-
-
 }
