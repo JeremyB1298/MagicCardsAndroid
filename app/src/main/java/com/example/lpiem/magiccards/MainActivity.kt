@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
             if (result["google"] === true) {
                 try {
 
-                    val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
+                    val intent = Intent(this@MainActivity, splashScreenActivity::class.java)
                     //intent.putExtra("user", user)
                     startActivity(intent)
                 } catch (e: Exception) {
@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
                     e.printStackTrace()
                 }
             } else if (result["google"] === false){
-                inscriptionGoogleAccount(UserManager.getCurrentUser()!!)
+                inscriptionGoogleAccount(UserManager.user!!)
             }
 
         }
@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
         val controller = MagicCardRetrofitController(this )
-        controller.callUserGoogleId(googleId, UserManager.getCurrentUser()!!)
+        controller.callUserGoogleId(googleId, UserManager.user!!)
     }
 
     private fun inscriptionGoogleAccount(user: User) {

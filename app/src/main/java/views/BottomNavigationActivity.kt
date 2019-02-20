@@ -3,7 +3,7 @@ package views
 import Fragments.CardRecyclerViewFragment
 import Managers.UserManager
 import Fragments.Fragment_home
-import Fragments.Fragment_shop
+import Fragments.FragmentShop
 import Models.User
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,7 +34,7 @@ class BottomNavigationActivity : AppCompatActivity() {
                     return true
                 }
                 R.id.navigation_3 -> {
-                    var fragment = Fragment_shop()
+                    var fragment = FragmentShop()
                     addFragment(fragment)
                     return true
                 }
@@ -72,7 +72,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        user = UserManager.getCurrentUser()
+        user = UserManager.user
         val fragment = Fragment_home.newInstance(user!!)
 
         addHomeFragment(fragment)

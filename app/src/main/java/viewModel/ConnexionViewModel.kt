@@ -77,6 +77,6 @@ object ConnexionViewModel: AppCompatActivity() {
 
     private fun connexionToTheAppWithFacebook(fbId: String) {
         val controller = MagicCardRetrofitController(this!!.inter!! )
-        controller.callUserFbId(fbId, Managers.UserManager.getCurrentUser())
+        controller.callUserFbId(fbId, Managers.UserManager.user)
     }
 }

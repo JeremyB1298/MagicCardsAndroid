@@ -14,19 +14,13 @@ import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.recycler_view_fragment.*
 
 
-class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallBackController {
-    override fun onWorkDone(result: Any) {
-        if (result as Boolean) {
-            viewAdapter.addCardList(this!!.listCard!!);
-        }
-    }
+class CardRecyclerViewFragment: androidx.fragment.app.Fragment() {
 
     private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     private lateinit var viewAdapter: CardRcyclViewAdapter
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     private lateinit var controller: MagicCardRetrofitController
 
-    private var listCard = UserManager.getUserCards()
 
     override fun onAttach(context: Context) {
         super.onAttach(context!!)
@@ -37,8 +31,7 @@ class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallB
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.recycler_view_fragment, container, false)
 
-        val controller = MagicCardRetrofitController(this as InterfaceCallBackController)
-        controller.callWS(this!!.listCard!!)
+        viewAdapter.addCardList(UserManager.listCards!!.value!!);
 
         return rootView
     }
