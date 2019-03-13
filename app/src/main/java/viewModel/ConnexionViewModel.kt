@@ -22,7 +22,8 @@ import controllers.MagicCardRetrofitController
 import org.json.JSONObject
 
 @SuppressLint("StaticFieldLeak")
-object ConnexionViewModel : InterfaceCallBackController {
+object ConnexionViewModel  {
+
 
 
     //class ConnexionViewModel(val app : Application) : AndroidViewModel(app) {
@@ -45,9 +46,9 @@ object ConnexionViewModel : InterfaceCallBackController {
 
     var activity : Activity?=null
 
-    var inter : InterfaceCallBackController? = this
+    var inter : InterfaceCallBackController? = null
 
-    fun initialize(activity: Activity) {
+    fun initialize(activity: Activity, inter : InterfaceCallBackController) {
         var gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build()
@@ -132,28 +133,5 @@ object ConnexionViewModel : InterfaceCallBackController {
         controller.callUserGoogleId(googleId, userManager.getUser()!!)
     }
 
-    override fun onWorkDone(result: Any) {
-        if (result is Map<*, *>) {
-            if (result["google"] === true) {
-                try {
 
-                    //val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
-                    //intent.putExtra("user", user)
-                    //startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            } else if (result["facebook"] === true) {
-                try {
-                    //val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
-                    //intent.putExtra("user", user)
-                    //startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            } else if (result["google"] === false){
-                //inscriptionGoogleAccount(ConnexionViewModel.userManager.getUser()!!)
-            }
-
-        }    }
 }

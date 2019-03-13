@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() , InterfaceCallBackController {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ConnexionViewModel.initialize(this)
+        ConnexionViewModel.initialize(this,this)
 
 
 
@@ -133,7 +133,27 @@ class MainActivity : AppCompatActivity() , InterfaceCallBackController {
 
 
     override fun onWorkDone(result: Any) {
-val a = 0
+        if (result is Map<*, *>) {
+            if (result["google"] === true) {
+                try {
+
+                    val intent = Intent(this@MainActivity, views.BottomNavigationActivity::class.java)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else if (result["facebook"] === true) {
+                try {
+                    val intent = Intent(this@MainActivity, views.BottomNavigationActivity::class.java)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else if (result["google"] === false){
+                inscriptionGoogleAccount(ConnexionViewModel.userManager.getUser()!!)
+            }
+
+        }
     }
 
 
