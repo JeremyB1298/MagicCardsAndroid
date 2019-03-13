@@ -1,15 +1,13 @@
 
 package viewModel
 
-import Models.Card
-import Models.CardDB
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.UserManager
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -22,11 +20,15 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
-import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
 @SuppressLint("StaticFieldLeak")
-object ConnexionViewModel: AppCompatActivity() {
+object ConnexionViewModel  {
+
+
+
+    //class ConnexionViewModel(val app : Application) : AndroidViewModel(app) {
+
     var mGoogleSignInClient: GoogleSignInClient? = null
 
     val RC_SIGN_IN: Int = 9001
@@ -45,13 +47,14 @@ object ConnexionViewModel: AppCompatActivity() {
 
     var inter : InterfaceCallBackController? = null
 
-    fun initialize(activity: Activity, inter: InterfaceCallBackController) {
+    fun initialize(activity: Activity, inter : InterfaceCallBackController) {
         var gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(activity,gso)
 
+    //app.applicationContext
 
         callbackManager = CallbackManager.Factory.create()
 
@@ -74,9 +77,60 @@ object ConnexionViewModel: AppCompatActivity() {
 
     }
 
+    public fun signIn(activity : AppCompatActivity) {
+        val signInIntent = mGoogleSignInClient!!.getSignInIntent()
+        activity.startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>, context: Context) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+
+            // Signed in successfully, show authenticated UI.
+            //Toast.makeText(this, "Connecte", Toast.LENGTH_SHORT).show()
+            this.goToMenuActivity(context)
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Connect", "signInResult:failed code=" + e.statusCode)
+            //Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    public fun signInResult(requestCode: Int, resultCode: Int, data: Intent?, context: Context){
+        ConnexionViewModel.callbackManager!!.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == ConnexionViewModel.RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+
+
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task, context)
+        }
+    }
+
+    private fun goToMenuActivity(context: Context) {
+
+        acctGoogle = GoogleSignIn.getLastSignedInAccount(context)
+        if (acctGoogle != null) {
+            connexionToTheAppWithGoogle(acctGoogle!!.id.toString())
+        }
+
+    }
+
+
 
     private fun connexionToTheAppWithFacebook(fbId: String) {
         val controller = MagicCardRetrofitController(this!!.inter!! )
         controller.callUserFbId(fbId, Managers.UserManager.user)
     }
+
+    private fun connexionToTheAppWithGoogle(googleId: String) {
+        val controller = MagicCardRetrofitController(this.inter!!)
+        controller.callUserGoogleId(googleId, userManager.getUser()!!)
+    }
+
+
 }

@@ -2,29 +2,26 @@ package com.example.lpiem.magiccards
 
 import Managers.UserManager
 import Models.User
-import views.BottomNavigationActivity
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.*
+import com.facebook.AccessToken
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
 import viewModel.ConnexionViewModel
 
 
-class MainActivity : AppCompatActivity(), InterfaceCallBackController {
+class MainActivity : AppCompatActivity() , InterfaceCallBackController {
 
 
 
@@ -32,7 +29,7 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ConnexionViewModel.initialize(this, this)
+        ConnexionViewModel.initialize(this,this)
 
 
 
@@ -61,8 +58,10 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
         })
 
         //butons pour le compte google
-        sign_in_button.setOnClickListener { signIn() }
+        sign_in_button.setOnClickListener { ConnexionViewModel.signIn(this) }
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -129,35 +128,24 @@ class MainActivity : AppCompatActivity(), InterfaceCallBackController {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        ConnexionViewModel.callbackManager!!.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == ConnexionViewModel.RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-
-
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
+        ConnexionViewModel.signInResult(requestCode, resultCode, data, this)
     }
 
-    @SuppressLint("LongLogTag")
+
     override fun onWorkDone(result: Any) {
         if (result is Map<*, *>) {
             if (result["google"] === true) {
                 try {
 
-                    val intent = Intent(this@MainActivity, splashScreenActivity::class.java)
-                    //intent.putExtra("user", user)
+                    val intent = Intent(this@MainActivity, views.BottomNavigationActivity::class.java)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             } else if (result["facebook"] === true) {
                 try {
-                    val intent = Intent(this@MainActivity, BottomNavigationActivity::class.java)
-                    //intent.putExtra("user", user)
+                    val intent = Intent(this@MainActivity, views.BottomNavigationActivity::class.java)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
