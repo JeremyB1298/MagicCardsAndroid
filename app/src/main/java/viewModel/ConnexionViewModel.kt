@@ -129,7 +129,7 @@ object ConnexionViewModel  {
 
     private fun connexionToTheAppWithGoogle(googleId: String) {
         val controller = MagicCardRetrofitController(this.inter!!)
-        controller.callUserGoogleId(googleId, userManager.getUser()!!)
+        controller.callUserGoogleId(googleId, Managers.UserManager.user)
     }
 
 
