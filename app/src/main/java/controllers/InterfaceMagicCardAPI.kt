@@ -23,9 +23,13 @@ interface InterfaceMagicCardAPI {
             @Path("fbId") fbId: String
     ): Call<User>
 
-    @POST("/MagicCard/web/index.php/inscription")
+    @POST("/MagicCard/web/index.php/inscriptionGoogle")
     @Headers("Content-Type: application/json;charset=UTF-8")
-    fun createUser(@Body user: User): Call<String>
+    fun createGoogleUser(@Body user: User): Call<String>
+
+    @POST("/MagicCard/web/index.php/inscriptionFacebook")
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    fun createFacebookUser(@Body user: User): Call<String>
 
     @GET("/MagicCard/web/index.php/randomCard")
     fun getRandomCards(): Call<List<Card>>

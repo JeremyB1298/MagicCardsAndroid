@@ -5,12 +5,12 @@ import Models.Card
 import Models.CardDB
 import Models.User
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import viewModel.ConnexionViewModel
 import viewModel.ShopViewModel
+import androidx.lifecycle.Observer
 
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
@@ -71,6 +71,9 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 t.printStackTrace()
+                val readWriteMap = hashMapOf("google" to false)
+                val map: Map<String, Boolean> = HashMap(readWriteMap)
+                interfaceCallBackController.onWorkDone(map)
             }
         })
 
@@ -98,22 +101,46 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 t.printStackTrace()
+                val readWriteMap = hashMapOf("facebook" to false)
+                val map: Map<String, Boolean> = HashMap(readWriteMap)
+                interfaceCallBackController.onWorkDone(map)
             }
         })
 
     }
 
-    fun createUser(user: User) {
-        val callUser = magicCardAPI.createUser(user)
+    fun createGoogleUser(user: User) {
+        val callUser = magicCardAPI.createGoogleUser(user)
         callUser.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful && response.body().equals("OK")) {
-                    val readWriteMap = hashMapOf("google" to true)
-                    val map: Map<String, Boolean> = HashMap(readWriteMap)
-                    interfaceCallBackController.onWorkDone(map)
-                    Log.d("INSCRIPTION GOOD", response.errorBody()!!.toString())
+                    //val readWriteMap = hashMapOf("google" to true)
+                    //val map: Map<String, Boolean> = HashMap(readWriteMap)
+                    //interfaceCallBackController.onWorkDone(map)
+                    //Log.d("INSCRIPTION GOOD", response.errorBody()!!.toString())
                 } else {
-                    Log.d("INSCRIPTION FAILED", response.errorBody()!!.toString())
+                   // Log.d("INSCRIPTION FAILED", response.errorBody()!!.toString())
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    fun createFacebookUser(user: User) {
+        val callUser = magicCardAPI.createFacebookUser(user)
+        callUser.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+
+                if (response.isSuccessful && response.body().equals("OK")) {
+                    ConnexionViewModel.insription!!.value = "cacao"
+                    //val readWriteMap = hashMapOf("google" to true)
+                    //val map: Map<String, Boolean> = HashMap(readWriteMap)
+                    //interfaceCallBackController.onWorkDone(map)
+                    //Log.d("INSCRIPTION GOOD", response.errorBody()!!.toString())
+                } else {
+                     Log.d("INSCRIPTION FAILED", response.errorBody()!!.toString())
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -174,6 +201,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         user!!.lvl = response.body()!!.lvl
         user!!.exp = response.body()!!.exp
         user!!.money = response.body()!!.money
+
+        UserManager.user = user
     }
 
 }
