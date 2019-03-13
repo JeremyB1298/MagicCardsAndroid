@@ -53,26 +53,24 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
             override fun onResponse(call: Call<User>, response: Response<User>) {
 
                 if (response.isSuccessful) {
-                    fetchUser(response,user)
-                    val readWriteMap = hashMapOf("google" to true)
-                    val map: Map<String, Boolean> = HashMap(readWriteMap)
-                    interfaceCallBackController.onWorkDone(map)
-                    // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
-                    Log.d("SwapiRetrofitController", user!!.name )
 
-                } else {
-                    Log.d("SwapiRetrofitController", "error : " + response.errorBody()!!)
-                    val readWriteMap = hashMapOf("google" to false)
-                    val map: Map<String, Boolean> = HashMap(readWriteMap)
-                    interfaceCallBackController.onWorkDone(map)
+                    if (response.body()!!.id == -1) {
+                        val readWriteMap = hashMapOf("google" to false)
+                        val map: Map<String, Boolean> = HashMap(readWriteMap)
+                        interfaceCallBackController.onWorkDone(map)
+                    } else {
+                        fetchUser(response,user)
+                        val readWriteMap = hashMapOf("google" to true)
+                        val map: Map<String, Boolean> = HashMap(readWriteMap)
+                        interfaceCallBackController.onWorkDone(map)
+                        // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
+                        Log.d("SwapiRetrofitController", user!!.name )
+                    }
                 }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 t.printStackTrace()
-                val readWriteMap = hashMapOf("google" to false)
-                val map: Map<String, Boolean> = HashMap(readWriteMap)
-                interfaceCallBackController.onWorkDone(map)
             }
         })
 
@@ -86,13 +84,19 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         callUser.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
-                    fetchUser(response,user)
-                    val readWriteMap = hashMapOf("facebook" to true)
-                    val map: Map<String, Boolean> = HashMap(readWriteMap)
-                    interfaceCallBackController.onWorkDone(map)
-                    // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
-                    Log.d("SwapiRetrofitController", user!!.name )
 
+
+                    if (response.body()!!.id == -1) {
+                        val readWriteMap = hashMapOf("facebook" to false)
+                        val map: Map<String, Boolean> = HashMap(readWriteMap)
+                        interfaceCallBackController.onWorkDone(map)
+                    } else {fetchUser(response,user)
+                        val readWriteMap = hashMapOf("facebook" to true)
+                        val map: Map<String, Boolean> = HashMap(readWriteMap)
+                        interfaceCallBackController.onWorkDone(map)
+                        // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
+                        Log.d("SwapiRetrofitController", user!!.name )
+                    }
                 } else {
                     Log.d("SwapiRetrofitController", "error : " + response.errorBody()!!)
                 }
@@ -100,9 +104,6 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 t.printStackTrace()
-                val readWriteMap = hashMapOf("facebook" to false)
-                val map: Map<String, Boolean> = HashMap(readWriteMap)
-                interfaceCallBackController.onWorkDone(map)
             }
         })
 
