@@ -87,8 +87,7 @@ class FragmentShop: androidx.fragment.app.Fragment() {
         val iv = dialogs.findViewById(R.id.ivCard) as ImageView
         Picasso.get().load(ShopViewModel.cardsAlea!!.value!![id].imageUris!!.png).into(iv)
             okBtn.setOnClickListener {
-                ShopViewModel.addCard(CardDB(null, ShopViewModel.cardsAlea!!.value!!.get(id).id, ShopViewModel.cardsAlea!!.value!!.get(id).name,
-                        UserManager.user!!.id), id)
+
                 dialogs.dismiss()
             }
 
