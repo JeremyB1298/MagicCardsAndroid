@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/img_background"
-    tools:context="com.example.lpiem.magiccards.splashScreenActivity">
+    tools:context="com.example.lpiem.magiccards.SplashScreenActivity">
 
     <TextView
         android:layout_width="match_parent"

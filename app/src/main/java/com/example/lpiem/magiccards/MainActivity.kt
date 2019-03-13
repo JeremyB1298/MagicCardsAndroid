@@ -138,14 +138,14 @@ class MainActivity : AppCompatActivity() , InterfaceCallBackController {
             if (result["google"] === true) {
                 try {
 
-                    val intent = Intent(this@MainActivity, views.BottomNavigationActivity::class.java)
+                    val intent = Intent(this@MainActivity, SplashScreenActivity::class.java)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             } else if (result["facebook"] === true) {
                 try {
-                    val intent = Intent(this@MainActivity, views.BottomNavigationActivity::class.java)
+                    val intent = Intent(this@MainActivity, SplashScreenActivity::class.java)
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()

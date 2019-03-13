@@ -5,14 +5,13 @@ import views.BottomNavigationActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import androidx.lifecycle.Observer
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 
-class splashScreenActivity : AppCompatActivity(),InterfaceCallBackController {
+class SplashScreenActivity : AppCompatActivity(),InterfaceCallBackController {
     override fun onWorkDone(result: Any) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -33,7 +32,7 @@ class splashScreenActivity : AppCompatActivity(),InterfaceCallBackController {
 
 
     fun start() {
-        startActivity(Intent(this@splashScreenActivity, BottomNavigationActivity::class.java))
+        startActivity(Intent(this@SplashScreenActivity, BottomNavigationActivity::class.java))
         //finish this activity
         finish()
     }
