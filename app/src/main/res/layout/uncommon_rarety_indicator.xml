@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gray_patterned_bg">
+
+    <ImageView
+        android:id="@+id/ivStarUncommon2"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckUncommon"
+        app:layout_constraintEnd_toEndOf="@id/tvCardUncommon"
+        app:layout_constraintStart_toEndOf="@id/ivStarUncommon"
+        app:layout_constraintTop_toTopOf="@id/ivDeckUncommon"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/ivStarUncommon"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckUncommon"
+        app:layout_constraintEnd_toStartOf="@id/ivStarUncommon2"
+        app:layout_constraintStart_toEndOf="@id/ivDeckUncommon"
+        app:layout_constraintTop_toTopOf="@id/ivDeckUncommon"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/ivDeckUncommon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvCardUncommon"
+        app:layout_constraintEnd_toStartOf="@id/ivStarUncommon"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/tvCardUncommon"
+        app:layout_constraintTop_toTopOf="@id/tvCardUncommon"
+        app:srcCompat="@drawable/deck"
+        tools:ignore="NotSibling" />
+
+    <TextView
+        android:id="@+id/tvCardUncommon"
+        style="@style/HomeNbrCard2Star"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@drawable/circle_card_star"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
