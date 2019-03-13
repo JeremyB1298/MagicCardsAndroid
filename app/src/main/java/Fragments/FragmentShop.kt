@@ -56,7 +56,7 @@ class FragmentShop: androidx.fragment.app.Fragment() {
         val priceBtn = dialogs.findViewById(R.id.bPrice) as Button
         val text = dialogs.findViewById(R.id.tvBuy) as TextView
 
-        if (UserManager.user!!.money!! > 500) {
+        if (UserManager.user!!.money!! >= 500) {
 
             text.text = "Carte aléatoire"
 
@@ -72,7 +72,9 @@ class FragmentShop: androidx.fragment.app.Fragment() {
         } else {
             text.text = "Pas assez d'argent"
             priceBtn.text = "ok"
-                dialogs.dismiss()
+                priceBtn.setOnClickListener {
+                    dialogs.dismiss()
+                }
             }
 
         dialogs.show()
