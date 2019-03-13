@@ -2,22 +2,15 @@ package Managers
 
 import Models.Card
 import Models.User
+import androidx.lifecycle.MutableLiveData
 
 object UserManager {
 
     var user: User? = null
-    var listCards: ArrayList<Card>? = null
+    var listCards: MutableLiveData<ArrayList<Card>>? = null
 
     fun initialize() {
         this.user = User()
-        this.listCards = ArrayList()
-    }
-
-    fun getCurrentUser(): User? {
-        return user
-    }
-
-    fun getUserCards(): ArrayList<Card>? {
-        return listCards
+        this.listCards = MutableLiveData<ArrayList<Card>>()
     }
 }

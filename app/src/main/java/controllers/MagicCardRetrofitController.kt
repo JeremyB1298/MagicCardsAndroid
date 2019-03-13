@@ -1,12 +1,16 @@
 package controllers
 
+import Managers.UserManager
 import Models.Card
 import Models.CardDB
 import Models.User
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import viewModel.ShopViewModel
 
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
@@ -15,13 +19,15 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     internal var nbPages = 100
     val magicCardAPI: InterfaceMagicCardAPI  = MagicCardRetrofitSingleton.instance!!
 
-    fun callWS(listCard: ArrayList<Card>) {
+    fun callWS2(){
+
         val callExemple = magicCardAPI.getUserCards(1)
-        callExemple.enqueue(object : Callback<List<Card>> {
-            override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
+        callExemple.enqueue(object : Callback<ArrayList<Card>> {
+            override fun onResponse(call: Call<ArrayList<Card>>, response: Response<ArrayList<Card>>) {
                 if (response.isSuccessful) {
                     val listExample = response.body()
-                    fetchData(response, listCard)
+                    //fetchData(response, listCard)
+                    UserManager.listCards!!.postValue(response.body())
                     val card = listExample!![0]
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
 
@@ -32,7 +38,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                 }
             }
 
-            override fun onFailure(call: Call<List<Card>>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<Card>>, t: Throwable) {
                 t.printStackTrace()
             }
         })
@@ -121,7 +127,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         callRandomCard.enqueue(object : Callback<List<Card>>{
             override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
                if (response.isSuccessful) {
-                       interfaceCallBackController.onWorkDone(response.body() as ArrayList<Card>)
+                       ShopViewModel.cardsAlea!!.value = response.body() as ArrayList<Card>
                } else {
 
                }

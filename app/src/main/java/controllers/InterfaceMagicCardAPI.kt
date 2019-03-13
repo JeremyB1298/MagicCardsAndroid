@@ -11,7 +11,7 @@ interface InterfaceMagicCardAPI {
     @GET("/MagicCard/web/index.php/userCards/{id}")
     fun getUserCards(
             @Path("id") id: Int
-    ): Call<List<Card>>
+    ): Call<ArrayList<Card>>
 
     @GET("/MagicCard/web/index.php/googleConnexion/{googleId}")
     fun getUserByGoogle(

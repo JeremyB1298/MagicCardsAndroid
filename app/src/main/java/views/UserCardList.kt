@@ -22,10 +22,7 @@ class UserCardList : AppCompatActivity(), InterfaceCallBackController {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_card_list)
 
-        val controller = MagicCardRetrofitController(this as InterfaceCallBackController)
-
         rv_animal_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this);
-        controller.callWS(listCard)
     }
 
 

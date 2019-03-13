@@ -4,6 +4,7 @@ import Models.Card
 import Utils.inflate
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import com.example.lpiem.magiccards.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.rcycl_view_item.view.*
