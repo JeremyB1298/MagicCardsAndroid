@@ -21,17 +21,16 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     fun callWS2(){
 
-        val callExemple = magicCardAPI.getUserCards(1)
+        val callExemple = magicCardAPI.getUserCards(Managers.UserManager.user!!.id!!)
         callExemple.enqueue(object : Callback<ArrayList<Card>> {
             override fun onResponse(call: Call<ArrayList<Card>>, response: Response<ArrayList<Card>>) {
                 if (response.isSuccessful) {
                     val listExample = response.body()
                     //fetchData(response, listCard)
                     UserManager.listCards!!.postValue(response.body())
-                    val card = listExample!![0]
                     // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
 
-                    Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
+                    //Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
 
                 } else {
                     Log.d("SwapiRetrofitController", "error : " + response.errorBody()!!)
@@ -114,6 +113,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         callUser.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful && response.body().equals("OK")) {
+                    Managers.UserManager.user = user
+                    ConnexionViewModel.insription!!.value = "cacao"
                     //val readWriteMap = hashMapOf("google" to true)
                     //val map: Map<String, Boolean> = HashMap(readWriteMap)
                     //interfaceCallBackController.onWorkDone(map)
@@ -134,6 +135,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
                 if (response.isSuccessful && response.body().equals("OK")) {
+                    Managers.UserManager.user = user
                     ConnexionViewModel.insription!!.value = "cacao"
                     //val readWriteMap = hashMapOf("google" to true)
                     //val map: Map<String, Boolean> = HashMap(readWriteMap)

@@ -66,6 +66,7 @@ object ConnexionViewModel  {
         isLoggedIn = accessToken != null && !accessToken!!.isExpired()
         this.activity = activity
         this.inter = inter
+        insription = MutableLiveData()
     }
 
     fun getUserDetails(loginResult: AccessToken) {

@@ -151,7 +151,11 @@ class MainActivity : AppCompatActivity() , InterfaceCallBackController {
                 }
             } else if (result["google"] === false){
                 inscriptionGoogleAccount(UserManager.user!!)
-                connexionToTheAppWithGoogle(UserManager.user!!.googleId!!)
+                ConnexionViewModel.insription!!.observe(this, Observer {
+                    Log.d("NewUserId", UserManager.user!!.googleId!!)
+                    connexionToTheAppWithGoogle(UserManager.user!!.googleId!!)
+                })
+
             } else if (result["facebook"] === false) {
                 inscriptionFacebookAccount(UserManager.user!!)
                 ConnexionViewModel.insription!!.observe(this, Observer {
