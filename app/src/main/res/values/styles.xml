@@ -60,6 +60,11 @@
         <item name="android:textColor">@color/Color4Star</item>
     </style>
 
+    <style name="RcyclViewPowerIndicator" parent="HomeLevelPlayer">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/Color4Star</item>
+    </style>
+
     <style name="ShopPriceCard" parent="HomeLevelPlayer">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20dp</item>
