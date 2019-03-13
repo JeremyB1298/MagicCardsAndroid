@@ -73,6 +73,12 @@
 
     <style name="ShopDialogResponse" parent="ShopPriceCard"></style>
 
+    <style name="RcyclViewItemTitle" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
     <style name="ShopDialogTitle">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20dp</item>

@@ -7,18 +7,18 @@
     android:background="@drawable/gray_patterned_bg">
 
     <ImageView
-        android:id="@+id/ivStar3star2"
+        android:id="@+id/ivStarRare2"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivDeck3Star"
-        app:layout_constraintEnd_toEndOf="@id/tvCard3Stars"
-        app:layout_constraintStart_toEndOf="@id/ivStar3star"
-        app:layout_constraintTop_toTopOf="@id/ivDeck3Star"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckRare"
+        app:layout_constraintEnd_toEndOf="@id/tvCardRare"
+        app:layout_constraintStart_toEndOf="@id/ivStarRare"
+        app:layout_constraintTop_toTopOf="@id/ivDeckRare"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/star" />
 
     <TextView
-        android:id="@+id/tvCard3Stars"
+        android:id="@+id/tvCardRare"
         style="@style/HomeNbrCard3Star"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -32,36 +32,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivDeck3Star"
+        android:id="@+id/ivDeckRare"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/tvCard3Stars"
-        app:layout_constraintEnd_toStartOf="@id/ivStar3star"
+        app:layout_constraintBottom_toBottomOf="@id/tvCardRare"
+        app:layout_constraintEnd_toStartOf="@id/ivStarRare"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/tvCard3Stars"
-        app:layout_constraintTop_toTopOf="@id/tvCard3Stars"
+        app:layout_constraintStart_toStartOf="@id/tvCardRare"
+        app:layout_constraintTop_toTopOf="@id/tvCardRare"
         app:srcCompat="@drawable/deck"
         tools:ignore="NotSibling" />
 
     <ImageView
-        android:id="@+id/ivStar3star"
+        android:id="@+id/ivStarRare"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivDeck3Star"
-        app:layout_constraintEnd_toStartOf="@id/ivStar3star2"
-        app:layout_constraintStart_toEndOf="@id/ivDeck3Star"
-        app:layout_constraintTop_toTopOf="@id/ivDeck3Star"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckRare"
+        app:layout_constraintEnd_toStartOf="@id/ivStarRare2"
+        app:layout_constraintStart_toEndOf="@id/ivDeckRare"
+        app:layout_constraintTop_toTopOf="@id/ivDeckRare"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/star" />
 
     <ImageView
-        android:id="@+id/ivStar3star3"
+        android:id="@+id/ivStarRare3"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivDeck3Star"
-        app:layout_constraintEnd_toEndOf="@id/ivStar3star2"
-        app:layout_constraintStart_toEndOf="@id/ivDeck3Star"
-        app:layout_constraintTop_toBottomOf="@id/ivStar3star"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckRare"
+        app:layout_constraintEnd_toEndOf="@id/ivStarRare2"
+        app:layout_constraintStart_toEndOf="@id/ivDeckRare"
+        app:layout_constraintTop_toBottomOf="@id/ivStarRare"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/star" />
 

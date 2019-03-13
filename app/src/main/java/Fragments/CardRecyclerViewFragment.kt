@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.lpiem.magiccards.R
-import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.recycler_view_fragment.*
 
@@ -23,8 +22,8 @@ class CardRecyclerViewFragment: androidx.fragment.app.Fragment() {
 
 
     override fun onAttach(context: Context) {
-        super.onAttach(context!!)
-        viewAdapter = CardRcyclViewAdapter()
+        super.onAttach(context)
+        viewAdapter = CardRcyclViewAdapter(activity!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

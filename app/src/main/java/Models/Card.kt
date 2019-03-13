@@ -124,6 +124,12 @@ class Card : Serializable {
     @SerializedName("rarity")
     @Expose
     var rarity: String? = null
+    @SerializedName("power")
+    @Expose
+    var power: String? = null
+    @SerializedName("toughness")
+    @Expose
+    var toughness: String? = null
     @SerializedName("watermark")
     @Expose
     var watermark: String? = null

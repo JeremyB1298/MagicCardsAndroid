@@ -23,6 +23,8 @@ class CardListAdapter(val items : ArrayList<Card>, val context: Context) : andro
                 .get() // give it the context
                 .load(items[position].imageUris!!.artCrop) // load the image
                 .into(holder.cardImageView) // select the ImageView to load it into
+
+
     }
 
 
@@ -36,6 +38,9 @@ class CardListAdapter(val items : ArrayList<Card>, val context: Context) : andro
         items.clear()
         notifyItemRangeRemoved(0, size)
     }
+
+
+
 
 
 }

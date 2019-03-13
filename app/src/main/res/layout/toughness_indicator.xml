@@ -7,21 +7,20 @@
     android:background="@drawable/gray_patterned_bg">
 
     <ImageView
-        android:id="@+id/ivPowerInd"
+        android:id="@+id/ivToughnessInd"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="8dp"
         android:tint="@color/ColorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPowerInd"
-        app:layout_constraintEnd_toEndOf="@+id/tvPowerInd"
-        app:layout_constraintStart_toStartOf="@+id/tvPowerInd"
-        app:layout_constraintTop_toTopOf="@+id/tvPowerInd"
+        app:layout_constraintBottom_toBottomOf="@+id/tvToughnessInd"
+        app:layout_constraintEnd_toEndOf="@+id/tvToughnessInd"
+        app:layout_constraintStart_toStartOf="@+id/tvToughnessInd"
+        app:layout_constraintTop_toTopOf="@+id/tvToughnessInd"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_sword"
+        app:srcCompat="@drawable/ic_shield"
         tools:ignore="NotSibling,VectorDrawableCompat" />
 
     <TextView
-        android:id="@+id/tvPowerInd"
+        android:id="@+id/tvToughnessInd"
         style="@style/RcyclViewPowerIndicator"
         android:layout_width="60dp"
         android:layout_height="60dp"

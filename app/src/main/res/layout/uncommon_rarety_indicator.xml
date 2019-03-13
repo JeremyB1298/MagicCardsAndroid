@@ -7,41 +7,41 @@
     android:background="@drawable/gray_patterned_bg">
 
     <ImageView
-        android:id="@+id/ivStar2star2"
+        android:id="@+id/ivStarUncommon2"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivDeck2Star"
-        app:layout_constraintEnd_toEndOf="@id/tvCard2Stars"
-        app:layout_constraintStart_toEndOf="@id/ivStar2star"
-        app:layout_constraintTop_toTopOf="@id/ivDeck2Star"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckUncommon"
+        app:layout_constraintEnd_toEndOf="@id/tvCardUncommon"
+        app:layout_constraintStart_toEndOf="@id/ivStarUncommon"
+        app:layout_constraintTop_toTopOf="@id/ivDeckUncommon"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/star" />
 
     <ImageView
-        android:id="@+id/ivStar2star"
+        android:id="@+id/ivStarUncommon"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivDeck2Star"
-        app:layout_constraintEnd_toStartOf="@id/ivStar2star2"
-        app:layout_constraintStart_toEndOf="@id/ivDeck2Star"
-        app:layout_constraintTop_toTopOf="@id/ivDeck2Star"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckUncommon"
+        app:layout_constraintEnd_toStartOf="@id/ivStarUncommon2"
+        app:layout_constraintStart_toEndOf="@id/ivDeckUncommon"
+        app:layout_constraintTop_toTopOf="@id/ivDeckUncommon"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/star" />
 
     <ImageView
-        android:id="@+id/ivDeck2Star"
+        android:id="@+id/ivDeckUncommon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/tvCard2Stars"
-        app:layout_constraintEnd_toStartOf="@id/ivStar2star"
+        app:layout_constraintBottom_toBottomOf="@id/tvCardUncommon"
+        app:layout_constraintEnd_toStartOf="@id/ivStarUncommon"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/tvCard2Stars"
-        app:layout_constraintTop_toTopOf="@id/tvCard2Stars"
+        app:layout_constraintStart_toStartOf="@id/tvCardUncommon"
+        app:layout_constraintTop_toTopOf="@id/tvCardUncommon"
         app:srcCompat="@drawable/deck"
         tools:ignore="NotSibling" />
 
     <TextView
-        android:id="@+id/tvCard2Stars"
+        android:id="@+id/tvCardUncommon"
         style="@style/HomeNbrCard2Star"
         android:layout_width="50dp"
         android:layout_height="50dp"
