@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.os.UserManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.GraphRequest
@@ -28,6 +30,8 @@ object ConnexionViewModel  {
 
 
     //class ConnexionViewModel(val app : Application) : AndroidViewModel(app) {
+
+    var insription: MutableLiveData<String>? = null
 
     var mGoogleSignInClient: GoogleSignInClient? = null
 
@@ -62,12 +66,15 @@ object ConnexionViewModel  {
         isLoggedIn = accessToken != null && !accessToken!!.isExpired()
         this.activity = activity
         this.inter = inter
+        insription = MutableLiveData()
     }
 
     fun getUserDetails(loginResult: AccessToken) {
         val data_request = GraphRequest.newMeRequest(
                 loginResult) { json_object, response ->
             acctFacebook = json_object
+            Managers.UserManager.user!!.fbId = acctFacebook!!.get("id").toString()
+            Managers.UserManager.user!!.name = acctFacebook!!.get("name").toString()
             connexionToTheAppWithFacebook(acctFacebook!!.get("id").toString())
         }
         val permission_param = Bundle()
@@ -120,9 +127,7 @@ object ConnexionViewModel  {
 
     }
 
-
-
-    private fun connexionToTheAppWithFacebook(fbId: String) {
+    fun connexionToTheAppWithFacebook(fbId: String) {
         val controller = MagicCardRetrofitController(this!!.inter!! )
         controller.callUserFbId(fbId, Managers.UserManager.user)
     }

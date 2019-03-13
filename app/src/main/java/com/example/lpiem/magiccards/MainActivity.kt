@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.facebook.AccessToken
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -22,8 +23,6 @@ import viewModel.ConnexionViewModel
 
 
 class MainActivity : AppCompatActivity() , InterfaceCallBackController {
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,6 +151,16 @@ class MainActivity : AppCompatActivity() , InterfaceCallBackController {
                 }
             } else if (result["google"] === false){
                 inscriptionGoogleAccount(UserManager.user!!)
+                ConnexionViewModel.insription!!.observe(this, Observer {
+                    Log.d("NewUserId", UserManager.user!!.googleId!!)
+                    connexionToTheAppWithGoogle(UserManager.user!!.googleId!!)
+                })
+
+            } else if (result["facebook"] === false) {
+                inscriptionFacebookAccount(UserManager.user!!)
+                ConnexionViewModel.insription!!.observe(this, Observer {
+                    ConnexionViewModel.connexionToTheAppWithFacebook(UserManager.user!!.fbId!!)
+                })
             }
 
         }
@@ -165,7 +174,12 @@ class MainActivity : AppCompatActivity() , InterfaceCallBackController {
 
     private fun inscriptionGoogleAccount(user: User) {
         val controller = MagicCardRetrofitController(this )
-        controller.createUser(User(null,ConnexionViewModel.acctGoogle!!.id.toString(),null,ConnexionViewModel.acctGoogle!!.displayName.toString()));
+        controller.createGoogleUser(User(null,ConnexionViewModel.acctGoogle!!.id.toString(),null,ConnexionViewModel.acctGoogle!!.displayName.toString()));
+    }
+
+    private fun inscriptionFacebookAccount(user: User) {
+        val controller = MagicCardRetrofitController(this )
+        controller.createFacebookUser(User(null, null,ConnexionViewModel.acctFacebook!!.get("id").toString(), ConnexionViewModel.acctFacebook!!.get("name").toString()));
     }
 
 }
