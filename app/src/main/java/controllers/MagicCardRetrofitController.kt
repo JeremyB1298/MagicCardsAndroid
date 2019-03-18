@@ -183,6 +183,20 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         })
     }
 
+    fun updateAccount() {
+        val callUpdateAccount = magicCardAPI.updateAccount(UserManager.user!!)
+        callUpdateAccount.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful && response.body().equals("OK")) {
+                } else {
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
     @Synchronized
     private fun fetchData(response: Response<List<Card>>,listCard: ArrayList<Card>) {
 

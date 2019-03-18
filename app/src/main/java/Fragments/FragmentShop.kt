@@ -58,15 +58,27 @@ class FragmentShop: androidx.fragment.app.Fragment() {
 
         if (UserManager.user!!.money!! >= 500) {
 
-            text.text = "Carte aléatoire"
 
-            priceBtn.text = "500"
+            if (ShopViewModel.cardsAleaId!![id] == -1) {
+                text.text = "Vous avez déjà acheté(e) cette carte"
 
-            priceBtn.setOnClickListener {
-                ShopViewModel.addCard(CardDB(null, ShopViewModel.cardsAlea!!.value!!.get(id).id, ShopViewModel.cardsAlea!!.value!!.get(id).name,
-                        UserManager.user!!.id), id)
-                dialogs.dismiss()
-                showCardDialog(id)
+                priceBtn.text = "OK"
+
+                priceBtn.setOnClickListener {
+                    dialogs.dismiss()
+                }
+
+            } else {
+                text.text = "Carte aléatoire"
+
+                priceBtn.text = "500"
+
+                priceBtn.setOnClickListener {
+                    ShopViewModel.addCard(CardDB(null, ShopViewModel.cardsAlea!!.value!!.get(id).id, ShopViewModel.cardsAlea!!.value!!.get(id).name,
+                            UserManager.user!!.id), id)
+                    dialogs.dismiss()
+                    showCardDialog(id)
+                }
             }
 
         } else {
@@ -89,8 +101,7 @@ class FragmentShop: androidx.fragment.app.Fragment() {
         val iv = dialogs.findViewById(R.id.ivCard) as ImageView
         Picasso.get().load(ShopViewModel.cardsAlea!!.value!![id].imageUris!!.png).into(iv)
             okBtn.setOnClickListener {
-                ShopViewModel.addCard(CardDB(null, ShopViewModel.cardsAlea!!.value!!.get(id).id, ShopViewModel.cardsAlea!!.value!!.get(id).name,
-                        UserManager.user!!.id), id)
+
                 dialogs.dismiss()
             }
 

@@ -37,4 +37,8 @@ interface InterfaceMagicCardAPI {
     @POST("/MagicCard/web/index.php/addCard")
     @Headers("Content-Type: application/json;charset=UTF-8")
     fun addCard(@Body card: CardDB): Call<String>
+
+    @POST("/MagicCard/web/index.php/updateAccount")
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    fun updateAccount(@Body user: User): Call<String>
 }
