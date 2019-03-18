@@ -37,6 +37,7 @@ object ShopViewModel : InterfaceCallBackController {
             controller.addCard(card)
             UserManager.listCards!!.value!!.add(ShopViewModel.cardsAlea!!.value!!.get(id))
             UserManager.user!!.money = UserManager.user!!.money!! - 500
+            controller.updateAccount()
             cardsAleaId!![id] = -1
         }
     }
