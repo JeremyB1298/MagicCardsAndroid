@@ -52,7 +52,6 @@ class BottomNavigationActivity : AppCompatActivity() {
                 .beginTransaction()
                 .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
                 .replace(R.id.content, fragment, fragment.javaClass.getSimpleName())
-                .addToBackStack(fragment.javaClass.getSimpleName())
                 .commit()
     }
     private fun addHomeFragment(fragment: Fragment) {
@@ -60,7 +59,6 @@ class BottomNavigationActivity : AppCompatActivity() {
                 .beginTransaction()
                 .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
                 .replace(R.id.content, fragment, fragment.javaClass.getSimpleName())
-                .addToBackStack(fragment.javaClass.getSimpleName())
                 .commit()
     }
 
