@@ -205,7 +205,6 @@
             android:layout_weight="1"
             android:background="@drawable/circle_card_star"
             android:gravity="center"
-            android:text="@string/home_nbr_card_1_star"
             android:textColor="@color/ColorWhite"
             app:layout_constraintBottom_toBottomOf="@id/constraintLayoutCardsData"
             app:layout_constraintEnd_toStartOf="@id/tvCard2Stars"
