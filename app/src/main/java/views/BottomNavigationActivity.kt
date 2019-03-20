@@ -1,17 +1,18 @@
 package views
 
 import Fragments.CardRecyclerViewFragment
-import Managers.UserManager
-import Fragments.Fragment_home
 import Fragments.FragmentShop
+import Fragments.Fragment_home
+import Managers.UserManager
 import Models.User
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.MenuItem
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lpiem.magiccards.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -22,6 +23,10 @@ class BottomNavigationActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             when (item.itemId) {
+                android.R.id.home ->{
+                    displayText()
+                    return true
+                }
                 R.id.navigation_1 -> {
 
                     val fragment = Fragment_home.newInstance(user!!)
@@ -42,6 +47,16 @@ class BottomNavigationActivity : AppCompatActivity() {
             return false
         }
 
+    }
+
+    @Override
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    fun displayText() {
+        Toast.makeText(this,"Home action", Toast.LENGTH_LONG).show()
     }
 
     /**
