@@ -12,7 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lpiem.magiccards.R
+import com.facebook.login.LoginManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import viewModel.ConnexionViewModel
 
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -92,6 +94,12 @@ class BottomNavigationActivity : AppCompatActivity() {
         val fragment = Fragment_home.newInstance(user!!)
 
         addHomeFragment(fragment)
+    }
+
+    override fun finish() {
+        super.finish()
+        LoginManager.getInstance().logOut()
+        ConnexionViewModel.mGoogleSignInClient!!.signOut()
     }
 
 }
