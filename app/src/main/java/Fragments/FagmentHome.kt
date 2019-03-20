@@ -26,6 +26,14 @@ class Fragment_home : Fragment() {
         val tvUserLvl: TextView = rootView.findViewById(R.id.tvLvl);
         val tvUserExp: TextView = rootView.findViewById(R.id.tvExp);
         val tvMoney : TextView = rootView.findViewById(R.id.tvMoney)
+        val tvCommonCard : TextView = rootView.findViewById(R.id.tvCard1Stars)
+        val tvUnCommonCard : TextView = rootView.findViewById(R.id.tvCard2Stars)
+        val tvRareCard : TextView = rootView.findViewById(R.id.tvCard3Stars)
+        val tvMythicrareCard : TextView = rootView.findViewById(R.id.tvCard4Stars)
+        tvCommonCard.text = Managers.UserManager.nbrCommonCard().toString()
+        tvUnCommonCard.text = Managers.UserManager.nbrUnCommonCard().toString()
+        tvRareCard.text = Managers.UserManager.nbrRareCard().toString()
+        tvMythicrareCard.text = Managers.UserManager.nbrMythicrareCard().toString()
         tvUserName.text = Managers.UserManager.user!!.name
         tvUserLvl.text = Managers.UserManager.user!!.lvl.toString()
         tvUserExp.text = Managers.UserManager.user!!.exp.toString()
