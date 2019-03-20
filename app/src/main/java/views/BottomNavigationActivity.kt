@@ -52,6 +52,9 @@ class BottomNavigationActivity : AppCompatActivity() {
     @Override
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        val toolbar = supportActionBar
+
+        toolbar!!.setDisplayHomeAsUpEnabled(false)
         return true
     }
 
