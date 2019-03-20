@@ -3,15 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gray_patterned_bg"
     tools:context="Fragments.CardDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toughnessClCardDetail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/raretyClCardDetail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardDetailTitle" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/powerClCardDetail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/raretyClCardDetail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/raretyClCardDetail"
+        app:layout_constraintTop_toTopOf="@+id/raretyClCardDetail" />
+
     <TextView
         android:id="@+id/cardDetailTitle"
+        style="@style/CardDetailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,10 +44,45 @@
         android:id="@+id/cardDetailImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/raretyClCardDetail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toughnessClCardDetail"
+        app:layout_constraintEnd_toStartOf="@+id/powerClCardDetail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toughnessClCardDetail"
+        app:layout_constraintTop_toTopOf="@+id/toughnessClCardDetail">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/descriptionClCardDetail"
+        style="@style/CardDetailDescription"
+        android:layout_width="324dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/raretyClCardDetail">
+
+        <TextView
+            android:id="@+id/descriptionTvCardDetail"
+            style="@style/CardDetailDescription"
+            android:layout_width="321dp"
+            android:layout_height="162dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

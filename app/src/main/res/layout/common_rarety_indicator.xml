@@ -21,8 +21,8 @@
     <TextView
         android:id="@+id/tvCardCommon"
         style="@style/HomeNbrCard1Star"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="49dp"
         android:layout_weight="1"
         android:background="@drawable/circle_card_star"
         android:gravity="center"
