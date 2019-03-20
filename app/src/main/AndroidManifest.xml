@@ -31,6 +31,14 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name="Models.AlarmReceiver"
+            android:enabled="true" />
+
+        <service
+            android:name="Models.NotificationService"
+            android:enabled="true" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

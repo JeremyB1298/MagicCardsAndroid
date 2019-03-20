@@ -2,6 +2,7 @@ package Fragments
 
 import Managers.UserManager
 import Models.CardDB
+import Models.NotificationUtils
 import android.app.Dialog
 import viewModel.ShopViewModel
 import android.os.Bundle
@@ -16,9 +17,12 @@ import com.example.lpiem.magiccards.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.buy_dialog.*
 import kotlinx.android.synthetic.main.fragment_card_detail.*
+import java.util.*
 
 
 class FragmentShop: androidx.fragment.app.Fragment() {
+
+    private val mNotificationTime = Calendar.getInstance().timeInMillis + 10000 //Set after 5 seconds from the current time.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +81,7 @@ class FragmentShop: androidx.fragment.app.Fragment() {
                     ShopViewModel.addCard(CardDB(null, ShopViewModel.cardsAlea!!.value!!.get(id).id, ShopViewModel.cardsAlea!!.value!!.get(id).name,
                             UserManager.user!!.id), id)
                     dialogs.dismiss()
+                    NotificationUtils().setNotification(mNotificationTime, this.context!!)
                     showCardDialog(id)
                 }
             }

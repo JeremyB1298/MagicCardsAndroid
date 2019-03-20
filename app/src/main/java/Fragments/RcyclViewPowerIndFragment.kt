@@ -32,8 +32,8 @@ class RcyclViewPowerIndFragment : androidx.fragment.app.Fragment(){
     }
 
     companion object {
-        fun newInstance(rarety: String): Fragment_home {
-            val fragment = Fragment_home()
+        fun newInstance(rarety: String): FragmentHome {
+            val fragment = FragmentHome()
             val args = Bundle()
             args.putString("Rarety",rarety)
             fragment.arguments = args
