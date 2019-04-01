@@ -3,9 +3,7 @@ package viewModel
 import Managers.UserManager
 import Models.Card
 import Models.CardDB
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 
@@ -24,11 +22,13 @@ object ShopViewModel : InterfaceCallBackController {
     fun initialize() {
         cardsAlea = MutableLiveData<ArrayList<Card>>()
         val controller = MagicCardRetrofitController(this)
-        controller.getRandomCards()
-        cardsAleaId = ArrayList()
+        controller.getRandomCards().observeForever {
+            it
+        }
+        /*cardsAleaId = ArrayList()
         for (i in 0..3) {
             cardsAleaId!!.add(i)
-        }
+        }*/
     }
 
     fun addCard(card: CardDB, id: Int) {

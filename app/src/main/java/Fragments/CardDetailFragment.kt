@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.toughness_indicator.view.*
 
 
 
-
-
 class CardDetailFragment : androidx.fragment.app.Fragment() {
 
     lateinit var card: Card;
@@ -62,6 +60,7 @@ class CardDetailFragment : androidx.fragment.app.Fragment() {
 
         toolbar!!.setDisplayHomeAsUpEnabled(true)
 
+        getImageSize(act)
 
         val layoutRarity = LayoutInflater.from(act).inflate(getLayout(card.rarity), null)
 
@@ -95,6 +94,15 @@ class CardDetailFragment : androidx.fragment.app.Fragment() {
         cardDetailTitle.text = card.name
 
     }
+
+fun getImageSize(act : AppCompatActivity) : String {
+    val displayMetrics = context!!.getResources().displayMetrics
+    val dpHeight = displayMetrics.heightPixels / displayMetrics.density
+    val dpWidth = displayMetrics.widthPixels / displayMetrics.density
+    Log.d("Width",dpWidth.toString())
+    Log.d("Height",dpHeight.toString())
+    return ""
+}
 
     fun getLayout(rarety:String?) : Int {
         val layout = when (rarety) {

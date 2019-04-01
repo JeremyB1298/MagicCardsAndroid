@@ -5,12 +5,12 @@ import Models.Card
 import Models.CardDB
 import Models.User
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import viewModel.ConnexionViewModel
-import viewModel.ShopViewModel
-import androidx.lifecycle.Observer
 
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
@@ -44,7 +44,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     }
 
-    fun callUserGoogleId(googleId: String, user: User?){
+    fun callUserGoogleId(googleId: String, user: User? ){
 
         val callUser = magicCardAPI.getUserByGoogle(googleId)
 
@@ -152,12 +152,16 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         })
     }
 
-    fun getRandomCards() {
+    fun getRandomCards() : LiveData<List<Card>> {
+
+        val data = MutableLiveData<List<Card>>()
+
         val callRandomCard = magicCardAPI.getRandomCards()
         callRandomCard.enqueue(object : Callback<List<Card>>{
             override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
                if (response.isSuccessful) {
-                       ShopViewModel.cardsAlea!!.value = response.body() as ArrayList<Card>
+                   data.postValue(response.body())
+                       //ShopViewModel.cardsAlea!!.value = response.body() as ArrayList<Card>
                } else {
 
                }
@@ -167,6 +171,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
+
+        return data
     }
 
     fun addCard(card: CardDB) {
