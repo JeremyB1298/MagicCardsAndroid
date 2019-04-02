@@ -3,6 +3,7 @@ package controllers
 import Managers.UserManager
 import Models.Card
 import Models.CardDB
+import Models.Deck
 import Models.User
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -194,6 +195,21 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         callUpdateAccount.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful && response.body().equals("OK")) {
+                } else {
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    fun addDecks(decks: Array<Deck>) {
+        val callUpdateAccount = magicCardAPI.addDecks(decks)
+        callUpdateAccount.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+
                 } else {
                 }
             }

@@ -2,6 +2,7 @@ package controllers
 
 import Models.Card
 import Models.CardDB
+import Models.Deck
 import Models.User
 import retrofit2.Call
 import retrofit2.http.*
@@ -41,4 +42,9 @@ interface InterfaceMagicCardAPI {
     @POST("/MagicCard/web/index.php/updateAccount")
     @Headers("Content-Type: application/json;charset=UTF-8")
     fun updateAccount(@Body user: User): Call<String>
+
+    @POST("/MagicCard/web/index.php/addDeck")
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    fun addDecks(@Body decks: Array<Deck>): Call<String>
+
 }
