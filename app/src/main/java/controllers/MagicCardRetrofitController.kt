@@ -219,6 +219,21 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         })
     }
 
+    fun updateDecks(decks: Array<Deck>) {
+        val callUpdateAccount = magicCardAPI.updateDecks(decks)
+        callUpdateAccount.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+
+                } else {
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
     @Synchronized
     private fun fetchData(response: Response<List<Card>>,listCard: ArrayList<Card>) {
 
