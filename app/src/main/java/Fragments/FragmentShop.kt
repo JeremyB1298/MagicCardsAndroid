@@ -74,7 +74,7 @@ class FragmentShop: androidx.fragment.app.Fragment() {
                 priceBtn.text = "500"
 
                 priceBtn.setOnClickListener {
-                    ShopViewModel.addCard(CardDB(null, ShopViewModel.cardsAlea!!.value!!.get(id).id, ShopViewModel.cardsAlea!!.value!!.get(id).name,
+                    ShopViewModel.addCard(CardDB(null, ShopViewModel.cardsAlea!!.get(id).id, ShopViewModel.cardsAlea!!.get(id).name,
                             UserManager.user!!.id), id)
                     dialogs.dismiss()
                     showCardDialog(id)
@@ -99,7 +99,7 @@ class FragmentShop: androidx.fragment.app.Fragment() {
         dialogs.setContentView(R.layout.card_dialog)
         val okBtn = dialogs.findViewById(R.id.bCardOk) as Button
         val iv = dialogs.findViewById(R.id.ivCard) as ImageView
-        Picasso.get().load(ShopViewModel.cardsAlea!!.value!![id].imageUris!!.png).into(iv)
+        Picasso.get().load(ShopViewModel.cardsAlea!![id].imageUris!!.png).into(iv)
             okBtn.setOnClickListener {
 
                 dialogs.dismiss()
