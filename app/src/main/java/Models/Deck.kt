@@ -13,6 +13,6 @@ class Deck : Serializable{
     var userId: Int? = null
     @SerializedName("cards")
     @Expose
-    var cards: Array<DeckCard>? = null
+    var cards: ArrayList<DeckCard>? = ArrayList()
 
 }

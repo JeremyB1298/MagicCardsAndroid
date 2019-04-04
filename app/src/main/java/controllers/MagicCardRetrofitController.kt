@@ -204,7 +204,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         })
     }
 
-    fun addDecks(decks: Array<Deck>) {
+    fun addDecks(decks: ArrayList<Deck>) {
         val callUpdateAccount = magicCardAPI.addDecks(decks)
         callUpdateAccount.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {

@@ -3,32 +3,43 @@ package Fragments
 import Adapter.DeckRcyclViewAdapter
 import Managers.UserManager
 import Models.Card
+import Models.Deck
+import Models.DeckCard
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.lpiem.magiccards.R
+import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
-import kotlinx.android.synthetic.main.recycler_view_fragment.*
+import kotlinx.android.synthetic.main.fragment_deck.*
 
-class DeckRecyclerViewFragment : androidx.fragment.app.Fragment() {
+class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallBackController {
+    override fun onWorkDone(result: Any) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     private lateinit var viewAdapter: DeckRcyclViewAdapter
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     private lateinit var controller: MagicCardRetrofitController
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         viewAdapter = DeckRcyclViewAdapter(activity!!)
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.recycler_view_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_deck, container, false)
 
-        viewAdapter.addDeckList(UserManager.listCards!!.value!!);
+        viewAdapter.addDeckList(UserManager.listCards!!.value!!)
+
+        controller = MagicCardRetrofitController(this)
 
         return rootView
     }
@@ -40,7 +51,25 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment() {
             onClickCell(it)
         }
 
-        CardRcyclView.adapter = viewAdapter
+        deckFab.setOnClickListener {
+            var tmp = ArrayList<Deck>()
+            var deck = Deck()
+            var cards = ArrayList<DeckCard>()
+            var card1 = DeckCard()
+            card1.cardId = "testest"
+            card1.deckId = 0
+            var card2 = DeckCard()
+            card2.cardId = "testest2"
+            card2.deckId = 0
+            deck.name = "Deck1"
+            deck.userId = UserManager.user!!.id
+            deck.cards!!.add(card1)
+            deck.cards!!.add(card2)
+            tmp.add(deck)
+            controller.addDecks(tmp)
+        }
+
+        deckRcyclView.adapter = viewAdapter
     }
 
     fun onClickCell(card: Card) {
@@ -56,6 +85,6 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment() {
 
     override fun onResume() {
         super.onResume()
-        CardRcyclView.adapter
+        deckRcyclView.adapter
     }
 }
