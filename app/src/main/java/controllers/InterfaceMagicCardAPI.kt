@@ -47,8 +47,12 @@ interface InterfaceMagicCardAPI {
     @Headers("Content-Type: application/json;charset=UTF-8")
     fun addDecks(@Body decks: ArrayList<Deck>): Call<String>
 
-    @POST("/MagicCard/web/index.php/addDeck")
+    @POST("/MagicCard/web/index.php/updateDeck")
     @Headers("Content-Type: application/json;charset=UTF-8")
     fun updateDecks(@Body decks: Array<Deck>): Call<String>
 
+    @GET("/MagicCard/web/index.php/userDeck/{id}")
+    fun getUserDeck(
+            @Path("id") id: Int
+    ): Call<ArrayList<Deck>>
 }

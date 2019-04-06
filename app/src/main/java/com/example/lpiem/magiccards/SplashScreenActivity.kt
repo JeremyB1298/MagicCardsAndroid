@@ -28,6 +28,7 @@ class SplashScreenActivity : AppCompatActivity(),InterfaceCallBackController {
             start()
         })
         controller.callWS2()
+        controller.userDecks()
     }
 
 

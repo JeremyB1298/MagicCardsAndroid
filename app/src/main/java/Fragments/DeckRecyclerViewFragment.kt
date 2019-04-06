@@ -7,6 +7,7 @@ import Models.Deck
 import Models.DeckCard
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewAdapter = DeckRcyclViewAdapter(activity!!)
+        viewAdapter = DeckRcyclViewAdapter(this.context!!)
 
 
     }
@@ -37,7 +38,7 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_deck, container, false)
 
-        viewAdapter.addDeckList(UserManager.listCards!!.value!!)
+        viewAdapter.addDeckList(UserManager.listDeck?.value!!)
 
         controller = MagicCardRetrofitController(this)
 
@@ -66,16 +67,17 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
             deck.cards!!.add(card1)
             deck.cards!!.add(card2)
             tmp.add(deck)
-            controller.addDecks(tmp)
+            //controller.addDecks(tmp)
+            UserManager.listDeck?.value?.add(deck)
         }
 
         deckRcyclView.adapter = viewAdapter
     }
 
-    fun onClickCell(card: Card) {
+    fun onClickCell(deck: Deck) {
         val nextFrag = CardDetailFragment()
         val args = Bundle()
-        args.putSerializable("Card", card)
+        args.putSerializable("Deck", deck)
         nextFrag.setArguments(args)
         val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.content, nextFrag)

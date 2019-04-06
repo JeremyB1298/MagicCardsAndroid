@@ -234,6 +234,31 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         })
     }
 
+    fun userDecks(){
+
+        val callExemple = magicCardAPI.getUserDeck(Managers.UserManager.user!!.id!!)
+        callExemple.enqueue(object : Callback<ArrayList<Deck>> {
+            override fun onResponse(call: Call<ArrayList<Deck>>, response: Response<ArrayList<Deck>>) {
+                if (response.isSuccessful) {
+                    val listExample = response.body()
+                    //fetchData(response, listCard)
+                    UserManager.listDeck!!.postValue(response.body())
+                    // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
+
+                    //Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
+
+                } else {
+                    Log.d("SwapiRetrofitController", "error : " + response.errorBody()!!)
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Deck>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+
+    }
+
     @Synchronized
     private fun fetchData(response: Response<List<Card>>,listCard: ArrayList<Card>) {
 
