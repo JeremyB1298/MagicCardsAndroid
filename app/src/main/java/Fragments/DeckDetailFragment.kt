@@ -40,7 +40,7 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
         deckDetailRcyclView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
 
         deckDetailFab.setOnClickListener {
-            val nextFrag = DeckDetailFragment()
+            val nextFrag = AddDeckCardFragment()
             val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.content, nextFrag)
             fragmentTransaction.addToBackStack(null)
