@@ -1,23 +1,20 @@
 package Adapter
 
-import Managers.UserManager
-import Models.Card
 import Models.Deck
 import Utils.inflate
 import android.app.Activity
-import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import com.example.lpiem.magiccards.R
 import kotlinx.android.synthetic.main.deck_rcycl_view_item.view.*
 
-class DeckRcyclViewAdapter (val act: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<DeckRcyclViewAdapter.DeckRcyclViewHolder>() {
+class DeckRcyclViewAdapter (val act: Activity) : androidx.recyclerview.widget.RecyclerView.Adapter<DeckRcyclViewAdapter.DeckRcyclViewHolder>() {
 
 
     private var myDataset =  ArrayList<Deck>()
     private lateinit var onClick: (Deck)->Unit
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckRcyclViewAdapter.DeckRcyclViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckRcyclViewHolder {
         val cellForRow = parent.inflate(R.layout.deck_rcycl_view_item, false)
         return DeckRcyclViewHolder(cellForRow)
     }
@@ -36,7 +33,7 @@ class DeckRcyclViewAdapter (val act: Context) : androidx.recyclerview.widget.Rec
     fun addDeckList(deckList: ArrayList<Deck>){
         this.myDataset.clear()
         notifyDataSetChanged()
-        this.myDataset.addAll(UserManager.listDeck?.value!!)
+        this.myDataset.addAll(deckList)
         notifyDataSetChanged()
 
     }
@@ -46,7 +43,13 @@ class DeckRcyclViewAdapter (val act: Context) : androidx.recyclerview.widget.Rec
 
             v.deckTitleTv.text = myDataset.name
 
+            itemView.setOnClickListener{
+                onClick?.let {
+                    it(myDataset)
+                }
+            }
         }
+
 
         fun getLayout(rarety: String?): Int {
             val layout = when (rarety) {

@@ -1,13 +1,12 @@
 package Fragments
 
 import Adapter.DeckRcyclViewAdapter
+import Managers.DeckManager
 import Managers.UserManager
-import Models.Card
 import Models.Deck
 import Models.DeckCard
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +28,7 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewAdapter = DeckRcyclViewAdapter(this.context!!)
+        viewAdapter = DeckRcyclViewAdapter(activity!!)
 
 
     }
@@ -48,6 +47,7 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        deckRcyclView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         viewAdapter.setClick {
             onClickCell(it)
         }
@@ -75,10 +75,8 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
     }
 
     fun onClickCell(deck: Deck) {
-        val nextFrag = CardDetailFragment()
-        val args = Bundle()
-        args.putSerializable("Deck", deck)
-        nextFrag.setArguments(args)
+        DeckManager.currentDeck = deck
+        val nextFrag = DeckDetailFragment()
         val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.content, nextFrag)
         fragmentTransaction.addToBackStack(null)

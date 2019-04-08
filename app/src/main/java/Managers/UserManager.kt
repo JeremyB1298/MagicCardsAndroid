@@ -15,7 +15,7 @@ object UserManager {
 
     fun initialize() {
         this.user = User()
-        this.deckManager = DeckManager()
+        this.deckManager = DeckManager
         this.listCards = MutableLiveData<ArrayList<Card>>()
         this.listDeck = MutableLiveData<ArrayList<Deck>>()
     }
@@ -65,9 +65,9 @@ object UserManager {
     }
 
     fun getCardsOfDeck( deckName: String): ArrayList<Card>? {
-        var deckList = this.listDeck as ArrayList<Deck>
+        var deckList = this.listDeck!!.value
 
-        return this.deckManager?.getCardById(deckList.find { deck -> deck.name == deckName },this.listCards as ArrayList<Card>)
+        return this.deckManager?.getCardById(deckList?.find { deck -> deck.name == deckName },this.listCards!!.value!!)
     }
 
 }

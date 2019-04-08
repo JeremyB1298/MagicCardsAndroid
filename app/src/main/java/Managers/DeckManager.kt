@@ -3,7 +3,10 @@ package Managers
 import Models.Card
 import Models.Deck
 
-class DeckManager {
+object DeckManager {
+
+        lateinit var currentDeck : Deck
+
        fun getCardById(deck: Deck?,cardList:ArrayList<Card>) : ArrayList<Card>{
 
         var cardListTmp = ArrayList<Card>()
