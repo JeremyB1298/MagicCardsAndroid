@@ -3,10 +3,14 @@ package Adapter
 import Models.Card
 import Utils.inflate
 import android.app.Activity
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat
 import com.example.lpiem.magiccards.R
+import com.facebook.FacebookSdk.getApplicationContext
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.power_indicator.view.*
 import kotlinx.android.synthetic.main.rcycl_view_item.view.*
@@ -100,6 +104,7 @@ class DeckDetailRcyclViewAdapter(val act: Activity) : androidx.recyclerview.widg
             itemView.setOnLongClickListener{
                 if(onLongClick?.let {
                     it(myDataset)
+
                 } != null){
                     true
                 }
