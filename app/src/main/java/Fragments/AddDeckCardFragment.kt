@@ -11,10 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lpiem.magiccards.R
+import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.fragment_add_deck_card.*
 
-class AddDeckCardFragment : androidx.fragment.app.Fragment() {
+class AddDeckCardFragment : androidx.fragment.app.Fragment(), InterfaceCallBackController {
+    override fun onWorkDone(result: Any) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     private lateinit var viewAdapter: DeckDetailRcyclViewAdapter
@@ -32,7 +36,7 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_add_deck_card, container, false)
 
         viewAdapter.addCardList(DeckManager.getCardNotInDeck(DeckManager.currentDeck,UserManager.listCards!!.value!!));
-
+        controller = MagicCardRetrofitController(this)
         return rootView
     }
 
@@ -60,7 +64,9 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
             for (deckCard in DeckManager.convertCardToDeckCard(viewAdapter.selectedCards,DeckManager.currentDeck)) {
                 DeckManager.currentDeck.cards!!.add(deckCard)
             }
+
             fragmentManager!!.popBackStackImmediate()
+            controller.updateDecks(UserManager.listDeck?.value!!)
         }
     }
 
