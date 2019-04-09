@@ -75,27 +75,17 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
                 if (teName.text.length > 0) {
                     var tmp = ArrayList<Deck>()
                     var deck = Deck()
-                    var cards = ArrayList<DeckCard>()
-                    var card1 = DeckCard()
-                    card1.cardId = "testest"
-                    card1.deckId = 0
-                    var card2 = DeckCard()
-                    card2.cardId = "testest2"
-                    card2.deckId = 0
                     deck.name = teName.text.toString()
                     deck.userId = UserManager.user!!.id
-                    deck.cards!!.add(card1)
-                    deck.cards!!.add(card2)
                     tmp.add(deck)
-                    //controller.addDecks(tmp)
+                    controller.addDecks(tmp)
                     UserManager.listDeck?.value?.add(deck)
                 }
-            dialogs.dismiss()
+                dialogs.dismiss()
+                viewAdapter.addDeckList(UserManager.listDeck?.value!!)
+                viewAdapter.notifyDataSetChanged()
         }
-
-
             dialogs.show()
-
         }
 
         deckRcyclView.adapter = viewAdapter
