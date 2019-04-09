@@ -5,18 +5,20 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gray_patterned_bg">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/ic_pack_of_playing_cards"/>
 
     <TextView
         android:id="@+id/deckTitleTv"
@@ -27,7 +29,11 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/ColorWhite"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
 
     <TextView
         android:id="@+id/numberOfCardsTv"
@@ -38,5 +44,8 @@
         android:layout_marginTop="32dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/deckTitleTv" />
+        app:layout_constraintTop_toBottomOf="@+id/deckTitleTv"
+        android:textColor="@color/ColorWhite"
+        android:textStyle="bold"
+        android:textSize="15dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,6 @@ class CardRecyclerViewFragment: androidx.fragment.app.Fragment() {
         viewAdapter.setClick {
             onClickCell(it)
         }
-
         CardRcyclView.adapter = viewAdapter
     }
 
