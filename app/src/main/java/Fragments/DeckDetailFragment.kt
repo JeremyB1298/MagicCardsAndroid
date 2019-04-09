@@ -4,6 +4,7 @@ import Adapter.CardRcyclViewAdapter
 import Managers.DeckManager
 import Managers.UserManager
 import Models.Card
+import Models.User
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -35,7 +36,7 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_deck_detail, container, false)
 
-        viewAdapter.addCardList(UserManager.getCardsOfDeck(DeckManager.currentDeck.name!!)!!);
+        viewAdapter.addCardList(UserManager.getCardsOfDeck(DeckManager.currentDeck.name!!)!!)
 
         return rootView
     }
@@ -97,7 +98,8 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
         okBtn.setOnClickListener{
             DeckManager.removeDeckCardByName(DeckManager.currentDeck,card)
             dialogs.dismiss()
-            deckDetailRcyclView.adapter!!.notifyDataSetChanged()
+            viewAdapter.addCardList(UserManager.getCardsOfDeck(DeckManager.currentDeck.name!!)!!);
+            viewAdapter.notifyDataSetChanged()
         }
 
         dialogs.show()

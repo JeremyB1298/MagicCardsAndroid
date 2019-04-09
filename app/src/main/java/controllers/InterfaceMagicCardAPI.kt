@@ -49,7 +49,7 @@ interface InterfaceMagicCardAPI {
 
     @POST("/MagicCard/web/index.php/updateDeck")
     @Headers("Content-Type: application/json;charset=UTF-8")
-    fun updateDecks(@Body decks: Array<Deck>): Call<String>
+    fun updateDecks(@Body decks: ArrayList<Deck>): Call<String>
 
     @GET("/MagicCard/web/index.php/userDeck/{id}")
     fun getUserDeck(

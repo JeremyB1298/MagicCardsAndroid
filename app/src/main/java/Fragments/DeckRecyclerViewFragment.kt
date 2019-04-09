@@ -48,6 +48,8 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
 
         controller = MagicCardRetrofitController(this)
 
+        controller.updateDecks(UserManager.listDeck?.value!!)
+
         return rootView
     }
 

@@ -27,9 +27,6 @@ class CardDetailFragment : androidx.fragment.app.Fragment() {
         this.card = arguments?.getSerializable("Card") as Card
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_card_detail, container, false)
-
-
-
     }
 
 
