@@ -3,17 +3,24 @@ package Fragments
 import Adapter.DeckRcyclViewAdapter
 import Managers.DeckManager
 import Managers.UserManager
+import Models.CardDB
 import Models.Deck
 import Models.DeckCard
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import com.example.lpiem.magiccards.R
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.fragment_deck.*
+import viewModel.ShopViewModel
 
 class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallBackController {
     override fun onWorkDone(result: Any) {
@@ -56,22 +63,39 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
 
 
         deckFab.setOnClickListener {
-            var tmp = ArrayList<Deck>()
-            var deck = Deck()
-            var cards = ArrayList<DeckCard>()
-            var card1 = DeckCard()
-            card1.cardId = "testest"
-            card1.deckId = 0
-            var card2 = DeckCard()
-            card2.cardId = "testest2"
-            card2.deckId = 0
-            deck.name = "Deck1"
-            deck.userId = UserManager.user!!.id
-            deck.cards!!.add(card1)
-            deck.cards!!.add(card2)
-            tmp.add(deck)
-            //controller.addDecks(tmp)
-            UserManager.listDeck?.value?.add(deck)
+            var dialogs = Dialog(activity)
+            dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogs.setCancelable(true)
+            dialogs.setContentView(R.layout.dialog_new_deck)
+
+            val btnValid = dialogs.findViewById(R.id.bValidNameDeck) as Button
+            val teName = dialogs.findViewById(R.id.etDeckName) as EditText
+
+            btnValid.setOnClickListener {
+                if (teName.text.length > 0) {
+                    var tmp = ArrayList<Deck>()
+                    var deck = Deck()
+                    var cards = ArrayList<DeckCard>()
+                    var card1 = DeckCard()
+                    card1.cardId = "testest"
+                    card1.deckId = 0
+                    var card2 = DeckCard()
+                    card2.cardId = "testest2"
+                    card2.deckId = 0
+                    deck.name = teName.text.toString()
+                    deck.userId = UserManager.user!!.id
+                    deck.cards!!.add(card1)
+                    deck.cards!!.add(card2)
+                    tmp.add(deck)
+                    //controller.addDecks(tmp)
+                    UserManager.listDeck?.value?.add(deck)
+                }
+            dialogs.dismiss()
+        }
+
+
+            dialogs.show()
+
         }
 
         deckRcyclView.adapter = viewAdapter
