@@ -52,6 +52,8 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
             onClickCell(it)
         }
 
+
+
         deckFab.setOnClickListener {
             var tmp = ArrayList<Deck>()
             var deck = Deck()

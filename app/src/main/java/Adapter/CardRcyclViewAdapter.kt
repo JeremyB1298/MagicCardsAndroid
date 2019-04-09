@@ -16,6 +16,7 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
 
     private var myDataset =  ArrayList<Card>()
     private lateinit var onClick: (Card)->Unit
+    private lateinit var onLongClick: (Card)->Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardRcyclViewHolder {
         val cellForRow = parent.inflate(R.layout.rcycl_view_item, false)
@@ -24,7 +25,7 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
 
     override fun onBindViewHolder(holder: CardRcyclViewHolder, position: Int) {
         val card = myDataset.get(position)
-        holder.bindCard(card, onClick)
+        holder.bindCard(card, onClick,onLongClick)
     }
 
     override fun getItemCount() = myDataset.size
@@ -42,7 +43,7 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
     }
 
     inner class CardRcyclViewHolder(val v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v){
-        fun bindCard(myDataset: Card, onClick: (Card) -> Unit){
+        fun bindCard(myDataset: Card, onClick: (Card) -> Unit, onLongClick: (Card) -> Unit){
 
             val layoutRarity = LayoutInflater.from(act).inflate(getLayout(myDataset.rarity), null)
 
@@ -80,6 +81,18 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
                 onClick?.let {
                     it(myDataset)
                 }
+            }
+
+            itemView.setOnLongClickListener{
+                if(onLongClick?.let {
+                            it(myDataset)
+                        } != null){
+                    true
+                }
+                else{
+                    false
+                }
+
             }
 
         }

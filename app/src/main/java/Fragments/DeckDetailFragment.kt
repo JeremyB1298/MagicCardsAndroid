@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lpiem.magiccards.R
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.fragment_deck_detail.*
@@ -47,6 +48,12 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
             fragmentTransaction.commit()
         }
 
+        val act = activity as AppCompatActivity?
+
+        val toolbar = act!!.supportActionBar
+
+        toolbar!!.setDisplayHomeAsUpEnabled(true)
+
         viewAdapter.setClick {
             onClickCell(it)
         }
@@ -56,13 +63,23 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
 
     fun onClickCell(card: Card) {
         val nextFrag = CardDetailFragment()
-
-
+        val args = Bundle()
+        args.putSerializable("Card", card)
+        nextFrag.setArguments(args)
+        val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.content, nextFrag)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     override fun onResume() {
         super.onResume()
         deckDetailRcyclView.adapter
+        val act = activity as AppCompatActivity?
+
+        val toolbar = act!!.supportActionBar
+
+        toolbar!!.setDisplayHomeAsUpEnabled(true)
     }
 
 }

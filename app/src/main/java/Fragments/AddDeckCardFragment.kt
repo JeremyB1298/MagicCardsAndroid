@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lpiem.magiccards.R
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.fragment_add_deck_card.*
@@ -30,7 +31,7 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_add_deck_card, container, false)
 
-        viewAdapter.addCardList(UserManager.listCards!!.value!!);
+        viewAdapter.addCardList(DeckManager.getCardNotInDeck(DeckManager.currentDeck,UserManager.listCards!!.value!!));
 
         return rootView
     }
@@ -39,7 +40,11 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
         super.onViewCreated(view, savedInstanceState)
         addDeckCardRcyclView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
 
+        val act = activity as AppCompatActivity?
 
+        val toolbar = act!!.supportActionBar
+
+        toolbar!!.setDisplayHomeAsUpEnabled(true)
 
         viewAdapter.setClick {
             onClickCell(it)

@@ -6,7 +6,7 @@ import Models.DeckCard
 
 object DeckManager {
 
-        lateinit var currentDeck : Deck
+       lateinit var currentDeck : Deck
 
        fun getCardById(deck: Deck?,cardList:ArrayList<Card>) : ArrayList<Card>{
 
@@ -34,5 +34,21 @@ object DeckManager {
             tmp.add(tmpCard)
         }
         return tmp
+    }
+
+    fun getCardNotInDeck(deck : Deck, cards : ArrayList<Card>) : ArrayList<Card>{
+        var cardListTmp = cards
+
+        if (deck?.cards != null && deck?.cards!!.count() != 0){
+            for (deckCard in deck?.cards!!)
+            {
+                cardListTmp = cardListTmp.filter { card -> card.id != deckCard.cardId } as ArrayList<Card>
+
+            }
+        }
+        else{
+            return cards
+        }
+        return cardListTmp
     }
 }
