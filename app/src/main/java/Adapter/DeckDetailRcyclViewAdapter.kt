@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.toughness_indicator.view.*
 class DeckDetailRcyclViewAdapter(val act: Activity) : androidx.recyclerview.widget.RecyclerView.Adapter<DeckDetailRcyclViewAdapter.DeckDetailRcyclViewHolder>() {
 
     private var myDataset =  ArrayList<Card>()
+    var selectedCards =  ArrayList<Card>()
     private lateinit var onClick: (Card)->Unit
     private lateinit var onLongClick: (Card)->Unit
 
@@ -85,6 +86,14 @@ class DeckDetailRcyclViewAdapter(val act: Activity) : androidx.recyclerview.widg
             itemView.setOnClickListener{
                 onClick?.let {
                     it(myDataset)
+                    if (selectedCards.contains(myDataset)){
+                        selectedCards.remove(myDataset)
+                        v.setBackgroundResource(R.drawable.gray_patterned_bg)
+                    }
+                    else{
+                        selectedCards.add(myDataset)
+                        v.setBackgroundColor(R.color.cardview_light_background)
+                    }
                 }
             }
 

@@ -2,6 +2,7 @@ package Managers
 
 import Models.Card
 import Models.Deck
+import Models.DeckCard
 
 object DeckManager {
 
@@ -21,5 +22,17 @@ object DeckManager {
                 }
         }
         return cardListTmp
+    }
+
+    fun convertCardToDeckCard(cardList: ArrayList<Card>,deck : Deck) : ArrayList<DeckCard> {
+        var tmp : ArrayList<DeckCard> = ArrayList()
+        val deckId = deck.id
+        for (card in cardList){
+            var tmpCard = DeckCard()
+            tmpCard.deckId = deckId
+            tmpCard.cardId = card.id
+            tmp.add(tmpCard)
+        }
+        return tmp
     }
 }

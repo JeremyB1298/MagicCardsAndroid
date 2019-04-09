@@ -1,6 +1,7 @@
 package Fragments
 
 import Adapter.DeckDetailRcyclViewAdapter
+import Managers.DeckManager
 import Managers.UserManager
 import Models.Card
 import android.content.Context
@@ -10,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.lpiem.magiccards.R
 import controllers.MagicCardRetrofitController
-import kotlinx.android.synthetic.main.recycler_view_fragment.*
+import kotlinx.android.synthetic.main.fragment_add_deck_card.*
 
 class AddDeckCardFragment : androidx.fragment.app.Fragment() {
 
@@ -27,7 +28,7 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.recycler_view_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_add_deck_card, container, false)
 
         viewAdapter.addCardList(UserManager.listCards!!.value!!);
 
@@ -36,7 +37,7 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        CardRcyclView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        addDeckCardRcyclView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
 
 
 
@@ -48,11 +49,18 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
             onLongClickCell(it)
         }
 
-        CardRcyclView.adapter = viewAdapter
+        addDeckCardRcyclView.adapter = viewAdapter
+
+        addDeckCardFab.setOnClickListener {
+            for (deckCard in DeckManager.convertCardToDeckCard(viewAdapter.selectedCards,DeckManager.currentDeck)) {
+                DeckManager.currentDeck.cards!!.add(deckCard)
+            }
+            fragmentManager!!.popBackStackImmediate()
+        }
     }
 
     fun onClickCell(card: Card) {
-
+        viewAdapter.selectedCards
     }
 
     fun onLongClickCell(card: Card) {
@@ -68,7 +76,7 @@ class AddDeckCardFragment : androidx.fragment.app.Fragment() {
 
     override fun onResume() {
         super.onResume()
-        CardRcyclView.adapter
+        addDeckCardRcyclView.adapter
     }
 
 }

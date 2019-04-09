@@ -57,6 +57,7 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
     fun onClickCell(card: Card) {
         val nextFrag = CardDetailFragment()
 
+
     }
 
     override fun onResume() {
