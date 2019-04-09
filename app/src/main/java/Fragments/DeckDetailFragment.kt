@@ -4,11 +4,15 @@ import Adapter.CardRcyclViewAdapter
 import Managers.DeckManager
 import Managers.UserManager
 import Models.Card
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lpiem.magiccards.R
 import controllers.MagicCardRetrofitController
@@ -57,6 +61,9 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
         viewAdapter.setClick {
             onClickCell(it)
         }
+        viewAdapter.setLongClick {
+            onLongClickCell(it)
+        }
 
         deckDetailRcyclView.adapter = viewAdapter
     }
@@ -70,6 +77,30 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
         fragmentTransaction.replace(R.id.content, nextFrag)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+
+    private fun onLongClickCell(card : Card) {
+
+        var dialogs = Dialog(activity)
+        dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogs.setCancelable(true)
+        dialogs.setContentView(R.layout.delete_card_dialog)
+        val okBtn = dialogs.findViewById(R.id.deleteCardBtnOk) as Button
+        val cancelBtn = dialogs.findViewById(R.id.deleteCardBtnCancel) as Button
+        val text = dialogs.findViewById(R.id.deleteCardTv) as TextView
+
+        okBtn.text = "OK"
+        cancelBtn.text = "Annuler"
+        text.text = "Voulez vous suprimer la carte " + card.name
+
+        okBtn.setOnClickListener{
+            DeckManager.removeDeckCardByName(DeckManager.currentDeck,card)
+            dialogs.dismiss()
+            deckDetailRcyclView.adapter!!.notifyDataSetChanged()
+        }
+
+        dialogs.show()
     }
 
     override fun onResume() {

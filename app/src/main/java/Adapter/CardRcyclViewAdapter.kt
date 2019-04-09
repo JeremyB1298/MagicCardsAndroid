@@ -42,6 +42,10 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
         this.onClick = onClick
     }
 
+    fun setLongClick(onLongClick:(Card)->Unit){
+        this.onLongClick = onLongClick
+    }
+
     inner class CardRcyclViewHolder(val v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v){
         fun bindCard(myDataset: Card, onClick: (Card) -> Unit, onLongClick: (Card) -> Unit){
 

@@ -51,4 +51,11 @@ object DeckManager {
         }
         return cardListTmp
     }
+
+    fun removeDeckCardByName(deck: Deck,card : Card) {
+
+            val tmp = deck.cards!!.find{deckCard -> deckCard.cardId.toString() == card.id }
+            deck.cards!!.remove(tmp)
+
+    }
 }
