@@ -1,5 +1,6 @@
 package Adapter
 
+import Models.Card
 import Models.Deck
 import Utils.inflate
 import android.app.Activity
@@ -13,6 +14,7 @@ class DeckRcyclViewAdapter (val act: Activity) : androidx.recyclerview.widget.Re
 
     private var myDataset =  ArrayList<Deck>()
     private lateinit var onClick: (Deck)->Unit
+    private lateinit var onLongClick: (Deck)->Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckRcyclViewHolder {
         val cellForRow = parent.inflate(R.layout.deck_rcycl_view_item, false)
@@ -29,7 +31,9 @@ class DeckRcyclViewAdapter (val act: Activity) : androidx.recyclerview.widget.Re
     fun setClick(onClick:(Deck)->Unit){
         this.onClick = onClick
     }
-
+    fun setLongClick(onLongClick:(Deck)->Unit){
+        this.onLongClick = onLongClick
+    }
     fun addDeckList(deckList: ArrayList<Deck>){
         this.myDataset.clear()
         notifyDataSetChanged()
@@ -42,11 +46,24 @@ class DeckRcyclViewAdapter (val act: Activity) : androidx.recyclerview.widget.Re
         fun bindCard(myDataset: Deck, onClick: (Deck) -> Unit) {
 
             v.deckTitleTv.text = myDataset.name
+            v.numberOfCardsTv.text = myDataset.cards?.size.toString()
 
             itemView.setOnClickListener{
                 onClick?.let {
                     it(myDataset)
                 }
+            }
+            itemView.setOnLongClickListener{
+                if(onLongClick?.let {
+                            it(myDataset)
+
+                        } != null){
+                    true
+                }
+                else{
+                    false
+                }
+
             }
         }
 

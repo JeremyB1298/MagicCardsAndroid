@@ -235,7 +235,6 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
     }
 
     fun userDecks(){
-
         val callExemple = magicCardAPI.getUserDeck(Managers.UserManager.user!!.id!!)
         callExemple.enqueue(object : Callback<ArrayList<Deck>> {
             override fun onResponse(call: Call<ArrayList<Deck>>, response: Response<ArrayList<Deck>>) {
@@ -257,6 +256,19 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
             }
         })
 
+    }
+
+    fun deleteDeck(id: Int) {
+        val callExemple = magicCardAPI.deleteDecks(id)
+        callExemple.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
     }
 
     @Synchronized

@@ -101,7 +101,9 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
             viewAdapter.addCardList(UserManager.getCardsOfDeck(DeckManager.currentDeck.name!!)!!);
             viewAdapter.notifyDataSetChanged()
         }
-
+        cancelBtn.setOnClickListener{
+            dialogs.dismiss()
+        }
         dialogs.show()
     }
 

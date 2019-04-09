@@ -3,6 +3,7 @@ package Fragments
 import Adapter.DeckRcyclViewAdapter
 import Managers.DeckManager
 import Managers.UserManager
+import Models.Card
 import Models.CardDB
 import Models.Deck
 import Models.DeckCard
@@ -60,7 +61,9 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
             onClickCell(it)
         }
 
-
+        viewAdapter.setLongClick {
+            onLongClickCell(it)
+        }
 
 
         deckFab.setOnClickListener {
@@ -99,6 +102,35 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
         fragmentTransaction.replace(R.id.content, nextFrag)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    private fun onLongClickCell(deck : Deck) {
+
+        var dialogs = Dialog(activity)
+        dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogs.setCancelable(true)
+        dialogs.setContentView(R.layout.delete_card_dialog)
+        val okBtn = dialogs.findViewById(R.id.deleteCardBtnOk) as Button
+        val cancelBtn = dialogs.findViewById(R.id.deleteCardBtnCancel) as Button
+        val text = dialogs.findViewById(R.id.deleteCardTv) as TextView
+
+        okBtn.text = "OK"
+        cancelBtn.text = "Annuler"
+        text.text = "Voulez vous suprimer le deck " + deck.name
+
+        okBtn.setOnClickListener{
+            controller.deleteDeck(deck.id!!)
+            UserManager.listDeck?.value?.remove(deck)
+            dialogs.dismiss()
+            viewAdapter.addDeckList(UserManager.listDeck?.value!!)
+            viewAdapter.notifyDataSetChanged()
+        }
+
+        cancelBtn.setOnClickListener{
+            dialogs.dismiss()
+        }
+
+        dialogs.show()
     }
 
     override fun onResume() {

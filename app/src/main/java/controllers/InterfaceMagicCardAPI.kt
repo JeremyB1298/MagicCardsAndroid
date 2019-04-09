@@ -55,4 +55,10 @@ interface InterfaceMagicCardAPI {
     fun getUserDeck(
             @Path("id") id: Int
     ): Call<ArrayList<Deck>>
+
+    @GET("/MagicCard/web/index.php/deleteDecks/{id}")
+    fun deleteDecks(
+            @Path("id") id: Int
+    ): Call<String>
+
 }

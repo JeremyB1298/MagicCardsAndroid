@@ -5,7 +5,8 @@
     android:id="@+id/decksConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gray_patterned_bg">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/deckFab"
@@ -16,6 +17,7 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:focusable="auto"
+        android:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add" />

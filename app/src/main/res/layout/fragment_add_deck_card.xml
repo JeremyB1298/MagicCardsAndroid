@@ -15,6 +15,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
         android:clickable="true"
+        android:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/addDeckCardRcyclView"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />

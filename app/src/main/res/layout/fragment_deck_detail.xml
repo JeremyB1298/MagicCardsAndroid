@@ -17,6 +17,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/colorPrimaryDark"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
     <androidx.recyclerview.widget.RecyclerView
