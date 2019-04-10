@@ -4,6 +4,8 @@ import Models.Card
 import Models.Deck
 import Models.User
 import androidx.lifecycle.MutableLiveData
+import java.lang.reflect.Array
+import java.util.*
 
 object UserManager {
 
@@ -68,6 +70,21 @@ object UserManager {
         var deckList = this.listDeck!!.value
 
         return this.deckManager?.getCardById(deckList?.find { deck -> deck.name == deckName },this.listCards!!.value!!)
+    }
+
+    fun nameDeckExist(futurName: String) : Boolean {
+        val fName = arrayOf(futurName)
+        var nameArray= arrayOfNulls<String>(listDeck?.value!!.size)
+        var i = 0
+        for (deck in listDeck?.value!!) {
+            nameArray[i] = deck.name
+            i++
+        }
+
+        if (nameArray.contains(futurName)) {
+            return true
+        }
+        return false
     }
 
 }

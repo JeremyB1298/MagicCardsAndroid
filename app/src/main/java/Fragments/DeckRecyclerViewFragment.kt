@@ -76,7 +76,7 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
             val teName = dialogs.findViewById(R.id.etDeckName) as EditText
 
             btnValid.setOnClickListener {
-                if (teName.text.length > 0) {
+                if (teName.text.length > 0 && !UserManager.nameDeckExist(teName.text.toString())) {
                     var tmp = ArrayList<Deck>()
                     var deck = Deck()
                     deck.name = teName.text.toString()
@@ -119,7 +119,7 @@ class DeckRecyclerViewFragment : androidx.fragment.app.Fragment(),InterfaceCallB
         text.text = "Voulez vous suprimer le deck " + deck.name
 
         okBtn.setOnClickListener{
-            controller.deleteDeck(deck.id!!)
+            controller.deleteDeck(deck.name!!)
             UserManager.listDeck?.value?.remove(deck)
             dialogs.dismiss()
             viewAdapter.addDeckList(UserManager.listDeck?.value!!)

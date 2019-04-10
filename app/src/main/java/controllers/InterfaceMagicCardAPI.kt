@@ -56,9 +56,9 @@ interface InterfaceMagicCardAPI {
             @Path("id") id: Int
     ): Call<ArrayList<Deck>>
 
-    @GET("/MagicCard/web/index.php/deleteDecks/{id}")
+    @GET("/MagicCard/web/index.php/deleteDeck/{name}")
     fun deleteDecks(
-            @Path("id") id: Int
+            @Path("name") id: String
     ): Call<String>
 
 }

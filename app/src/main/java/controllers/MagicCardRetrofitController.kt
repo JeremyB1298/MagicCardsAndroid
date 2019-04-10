@@ -258,8 +258,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     }
 
-    fun deleteDeck(id: Int) {
-        val callExemple = magicCardAPI.deleteDecks(id)
+    fun deleteDeck(name: String) {
+        val callExemple = magicCardAPI.deleteDecks(name)
         callExemple.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
