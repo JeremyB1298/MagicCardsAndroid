@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gray_patterned_bg">
+
+    <ImageView
+        android:id="@+id/ivDeckMythicRare"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvCardMythicRare"
+        app:layout_constraintEnd_toStartOf="@id/ivStarMythicRare"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/tvCardMythicRare"
+        app:layout_constraintTop_toTopOf="@id/tvCardMythicRare"
+        app:srcCompat="@drawable/deck"
+        tools:ignore="NotSibling" />
+
+    <ImageView
+        android:id="@+id/ivStarMythicRare"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckMythicRare"
+        app:layout_constraintEnd_toStartOf="@id/ivStarMythicRare2"
+        app:layout_constraintStart_toEndOf="@id/ivDeckMythicRare"
+        app:layout_constraintTop_toTopOf="@id/ivDeckMythicRare"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/star" />
+
+    <TextView
+        android:id="@+id/tvCardMythicRare"
+        style="@style/HomeNbrCard4Star"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@drawable/circle_card_star"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivStarMythicRare2"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckMythicRare"
+        app:layout_constraintEnd_toEndOf="@id/tvCardMythicRare"
+        app:layout_constraintStart_toEndOf="@id/ivStarMythicRare"
+        app:layout_constraintTop_toTopOf="@id/ivDeckMythicRare"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/ivStarMythicRare3"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckMythicRare"
+        app:layout_constraintEnd_toStartOf="@id/ivStarMythicRare4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/ivDeckMythicRare"
+        app:layout_constraintTop_toBottomOf="@id/ivStarMythicRare"
+        app:srcCompat="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/ivStarMythicRare4"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivDeckMythicRare"
+        app:layout_constraintEnd_toEndOf="@id/ivStarMythicRare2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/ivStarMythicRare3"
+        app:layout_constraintTop_toBottomOf="@id/ivStarMythicRare"
+        app:srcCompat="@drawable/star" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

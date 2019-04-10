@@ -60,4 +60,44 @@
         <item name="android:textColor">@color/Color4Star</item>
     </style>
 
+    <style name="RcyclViewPowerIndicator" parent="HomeLevelPlayer">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/Color4Star</item>
+    </style>
+
+    <style name="ShopPriceCard" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="ShopDialogResponse" parent="ShopPriceCard"></style>
+
+    <style name="RcyclViewItemTitle" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="CardDetailTitle" parent="HomeLevelPlayer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="CardDetailDescription" parent="HomeLevelPlayer">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/ColorWhite</item>
+    </style>
+
+    <style name="ShopDialogTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="HomeMoneyPlayer" parent="HomeLevelPlayer">
+        <item name="android:textSize">15dp</item>
+    </style>
+
 </resources>

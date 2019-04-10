@@ -1,8 +1,15 @@
 package Models
 
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.*
 
-class User(var id: Int, var fbId: String? = null, var googleId: String?= null,
-           var name: String?= null, var isNew: Boolean?= null, var lvl: Int?= null,
-           var exp: Int?= null) : Serializable
+data class User(@SerializedName("id") @Expose var id: Int? = null,
+           @SerializedName("googleId") @Expose var googleId: String?= null,
+           @SerializedName("fbId") @Expose var fbId: String? = null,
+           @SerializedName("name") @Expose var name: String?= null,
+           @SerializedName("isNew") @Expose var isNew: Boolean?= null,
+           @SerializedName("lvl") @Expose var lvl: Int?= null,
+           @SerializedName("exp") @Expose var exp: Int?= null,
+           @SerializedName("money") @Expose var money: Int?= null) : Serializable

@@ -1,33 +1,33 @@
 package Fragments
 
+import Adapter.CardRcyclViewAdapter
 import Models.User
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import com.example.lpiem.magiccards.R
+import controllers.MagicCardRetrofitController
 
 
-/**
- * Created by chirag on 31/7/17.
- */
 private const val INTENT_HOME_ID_USER = "User"
-class Fragment_home : Fragment() {
+class FragmentDecks : androidx.fragment.app.Fragment() {
+
+    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
+    private lateinit var viewAdapter: CardRcyclViewAdapter
+    private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private lateinit var controller: MagicCardRetrofitController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var rootView = inflater!!.inflate(R.layout.fragment_home, container, false)
-        val user = arguments?.getSerializable(INTENT_HOME_ID_USER) as User
-        Log.d("userFragment", user.googleId.toString())
-        val tvUserName: TextView = rootView.findViewById(R.id.tvName);
-        val tvUserLvl: TextView = rootView.findViewById(R.id.tvLvl);
-        val tvUserExp: TextView = rootView.findViewById(R.id.tvExp);
-        tvUserName.text = user.name
-        tvUserLvl.text = user.lvl.toString()
-        tvUserExp.text = user.exp.toString()
+
         return rootView
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewAdapter = CardRcyclViewAdapter(activity!!)
     }
 
     companion object {

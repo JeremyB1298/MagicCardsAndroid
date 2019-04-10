@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gray_patterned_bg">
+
+  <!--  <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBoosters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/bBooster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@id/clBoosters"
+            app:layout_constraintEnd_toStartOf="@+id/bSuperBooster"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bSuperBooster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@id/bBooster"
+            app:layout_constraintEnd_toStartOf="@+id/bMegaBooster"
+            app:layout_constraintStart_toEndOf="@id/bBooster"
+            app:layout_constraintTop_toTopOf="@id/bBooster" />
+
+        <Button
+            android:id="@+id/bMegaBooster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/clBoosters"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bSuperBooster"
+            app:layout_constraintTop_toTopOf="@id/bSuperBooster"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout> -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--app:layout_constraintTop_toBottomOf="@id/clBoosters"-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clImage1"
+            android:layout_width="100dp"
+            android:layout_height="125dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/bCommonCard"
+            app:layout_constraintStart_toStartOf="@id/bCommonCard"
+            app:layout_constraintTop_toTopOf="@+id/clCards">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/card" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/bCommonCard"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:gravity="bottom|center"
+            android:text="500"
+            style="@style/ShopPriceCard"
+            app:layout_constraintStart_toStartOf="@id/clCards"
+            app:layout_constraintEnd_toStartOf="@id/bUncommonCard"
+            app:layout_constraintTop_toBottomOf="@+id/clImage1"
+            app:layout_constraintBottom_toTopOf="@id/clImage3"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bg_shop_button"
+            android:paddingBottom="5dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clImage2"
+            android:layout_width="100dp"
+            android:layout_height="125dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/bUncommonCard"
+            app:layout_constraintStart_toStartOf="@id/bUncommonCard"
+            app:layout_constraintTop_toTopOf="@id/clImage1">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/card" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/bUncommonCard"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:gravity="bottom|center"
+            android:text="500"
+            style="@style/ShopPriceCard"
+            app:layout_constraintBottom_toTopOf="@id/clImage4"
+            app:layout_constraintEnd_toEndOf="@id/clCards"
+            app:layout_constraintStart_toEndOf="@id/bCommonCard"
+            app:layout_constraintTop_toBottomOf="@id/clImage2"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_shop_button"
+            android:paddingBottom="5dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clImage3"
+            android:layout_width="100dp"
+            android:layout_height="125dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/bRareCard"
+            app:layout_constraintStart_toStartOf="@id/bRareCard"
+            app:layout_constraintTop_toBottomOf="@+id/bCommonCard">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/card" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/bRareCard"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:gravity="bottom|center"
+            android:text="500"
+            style="@style/ShopPriceCard"
+            app:layout_constraintBottom_toBottomOf="@id/clCards"
+            app:layout_constraintEnd_toStartOf="@id/bMythicrareCard"
+            app:layout_constraintStart_toStartOf="@+id/clCards"
+            app:layout_constraintTop_toBottomOf="@id/clImage3"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bg_shop_button"
+            android:paddingBottom="5dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clImage4"
+            android:layout_width="100dp"
+            android:layout_height="125dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/bMythicrareCard"
+            app:layout_constraintStart_toStartOf="@id/bMythicrareCard"
+            app:layout_constraintTop_toBottomOf="@id/bUncommonCard">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/card" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/bMythicrareCard"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:gravity="bottom|center"
+            android:text="500"
+            style="@style/ShopPriceCard"
+            app:layout_constraintBottom_toBottomOf="@id/clCards"
+            app:layout_constraintEnd_toEndOf="@id/clCards"
+            app:layout_constraintStart_toEndOf="@id/bRareCard"
+            app:layout_constraintTop_toBottomOf="@id/clImage4"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_shop_button"
+            android:paddingBottom="5dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

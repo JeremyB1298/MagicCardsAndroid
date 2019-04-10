@@ -76,7 +76,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/tvName"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvLvl"/>
 
         <TextView
             android:id="@+id/tvLvl"
@@ -90,7 +91,8 @@
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvName"
-            app:layout_constraintTop_toBottomOf="@+id/tvHomeTitleLevel" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHomeTitleLevel"
+            app:layout_constraintBottom_toTopOf="@id/tvHomeTitleExp"/>
 
 
         <TextView
@@ -105,7 +107,8 @@
             app:layout_constraintEnd_toStartOf="@id/tvExp"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/tvName"
-            app:layout_constraintTop_toBottomOf="@+id/tvLvl" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLvl"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/tvExp"
@@ -115,7 +118,8 @@
             android:text="10000"
             app:layout_constraintEnd_toStartOf="@id/tvSeparatorExp"
             app:layout_constraintStart_toEndOf="@id/tvHomeTitleExp"
-            app:layout_constraintTop_toTopOf="@+id/tvHomeTitleExp" />
+            app:layout_constraintTop_toTopOf="@+id/tvHomeTitleExp"
+            />
 
         <TextView
             android:id="@+id/tvSeparatorExp"
@@ -136,6 +140,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvSeparatorExp"
             app:layout_constraintTop_toTopOf="@+id/tvSeparatorExp" />
+
+        <TextView
+            android:id="@+id/tvMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/HomeMoneyPlayer"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintEnd_toEndOf="@id/tvName"/>
+
+        <ImageView
+            android:id="@+id/ivMoney"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            app:srcCompat="@drawable/money"
+            android:paddingLeft="5dp"
+            app:layout_constraintStart_toEndOf="@id/tvMoney"
+            app:layout_constraintTop_toTopOf="@id/tvMoney"
+            app:layout_constraintBottom_toBottomOf="@id/tvMoney"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -182,7 +205,6 @@
             android:layout_weight="1"
             android:background="@drawable/circle_card_star"
             android:gravity="center"
-            android:text="@string/home_nbr_card_1_star"
             android:textColor="@color/ColorWhite"
             app:layout_constraintBottom_toBottomOf="@id/constraintLayoutCardsData"
             app:layout_constraintEnd_toStartOf="@id/tvCard2Stars"

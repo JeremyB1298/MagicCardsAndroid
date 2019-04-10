@@ -1,6 +1,7 @@
 package Fragments
 
 import Adapter.CardRcyclViewAdapter
+import Managers.UserManager
 import Models.Card
 import android.content.Context
 import android.os.Bundle
@@ -8,36 +9,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.lpiem.magiccards.R
-import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.recycler_view_fragment.*
 
 
-class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallBackController {
-    override fun onWorkDone(result: Any) {
-        if (result as Boolean) {
-            viewAdapter.addCardList(listCard);
-            listCard.clear();
-        }
-    }
+class CardRecyclerViewFragment: androidx.fragment.app.Fragment() {
 
     private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     private lateinit var viewAdapter: CardRcyclViewAdapter
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     private lateinit var controller: MagicCardRetrofitController
-    private var listCard = ArrayList<Card>()
+
 
     override fun onAttach(context: Context) {
-        super.onAttach(context!!)
-        viewAdapter = CardRcyclViewAdapter()
+        super.onAttach(context)
+        viewAdapter = CardRcyclViewAdapter(activity!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.recycler_view_fragment, container, false)
 
-        val controller = MagicCardRetrofitController(this as InterfaceCallBackController)
-        controller.callWS(listCard)
+        viewAdapter.addCardList(UserManager.listCards!!.value!!);
 
         return rootView
     }
@@ -49,6 +42,10 @@ class CardRecyclerViewFragment: androidx.fragment.app.Fragment(), InterfaceCallB
 
 
         viewAdapter.setClick {
+            onClickCell(it)
+        }
+
+        viewAdapter.setLongClick {
             onClickCell(it)
         }
 
