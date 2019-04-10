@@ -1,6 +1,7 @@
 package views
 
 import Fragments.CardRecyclerViewFragment
+import Fragments.DeckRecyclerViewFragment
 import Fragments.FragmentShop
 import Fragments.Fragment_home
 import Managers.UserManager
@@ -41,6 +42,11 @@ class BottomNavigationActivity : AppCompatActivity() {
                     return true
                 }
                 R.id.navigation_3 -> {
+                    var fragment = DeckRecyclerViewFragment()
+                    addFragment(fragment)
+                    return true
+                }
+                R.id.navigation_4 -> {
                     var fragment = FragmentShop()
                     addFragment(fragment)
                     return true

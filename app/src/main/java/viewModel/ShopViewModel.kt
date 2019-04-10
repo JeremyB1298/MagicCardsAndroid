@@ -3,9 +3,7 @@ package viewModel
 import Managers.UserManager
 import Models.Card
 import Models.CardDB
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 
@@ -15,16 +13,19 @@ object ShopViewModel : InterfaceCallBackController {
 
     }
 
-    var cardsAlea : MutableLiveData<ArrayList<Card>>? = null
+    var cardsAlea : List<Card>? = null
     var cardsAleaId: ArrayList<Int>? = null
 
     init {
     }
 
     fun initialize() {
-        cardsAlea = MutableLiveData<ArrayList<Card>>()
+        cardsAlea = ArrayList<Card>()
         val controller = MagicCardRetrofitController(this)
-        controller.getRandomCards()
+        controller.getRandomCards().observeForever {
+            it
+            cardsAlea = it
+        }
         cardsAleaId = ArrayList()
         for (i in 0..3) {
             cardsAleaId!!.add(i)
@@ -35,7 +36,7 @@ object ShopViewModel : InterfaceCallBackController {
         if (this.cardsAleaId!!.get(id) != -1){
             val controller = MagicCardRetrofitController(this)
             controller.addCard(card)
-            UserManager.listCards!!.value!!.add(ShopViewModel.cardsAlea!!.value!!.get(id))
+            UserManager.listCards!!.value!!.add(ShopViewModel.cardsAlea!!.get(id))
             UserManager.user!!.money = UserManager.user!!.money!! - 500
             controller.updateAccount()
             cardsAleaId!![id] = -1

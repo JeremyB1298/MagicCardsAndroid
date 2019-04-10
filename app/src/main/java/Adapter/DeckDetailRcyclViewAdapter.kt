@@ -3,27 +3,33 @@ package Adapter
 import Models.Card
 import Utils.inflate
 import android.app.Activity
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat
 import com.example.lpiem.magiccards.R
+import com.facebook.FacebookSdk.getApplicationContext
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.power_indicator.view.*
 import kotlinx.android.synthetic.main.rcycl_view_item.view.*
 import kotlinx.android.synthetic.main.toughness_indicator.view.*
 
-class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.RecyclerView.Adapter<CardRcyclViewAdapter.CardRcyclViewHolder>() {
+//DeckDetailRcyclViewAdapter
+class DeckDetailRcyclViewAdapter(val act: Activity) : androidx.recyclerview.widget.RecyclerView.Adapter<DeckDetailRcyclViewAdapter.DeckDetailRcyclViewHolder>() {
 
     private var myDataset =  ArrayList<Card>()
+    var selectedCards =  ArrayList<Card>()
     private lateinit var onClick: (Card)->Unit
     private lateinit var onLongClick: (Card)->Unit
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardRcyclViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckDetailRcyclViewHolder {
         val cellForRow = parent.inflate(R.layout.rcycl_view_item, false)
-        return CardRcyclViewHolder(cellForRow)
+        return DeckDetailRcyclViewHolder(cellForRow)
     }
 
-    override fun onBindViewHolder(holder: CardRcyclViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DeckDetailRcyclViewHolder, position: Int) {
         val card = myDataset.get(position)
         holder.bindCard(card, onClick,onLongClick)
     }
@@ -46,7 +52,7 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
         this.onLongClick = onLongClick
     }
 
-    inner class CardRcyclViewHolder(val v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v){
+    inner class DeckDetailRcyclViewHolder(val v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v){
         fun bindCard(myDataset: Card, onClick: (Card) -> Unit, onLongClick: (Card) -> Unit){
 
             val layoutRarity = LayoutInflater.from(act).inflate(getLayout(myDataset.rarity), null)
@@ -84,13 +90,22 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
             itemView.setOnClickListener{
                 onClick?.let {
                     it(myDataset)
+                    if (selectedCards.contains(myDataset)){
+                        selectedCards.remove(myDataset)
+                        v.setBackgroundResource(R.drawable.gray_patterned_bg)
+                    }
+                    else{
+                        selectedCards.add(myDataset)
+                        v.setBackgroundColor(R.color.cardview_light_background)
+                    }
                 }
             }
 
             itemView.setOnLongClickListener{
                 if(onLongClick?.let {
-                            it(myDataset)
-                        } != null){
+                    it(myDataset)
+
+                } != null){
                     true
                 }
                 else{
@@ -117,6 +132,5 @@ class CardRcyclViewAdapter(val act:Activity) : androidx.recyclerview.widget.Recy
     }
 
 }
-
 
 

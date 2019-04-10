@@ -20,9 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/navigation"
+        android:background="@color/ColorDark"
+        app:itemBackground="@color/ColorDark"
         app:itemIconTint="@drawable/nav_item_state_list"
         app:itemTextColor="@drawable/selector_bottom_bar"
-        app:itemBackground="@color/ColorDark"/>
+        app:menu="@menu/navigation" />
 
 </LinearLayout>

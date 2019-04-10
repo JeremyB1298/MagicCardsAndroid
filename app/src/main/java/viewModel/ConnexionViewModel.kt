@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -24,7 +23,7 @@ import controllers.MagicCardRetrofitController
 import org.json.JSONObject
 
 @SuppressLint("StaticFieldLeak")
-object ConnexionViewModel  {
+object ConnexionViewModel {
 
 
 

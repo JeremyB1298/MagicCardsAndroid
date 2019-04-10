@@ -3,14 +3,15 @@ package controllers
 import Managers.UserManager
 import Models.Card
 import Models.CardDB
+import Models.Deck
 import Models.User
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import viewModel.ConnexionViewModel
-import viewModel.ShopViewModel
-import androidx.lifecycle.Observer
 
 
 class MagicCardRetrofitController(internal var interfaceCallBackController: InterfaceCallBackController) {
@@ -44,7 +45,7 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
 
     }
 
-    fun callUserGoogleId(googleId: String, user: User?){
+    fun callUserGoogleId(googleId: String, user: User? ){
 
         val callUser = magicCardAPI.getUserByGoogle(googleId)
 
@@ -152,12 +153,16 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
         })
     }
 
-    fun getRandomCards() {
+    fun getRandomCards() : LiveData<List<Card>> {
+
+        val data = MutableLiveData<List<Card>>()
+
         val callRandomCard = magicCardAPI.getRandomCards()
         callRandomCard.enqueue(object : Callback<List<Card>>{
             override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
                if (response.isSuccessful) {
-                       ShopViewModel.cardsAlea!!.value = response.body() as ArrayList<Card>
+                   data.postValue(response.body())
+                       //ShopViewModel.cardsAlea!!.value = response.body() as ArrayList<Card>
                } else {
 
                }
@@ -167,6 +172,8 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
+
+        return data
     }
 
     fun addCard(card: CardDB) {
@@ -191,6 +198,73 @@ class MagicCardRetrofitController(internal var interfaceCallBackController: Inte
                 } else {
                 }
             }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    fun addDecks(decks: ArrayList<Deck>) {
+        val callUpdateAccount = magicCardAPI.addDecks(decks)
+        callUpdateAccount.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+
+                } else {
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    fun updateDecks(decks: ArrayList<Deck>) {
+        val callUpdateAccount = magicCardAPI.updateDecks(decks)
+        callUpdateAccount.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+
+                } else {
+                }
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    fun userDecks(){
+        val callExemple = magicCardAPI.getUserDeck(Managers.UserManager.user!!.id!!)
+        callExemple.enqueue(object : Callback<ArrayList<Deck>> {
+            override fun onResponse(call: Call<ArrayList<Deck>>, response: Response<ArrayList<Deck>>) {
+                if (response.isSuccessful) {
+                    val listExample = response.body()
+                    //fetchData(response, listCard)
+                    UserManager.listDeck!!.postValue(response.body())
+                    // changesList.forEach(rawPeople -> System.out.println(rawPeople.name));  // lambda expression (enable java 1.8 in project structure  - available only since AP 24...
+
+                    //Log.d("SwapiRetrofitController", "card name : " + card!!.name!!)
+
+                } else {
+                    Log.d("SwapiRetrofitController", "error : " + response.errorBody()!!)
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Deck>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+
+    }
+
+    fun deleteDeck(name: String) {
+        val callExemple = magicCardAPI.deleteDecks(name)
+        callExemple.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+
+            }
+
             override fun onFailure(call: Call<String>, t: Throwable) {
                 t.printStackTrace()
             }
