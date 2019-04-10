@@ -16,10 +16,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lpiem.magiccards.R
+import controllers.InterfaceCallBackController
 import controllers.MagicCardRetrofitController
 import kotlinx.android.synthetic.main.fragment_deck_detail.*
 
-class DeckDetailFragment : androidx.fragment.app.Fragment() {
+class DeckDetailFragment : androidx.fragment.app.Fragment(),InterfaceCallBackController {
+
+    override fun onWorkDone(result: Any) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
     private lateinit var viewAdapter: CardRcyclViewAdapter
@@ -37,6 +42,8 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_deck_detail, container, false)
 
         viewAdapter.addCardList(UserManager.getCardsOfDeck(DeckManager.currentDeck.name!!)!!)
+
+        controller = MagicCardRetrofitController(this)
 
         return rootView
     }
@@ -100,6 +107,7 @@ class DeckDetailFragment : androidx.fragment.app.Fragment() {
             dialogs.dismiss()
             viewAdapter.addCardList(UserManager.getCardsOfDeck(DeckManager.currentDeck.name!!)!!);
             viewAdapter.notifyDataSetChanged()
+            controller.updateDecks(UserManager.listDeck?.value!!)
         }
         cancelBtn.setOnClickListener{
             dialogs.dismiss()
